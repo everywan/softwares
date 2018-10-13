@@ -97,12 +97,23 @@
     - 设置oss: `./ossutil config`
 7. 回收站: `trash-cli`,
     - 设置删除为扔到回收站: 在 `~/.zshrc` 中添加: `alias rm="trash-put $1"`
+    - 恢复系统等意外情况出现权限不允许时,  在根目录创建 `/.Trash`, 权限660, 且设置t权限. `chmod a+rw /.Trash;chmod +t /.Trash;`
 8. 设置时间: `sudo timedatectl set-ntp true`, 并且修改 `/etc/systemd/timesyncd.conf`
     ````
     [Time]
     NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
     FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
     ````
+
+### 备份系统
+使用 rsync 备份文件, 使用 acl 备份权限, 使用 tar 压缩备份, 使用 ossutil 上传备份到oss.
+
+```Bash
+# rsync -arpogv /* /backup/backup --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/backup/*}
+# getfacl -R / > /backup/backup_permissions.txt
+# tar -jcvf /backup/backup.tar.bz2 /backup/backup
+# setfacl --restore=backup_permissions.txt
+```
 
 ### 配置桌面环境/中文环境
 [参考: arch 桌面环境配置](./arch_wm_config.md).

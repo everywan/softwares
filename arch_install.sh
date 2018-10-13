@@ -81,8 +81,4 @@ install_docker()
 install_pip()
 install_aurman()
 
-# backup system
-# rsync -arpogv /* /backup/backup --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/backup/*}
-tar -zcvf /backup/backup.tar.gz /backup/backup
-
 popd
