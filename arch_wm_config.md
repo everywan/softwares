@@ -39,8 +39,10 @@ aurman -S i3
 
 
 提示技巧(多看配置以及官方文档)
-1. `bindsym $mod+t [class="Termite"] focus` 立即切换到指定的窗口
+1. 工具介绍
     - 使用 `xprop` 查看窗口的class. (具体用法: 在浮动等非覆盖布局下, 输入 xprop, 然后点击窗口)
+    - 使用 `xev` 查看键值
+1. `bindsym $mod+t [class="Termite"] focus` 立即切换到指定的窗口
 2. `bindsym $mod+a focus left`: 使用 ad 切换前后窗口, shift+ad 移动前后窗口
 3. `bindsym $mod+Tab focus output left`: output 表示显示器之间的切换, left表示向左循环切换
     - mode_toggle 表示浮动/固定之间切换, parent表示父元素等切换. 具体查看文档

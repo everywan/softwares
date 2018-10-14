@@ -80,7 +80,7 @@
 1. oh-my-zsh:
     - 主题修改为ys: `ZSH_THEME="ys"`
 2. 更改默认shell为zsh: `chsh`
-3. 笔记本亮度调节脚本: `./backlight`
+3. 笔记本亮度调节脚本: []自己写的脚本,注意检查和更改权限](./backlight.sh)
 4. [笔记本设置](https://wiki.archlinux.org/index.php/Power_management#Power_management_with_systemd)
     - 合盖等状态设置: 修改文件` vim /etc/systemd/logind.conf`
     - 使配置生效: `systemctl restart systemd-logind`
@@ -117,6 +117,12 @@
 
 ### 配置桌面环境/中文环境
 [参考: arch 桌面环境配置](./arch_wm_config.md).
+
+
+### polybar配置
+- [官方文档](https://github.com/jaagr/polybar/wiki)
+- [我的配置文件](./config/polybar/config)
+- [特殊符号网站, 用于在状态栏显示图标](http://cn.piliapp.com/symbol/)
 
 ### 设置TLP电源管理
 - [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)

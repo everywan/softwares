@@ -23,6 +23,8 @@ bindsym $mod+Return exec --no-startup-id termite "~/.config/termite/config"
 # scratchpad
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -122,6 +124,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+smart_gaps on
 gaps inner 10
 gaps outer 5
 

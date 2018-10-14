@@ -45,7 +45,7 @@ font-4 = "material icons:pixelsize=16;3"
 modules-left = i3
 ;modules-center = mpd
 modules-center = xwindow
-modules-right = wlan cpu memory temperature battery date
+modules-right = network cpu memory temperature battery backlight date
 
 tray-position = right
 tray-padding = 2
@@ -59,32 +59,6 @@ type = internal/xwindow
 label = %title%
 width = 50
 label-maxlen = 45
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
@@ -149,29 +123,46 @@ format-prefix = "  "
 ;format-underline = #4bffdc
 label = %percentage_used%%
 
-[module/wlan]
+[module/network]
 type = internal/network
-interface = wlp2s0
+interface = wlp4s0
 interval = 3.0
 
-format-connected = <ramp-signal>
-;format-connected-underline = #9f78e1
-label-connected = "%essid%"
+;ping-interval = 3
+udspeed-minwidth = 5
+accumulate-stats = true
+unknown-as-up = true
 
-format-disconnected = 
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname% disconnected
-label-disconnected-foreground = #999999
+# format-connected = <ramp-signal> <label-connected>
+format-connected = <label-connected>
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
+format-disconnected = <label-disconnected>
+
+format-packetloss = <animation-packetloss> <label-connected>
+
+; Available tokens: %属性% 支持网络类型(有线/无线)
+;   %ifname%  [wireless+wired]  网卡name
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: %ifname% %local_ip%
+label-connected = %essid% %downspeed%:%signal%
+label-connected-foreground = #eefafafa
+
+label-disconnected = not connected
+label-disconnected-foreground = #66ffffff
+
+; Only applies if <animation-packetloss> is used
 animation-packetloss-0 = ⚠
 animation-packetloss-0-foreground = #ffa64c
-;ramp-signal-foreground = ${colors.foreground-alt}
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
 
 [module/date]
 type = internal/date
@@ -237,23 +228,13 @@ ramp-1 = 
 ramp-2 = 
 ;ramp-foreground = ${colors.foreground-alt}
 
-[module/powermenu]
-type = custom/menu
-expand-right = true
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
 
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = reboot
-menu-0-1 = power off
-menu-0-1-exec = poweroff
+enable-scroll = true
+format = <label>
+label = ☀%percentage%%
 
 
 [settings]
