@@ -17,12 +17,12 @@ floating_modifier $mod
 # ($alt+Ctrl: 软件常用): 尚未使用的:                                           _ B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 
 # rofi/termite
-bindsym $mod+space exec --no-startup-id rofi -show run
+bindsym $mod+space exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+Return exec --no-startup-id termite "~/.config/termite/config"
 
 # scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -53,6 +53,7 @@ bindsym $mod+Shift+a move left
 bindsym $mod+Shift+d move right
 # 多显示器之间切换
 bindsym $mod+Tab focus output right
+bindsym $alt+Tab focus mode_toggle
 # 常用程式切换快捷键
 bindsym $mod+t [class="Termite"] focus
 bindsym $mod+w [class="Chromium"] focus
@@ -96,6 +97,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "0"
 
+workspace $ws2 output HDMI-2
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
