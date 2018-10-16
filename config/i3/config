@@ -13,7 +13,7 @@ floating_modifier $mod
 # 规则
 # 除 终端($mod+return),启动器($mod+d)外, 不设置程序快捷启动键
 # ($mod: 不常用的系统级快捷键): 尚未使用的:                    _ B C _ _ _ G H I J K L M N O P Q _ S _ U V _ X Y Z
-# ($mod+Shift: 不常用的系统级快捷键): 尚未使用的:       _  _ _ _ _ _ G _ I _ _ _ M N O P _ _ _ _ U V W X Y Z            (方向键)
+# ($mod+Shift: 不常用的系统级快捷键): 尚未使用的:       _  _ _ _ _ _ G _ I _ _ _ M N O P _ _ S _ U V W X Y Z            (方向键)
 # ($alt+Ctrl: 软件常用): 尚未使用的:                                           _ B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 
 # rofi/termite
@@ -40,13 +40,12 @@ bindsym $mod+Shift+e exit
 bindsym $mod+Shift+q kill
 # change container layout
 bindsym $mod+Shift+t layout toggle tabbed split
+bindsym $mod+Shift+y split toggle
 # bindsym $mod+Shift+? layout toggle split
 # set window title: border width
 bindsym $mod+Shift+b border toggle
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
-# split in horizontal orientation /  vertical orientation
-bindsym $mod+Shift+s split toggle
 
 # 自定义, 特殊, 兼容其他程式的快捷键
 bindsym $mod+a focus left
@@ -84,6 +83,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # System Hardware Setting: 注意功能键是使用特殊键位的, Fn无法映射
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+
 bindsym XF86MonBrightnessDown exec --no-startup-id backlight -dec 100
 bindsym XF86MonBrightnessUp exec --no-startup-id backlight -inc 100
 

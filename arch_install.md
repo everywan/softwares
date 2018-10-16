@@ -80,7 +80,8 @@
 1. oh-my-zsh:
     - 主题修改为ys: `ZSH_THEME="ys"`
 2. 更改默认shell为zsh: `chsh`
-3. 笔记本亮度调节脚本: []自己写的脚本,注意检查和更改权限](./backlight.sh)
+3. 笔记本调节声音:  [高级 Linux 声音体系](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_)
+    - 声音输出测试: `# speaker-test -c 2 声音测试`
 4. [笔记本设置](https://wiki.archlinux.org/index.php/Power_management#Power_management_with_systemd)
     - 合盖等状态设置: 修改文件` vim /etc/systemd/logind.conf`
     - 使配置生效: `systemctl restart systemd-logind`
@@ -104,6 +105,29 @@
     NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
     FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
     ````
+
+#### 亮度调节与设备管理
+arch 使用udev作为设备管理器, 负责所有的硬件添加/删除/加载事件.
+
+tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`. 只需要重写数值, 就可以改变亮度.
+
+i3使用快捷键调节亮度时, 需要配置键值映射以及一些其他操作
+1. 调整 `/sys/class/backlight/intel_backlight/brightness` 权限: 默认情况下该文件只有root才能打开.
+    - 调整文件所属组为 video: `sudo chgrp video /sys/class/backlight/intel_backlight/brightness`
+    - 调整组权限: `sudo chmod  664 /sys/class/backlight/intel_backlight/brightness`
+2. 添加用户到组: `sudo usermod -a -G video wzs`
+3. 添加i3快捷键绑定:
+    - 使用 `xev` 获取键值
+    - 在i3配置文件中添加绑定
+4. 添加脚本到系统路径: [backlight](./backlight.sh)
+    - 也可以安装 lux, 效果一样.
+5. 官方写的根据 `udev-rules` 也可以更改权限, 但是我试了下失败了.. 权限没有更改成功(文件组没有变化). 流程如下
+    - 添加 `.rules` 规则: `vim /etc/udev/rules.d/99-backlight.rules`
+    ````
+    ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"
+    ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chmod g+w /sys/class/backlight/%k/brightness"
+    ````
+    - 执行 `udevadm test /sys/class/backlight/intel_backlight/` 测试rules加载
 
 ### 备份系统
 使用 rsync 备份文件, 使用 acl 备份权限, 使用 tar 压缩备份, 使用 ossutil 上传备份到oss.

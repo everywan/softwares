@@ -45,7 +45,7 @@ font-4 = "material icons:pixelsize=16;3"
 modules-left = i3
 ;modules-center = mpd
 modules-center = xwindow
-modules-right = network cpu memory temperature battery backlight date
+modules-right = network cpu memory temperature alsa battery backlight date
 
 tray-position = right
 tray-padding = 2
@@ -129,7 +129,7 @@ interface = wlp4s0
 interval = 3.0
 
 ;ping-interval = 3
-udspeed-minwidth = 5
+downspeed:min:max = 5
 accumulate-stats = true
 unknown-as-up = true
 
@@ -219,8 +219,8 @@ format = <ramp> <label>
 format-warn = <ramp> <label-warn>
 ;format-warn-underline = ${self.format-underline}
 
-label = %temperature%
-label-warn = %temperature%
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
@@ -235,6 +235,18 @@ card = intel_backlight
 enable-scroll = true
 format = <label>
 label = ☀%percentage%%
+
+[module/alsa]
+type = internal/alsa
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+master-mixer = Master
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+mapped = true
+interval = 5
 
 
 [settings]
