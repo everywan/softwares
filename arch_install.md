@@ -105,6 +105,7 @@
     NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
     FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
     ````
+9. 蓝牙设置
 
 #### 亮度调节与设备管理
 arch 使用udev作为设备管理器, 负责所有的硬件添加/删除/加载事件.

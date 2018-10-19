@@ -13,7 +13,7 @@ floating_modifier $mod
 # 规则
 # 除 终端($mod+return),启动器($mod+d)外, 不设置程序快捷启动键
 # ($mod: 不常用的系统级快捷键): 尚未使用的:                    _ B C _ _ _ G H I J K L M N O P Q _ S _ U V _ X Y Z
-# ($mod+Shift: 不常用的系统级快捷键): 尚未使用的:       _  _ _ _ _ _ G _ I _ _ _ M N O P _ _ S _ U V W X Y Z            (方向键)
+# ($mod+Shift: 不常用的系统级快捷键): 尚未使用的:       _  _ _ _ E _ G _ I _ _ _ M N O P _ _ S _ U V W X Y Z            (方向键)
 # ($alt+Ctrl: 软件常用): 尚未使用的:                                           _ B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 
 # rofi/termite
@@ -35,7 +35,8 @@ bindsym $alt+Ctrl+a exec deepin-screenshot
 # reload / restart /exit i3
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exit
+# 使用 `i3 exit` 退出, 不使用快捷键
+# bindsym $mod+Shift+e exit
 # kill focus app
 bindsym $mod+Shift+q kill
 # change container layout
