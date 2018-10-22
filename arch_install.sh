@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# --------------------------------------------------prepare work--------------------------------------------
 mkdir /tmp/temp
 pushd /tmp/temp
 
+# --------------------------------------------------basic tool------------------------------------------------
 # basic tools
 sudo pacman -S openssh vim wget curl rsync git
 sudo pacman -S nmap ydcv tree vscode chromium privoxy
@@ -14,6 +16,7 @@ sudo systemctl enable sshd
 # install oh my zsh
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh`
 
+# --------------------------------------------------function------------------------------------------------
 function install_shadowsock(){
     git clone https://github.com/shadowsocks/shadowsocks.git
     pushd shadowsocks
@@ -69,6 +72,7 @@ function install_ossutil(){
     sudo mv ossutil64\?spm=a2c4g.11186623.2.11.3638779cVMqV6m /usr/local/bin/ossutil
 }
 
+# --------------------------------------------------adv tools------------------------------------------------
 # 选择安装: TLP:电池管理, trash-put: 回收站
 sudo pacman -S tlp trash-put
 
@@ -81,4 +85,5 @@ install_docker()
 install_pip()
 install_aurman()
 
+# --------------------------------------------------clean work------------------------------------------------
 popd

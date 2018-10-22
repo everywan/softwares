@@ -1,4 +1,4 @@
-# Arch Linux 安装与配置
+# Arch Linux 安装
 
 - [Arch Linux 手册](https://wiki.archlinux.org/index.php/Main_page_(简体中文))
 - [Arch Linux的原则](https://wiki.archlinux.org/index.php/Arch_Linux_(简体中文))
@@ -16,13 +16,13 @@
 
 ### 预配置系统
 1. 链接wifi: `wifi-menu`
-    - arch 默认网络安装.
+    - 因为 arch 默认网络安装, 所以要保证在有网的情况下进行.
 2. 使用parted格式化硬盘为GPT分区: 后续使用GRUB/UEFI引导需要
     - [GURB引导](https://wiki.archlinux.org/index.php/GRUB_(简体中文)#UEFI_.E7.B3.BB.E7.BB.9F)
     - [Parted工具](https://wiki.archlinux.org/index.php/GNU_Parted_(简体中文)): parted比fdisk功能更多, 这里主要用来设置硬盘为gpt格式.
 3. 分区方案: `fdisk /dev/sda`
-    - efi 分区: 521Mb
-    - swqp 分区: 实际内存 <2G: 2G; 2G~8G: 内存同大小; >8G:8G.
+    - efi 分区: `521M`
+    - swqp 分区: 实际内存 `小于2G: 2G;   2G~8G: 内存同大小;    大于8G: 8G`.
     - 推荐 `/home, /usr/local/` 单独分区, 一个存放个人资料, 一个存放个人程式
     - `/tmp, /var` 根据需要决定是否单独分区(某些服务器需要单独设置, 避免临时文件填充满整个系统)
     - 剩下的所有可用空间给 `/`
@@ -58,97 +58,4 @@
 6. Intel/AMD CPU启用微码更新
     - Intel: `pacman -S intel-ucode`
 7. 退出并系统: `exit && reboot`
-
-## 系统配置
-配置网络: 
-1. 启用连接: 如果在上述步骤已经安装`wpa_supplicant`并且拷贝了网络配置文件, 直接`netctl start/stop/status/enable profile` 即可启动wifi链接
-    - 如果没有拷贝文件, 那么可以使用 `wifi-menu` 重新建立链接配置
-    - 如果没有安装 `wpa_supplicant`..  那么只能要么插网线, 要么使用U盘启动系统, 安装相应软件.
-    - profile 只是文件名称, 不含路径
-2. 添加用户
-    - `useradd -m -g users -G wheel wzs`
-    - 修改密码:`passwd wzs`
-
-### 软件安装
-- [推荐软件](https://wiki.archlinux.org/index.php/General_recommendations_)
-- [常用软件列表](https://wiki.archlinux.org/index.php/General_recommendations_)
-- [安装脚本](./arch_install.sh)
-
-### 软件配置
-建议看官方文档, 很全很好.
-
-1. oh-my-zsh:
-    - 主题修改为ys: `ZSH_THEME="ys"`
-2. 更改默认shell为zsh: `chsh`
-3. 笔记本调节声音:  [高级 Linux 声音体系](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_)
-    - 声音输出测试: `# speaker-test -c 2 声音测试`
-4. [笔记本设置](https://wiki.archlinux.org/index.php/Power_management#Power_management_with_systemd)
-    - 合盖等状态设置: 修改文件` vim /etc/systemd/logind.conf`
-    - 使配置生效: `systemctl restart systemd-logind`
-5. Thinkpad 小红点配置: 使用 `xinput` 查看.
-    - 参考: [小红点](https://www.jianshu.com/p/b9677e9e56ec)
-    - 示例如下
-    ```Bash
-    xinput list | grep TrackPoint
-    xinput list-props _id_
-    xinput set-prop _id_ _id_ 0.25
-    ```
-6. ossutil 设置(用于云盘备份)
-    - [文档](https://help.aliyun.com/document_detail/50452.html)
-    - 设置oss: `./ossutil config`
-7. 回收站: `trash-cli`,
-    - 设置删除为扔到回收站: 在 `~/.zshrc` 中添加: `alias rm="trash-put $1"`
-    - 恢复系统等意外情况出现权限不允许时,  在根目录创建 `/.Trash`, 权限660, 且设置t权限. `chmod a+rw /.Trash;chmod +t /.Trash;`
-8. 设置时间: `sudo timedatectl set-ntp true`, 并且修改 `/etc/systemd/timesyncd.conf`
-    ````
-    [Time]
-    NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
-    FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
-    ````
-9. 蓝牙设置
-
-#### 亮度调节与设备管理
-arch 使用udev作为设备管理器, 负责所有的硬件添加/删除/加载事件.
-
-tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`. 只需要重写数值, 就可以改变亮度.
-
-i3使用快捷键调节亮度时, 需要配置键值映射以及一些其他操作
-1. 调整 `/sys/class/backlight/intel_backlight/brightness` 权限: 默认情况下该文件只有root才能打开.
-    - 调整文件所属组为 video: `sudo chgrp video /sys/class/backlight/intel_backlight/brightness`
-    - 调整组权限: `sudo chmod  664 /sys/class/backlight/intel_backlight/brightness`
-2. 添加用户到组: `sudo usermod -a -G video wzs`
-3. 添加i3快捷键绑定:
-    - 使用 `xev` 获取键值
-    - 在i3配置文件中添加绑定
-4. 添加脚本到系统路径: [backlight](./backlight.sh)
-    - 也可以安装 lux, 效果一样.
-5. 官方写的根据 `udev-rules` 也可以更改权限, 但是我试了下失败了.. 权限没有更改成功(文件组没有变化). 流程如下
-    - 添加 `.rules` 规则: `vim /etc/udev/rules.d/99-backlight.rules`
-    ````
-    ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"
-    ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chmod g+w /sys/class/backlight/%k/brightness"
-    ````
-    - 执行 `udevadm test /sys/class/backlight/intel_backlight/` 测试rules加载
-
-### 备份系统
-使用 rsync 备份文件, 使用 acl 备份权限, 使用 tar 压缩备份, 使用 ossutil 上传备份到oss.
-
-```Bash
-# rsync -arpogv /* /backup/backup --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/backup/*}
-# getfacl -R / > /backup/backup_permissions.txt
-# tar -jcvf /backup/backup.tar.bz2 /backup/backup
-# setfacl --restore=backup_permissions.txt
-```
-
-### 配置桌面环境/中文环境
-[参考: arch 桌面环境配置](./arch_wm_config.md).
-
-
-### polybar配置
-- [官方文档](https://github.com/jaagr/polybar/wiki)
-- [我的配置文件](./config/polybar/config)
-- [特殊符号网站, 用于在状态栏显示图标](http://cn.piliapp.com/symbol/)
-
-### 设置TLP电源管理
-- [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
 

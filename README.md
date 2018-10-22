@@ -7,8 +7,11 @@
 4. 备份好自己的数据, 准备好折腾的信心.
 5. over
 
-- [arch安装流程](./arch_install.md)
-    - [arch必备软件安装脚本](./arch_install.sh)
-- [i3安装与配置教程](./arch_wm_config.md)
+**arch: 避免任何不必要的添加、修改和复杂增加**
+
+1. [arch安装](./arch_install.md)
+2. [系统安装配置](./arch_config.md)
+3. [i3wm桌面环境安装配置](./arch_wm_config.md)
+4. [config目录](./config/): 直接从我的config中copy过来的
 
 ![示例](i3-demo.png)

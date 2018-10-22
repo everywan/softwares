@@ -247,6 +247,8 @@ headphone-mixer = Headphone
 headphone-id = 9
 mapped = true
 interval = 5
+format-volume =  <label-volume>
+label-volume = ♪%percentage%%
 
 
 [settings]

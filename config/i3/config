@@ -101,7 +101,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "0"
+set $ws10 "task"
 
 workspace $ws2 output HDMI-2
 # switch to workspace
