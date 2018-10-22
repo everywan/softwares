@@ -53,7 +53,17 @@ tar -jcvf /backup/backup.tar.bz2 /backup/backup
 ```
 
 #### 桌面/中文环境配置
-- [参考: arch 桌面环境配置](./arch_wm_config.md).
+- [参考: arch 桌面环境配置](./arch_wm_config.md)
+
+#### 多显示器配置
+xrandr 是 X window 下管理多显示器的工具.
+
+- [xrandr_arch_doc](https://wiki.archlinux.org/index.php/Xrandr_)
+
+1. 安装: `sudo pacman -S xorg-xrandr`
+2. 直接运行 `xrandr` 即可显示所有的显示器
+2. 添加显示器: `xrandr --output HDMI-2 --auto --left-of eDP-1`
+3. 关闭显示器: `xrandr --output HDMI-2 --off`
 
 #### 时间同步
 使用 systemd-timesyncd 进行时间同步. _systemd-timesyncd 是一个用于跨网络同步系统时钟的守护服务_.
