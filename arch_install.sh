@@ -7,7 +7,7 @@ pushd /tmp/temp
 # --------------------------------------------------basic tool------------------------------------------------
 # basic tools
 sudo pacman -S openssh vim wget curl rsync git
-sudo pacman -S nmap ydcv tree vscode chromium privoxy
+sudo pacman -S nmap ydcv tree vscode chromium privoxy zsh
 
 # tools setting
 sudo systemctl start sshd
