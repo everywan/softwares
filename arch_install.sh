@@ -72,6 +72,12 @@ function install_ossutil(){
     sudo mv ossutil64\?spm=a2c4g.11186623.2.11.3638779cVMqV6m /usr/local/bin/ossutil
 }
 
+function install_go(){
+    wget -c https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz -O go.tar.gz
+    tar -xzf go.tar.gz && mv go /usr/local/src && ln -s /usr/local/src/go/bin/go /usr/local/bin/go
+}
+
+
 # --------------------------------------------------adv tools------------------------------------------------
 # 选择安装: TLP:电池管理, trash-put: 回收站
 sudo pacman -S tlp trash-put
@@ -80,10 +86,11 @@ sudo pacman -S tlp trash-put
 aurman -S deepin-screenshot
 
 # install user applicant
-install_shadowsock()
-install_docker()
-install_pip()
-install_aurman()
+install_shadowsock
+install_docker
+install_pip
+install_aurman
+install_go
 
 # --------------------------------------------------clean work------------------------------------------------
 popd
