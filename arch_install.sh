@@ -7,11 +7,11 @@ pushd /tmp/temp
 # --------------------------------------------------basic tool------------------------------------------------
 # basic tools
 sudo pacman -S openssh vim wget curl rsync git
-sudo pacman -S nmap ydcv tree vscode chromium privoxy zsh
+sudo pacman -S nmap ydcv tree vscode chromium privoxy zsh expect
 
 # tools setting
-sudo systemctl start sshd
-sudo systemctl enable sshd
+# sudo systemctl start sshd
+# sudo systemctl enable sshd
 
 # install oh my zsh
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh`
@@ -84,6 +84,9 @@ sudo pacman -S tlp trash-put
 
 # deepin截图软件
 aurman -S deepin-screenshot
+
+# mysql客户端(mycli)
+aurman -S mycli
 
 # install user applicant
 install_shadowsock

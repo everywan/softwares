@@ -13,5 +13,7 @@
 2. [系统安装配置](./arch_config.md)
 3. [i3wm桌面环境安装配置](./arch_wm_config.md)
 4. [config目录](./config/): 直接从我的config中copy过来的
+5. 脚本
+    - [ssh端口转发+mycli+推出断开端口转发](/script/ssh_mysql.sh)
 
 ![示例](i3-demo.png)
