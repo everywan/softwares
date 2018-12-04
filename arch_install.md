@@ -17,7 +17,7 @@
 ### 预配置系统
 1. 链接wifi: `wifi-menu`
     - 因为 arch 默认网络安装, 所以要保证在有网的情况下进行.
-2. 使用parted格式化硬盘为GPT分区: 后续使用GRUB/UEFI引导需要
+2. 使用parted格式化硬盘为GPT分区 (GRUB/UEFI引导需要分区格式为GPT)
     - [GURB引导](https://wiki.archlinux.org/index.php/GRUB_(简体中文)#UEFI_.E7.B3.BB.E7.BB.9F)
     - [Parted工具](https://wiki.archlinux.org/index.php/GNU_Parted_(简体中文)): parted比fdisk功能更多, 这里主要用来设置硬盘为gpt格式.
 3. 分区方案: `fdisk /dev/sda`
