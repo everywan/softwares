@@ -9,6 +9,9 @@ pushd /tmp/temp
 sudo pacman -S openssh vim wget curl rsync git
 sudo pacman -S nmap ydcv tree vscode chromium privoxy zsh expect
 
+# 安装中文字体
+sudo pacman -S wqy-microhei
+
 # tools setting
 # sudo systemctl start sshd
 # sudo systemctl enable sshd

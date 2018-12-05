@@ -83,6 +83,7 @@ aurman -S i3
     export LC_CTYPE=en_US.UTF-8
     export LC_ALL=zh_CN.UTF-8
     ```
+5. 安装中文字体: `sudo pacman -S wqy-microhei`
 
 ### fcitx
 - [参考](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))
