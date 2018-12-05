@@ -42,7 +42,7 @@
 
 ### 命令行配置
 注意, 默认账户不建议为root账户
-1. [cli软件安装脚本](./init_install.sh)
+1. [cli软件安装脚本](./config.sh)
 2. 使用 chsh 切换默认shell为zsh
     - 如果 chsh 不生效, 那么 直接在 `~/.bashrc` 最后添加 `exec zsh` 也可 (其他内容可删除)
 
@@ -65,9 +65,9 @@ i3
  同一个开发者)
     - 好用是指 渲染更好.
 2. 指定将图形显示到何处: `export DISPLAY=:0`, 也可以添加到 .bashrc 或 .zshrc 中.
-3. 拷贝 i3 配置文件到 `~/.config/i3` 下, 拷贝 termite 配置文件到 `~/.config/termite` 下
-    - [i3 配置文件](./config/i3)
-    - [termite 配置文件](/os/arch/config/termite) termite 的配置文件与 arch 相同,暂时不需要更改
+3. 拷贝 i3 配置文件到 `~/.config/i3` 下, 拷贝 termite 配置文件到 `~/.config/termite/` 下
+    - [i3 配置文件](./config/i3/)
+    - [termite 配置文件](/os/arch/config/termite/) termite 的配置文件与 arch 相同,暂时不需要更改
 4. 安装 xorg 及相关软件
     ```Bash
     sudo pacman -S xorg termite feh rofi
@@ -75,9 +75,6 @@ i3
     ```
 5. 启动 i3: `i3`
 5. 中文输入法就不配置了, 目前用处不大. 需要的参考 arch 下 中文输入法的配置即可, 类似的.
-
-配置之后的 i3wm+wsl 如图示
-![wsl-i3](./wsl-i3.jpg)
 
 ## 补充
 1. 在 archLinux 中打开 chrome 需要加 `--no-sandbox` 选项, 否则会报错(`Network namespace supported`)

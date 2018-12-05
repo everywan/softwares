@@ -11,7 +11,7 @@
 ### 脚本安装
 执行以下命令即可， [脚本源码点这里](./init.sh)
 ```Bash
-curl -sSL https://github.com/everywan/soft/blob/master/arch/osx/init.sh | sh -
+curl -sSL https://github.com/everywan/soft/blob/master/arch/osx/config.sh | sh -
 ```
 
 ### 手动安装

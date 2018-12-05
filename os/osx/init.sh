@@ -76,7 +76,7 @@ mirrors = https://pypi.doubanio.com/simple/
 EOF
 }
 
-if [ $(basename "$0") == "init.sh" ]; then
+if [ $(basename "$0") == "config.sh" ]; then
     if [ ! -d "/tmp/install_aaa" ]; then
         mkdir -p /tmp/install_aaa
     else

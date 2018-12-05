@@ -19,7 +19,7 @@
 - [arch_推荐软件](https://wiki.archlinux.org/index.php/General_recommendations_)
 - [arch_常用软件列表](https://wiki.archlinux.org/index.php/General_recommendations_)
 
-- [wzs_安装脚本](./arch_install.sh): 软件自动化安装配置脚本, 包括vim/ssh/nmap等基础工具, 也有 ss,docker,pip 等软件与配置.
+- [wzs_安装脚本](./config.sh): 软件自动化安装配置脚本, 包括vim/ssh/nmap等基础工具, 也有 ss,docker,pip 等软件与配置.
     - 其实用 awk/sed 等可以实现更多的自动化配置, 但是太复杂了, 所以没用这个
 
 建议先看下官方教程, 先选择自己需要那些软件, 最后写一个自己的自动化安装配置脚本.
@@ -53,7 +53,7 @@ tar -jcvf /backup/backup.tar.bz2 /backup/backup
 ```
 
 #### 桌面/中文环境配置
-- [参考: arch 桌面环境配置](./arch_wm_config.md)
+- [参考: arch 桌面环境配置](./i3wm_config.md)
 
 #### 多显示器配置
 xrandr 是 X window 下管理多显示器的工具.
@@ -94,7 +94,7 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
     - 调整文件所属组为 video: `sudo chgrp video /sys/class/backlight/intel_backlight/brightness`
     - 调整组权限: `sudo chmod  664 /sys/class/backlight/intel_backlight/brightness`
 2. 添加用户到组: `sudo usermod -a -G video wzs`
-3. 添加脚本到系统路径: [backlight](./backlight.sh)
+3. 添加脚本到系统路径: [backlight](./config/backlight.sh)
     - 也可以安装 lux, 效果一样.
 4. 添加i3快捷键绑定:
     - 使用 `xev` 获取键值

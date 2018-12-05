@@ -3,7 +3,7 @@ Mac毕竟不是Linux, 还是更习惯将某些偏服务端的程序放到Linux�
 
 ### 配置privoxy
 privoxy用于设置HTTP代理或者将socket代理转为http代理.
-- 安装教程参见 [init.sh - install_privoxy](./init.sh)
+- 安装教程参见 [config.sh - install_privoxy](./config.sh)
 - [privoxy 配置教程](/collect/soft/shadowsocks.md#搭建HTTP代理服务)
 
 添加到 systemd, 使用 systemctl 管理服务

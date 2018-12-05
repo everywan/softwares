@@ -9,16 +9,12 @@
 
 **arch: without unnecessary additions or modifications**
 
-1. [arch安装教程](./arch_install.md)
-2. [系统安装配置](./arch_config.md)
-3. [i3wm桌面环境安装配置](./arch_wm_config.md)
+1. [arch安装教程](./install.md)
+2. [系统安装配置](./config.md)
+3. [i3wm桌面环境安装配置](./i3wm_config.md)
 4. [config目录](./config/): 直接从我的config中copy过来的
 5. [脚本](./script)
     - [ssh端口转发+mycli+退出自动断开端口转发](/script/ssh_mysql.sh)
 
-![示例](i3-demo.png)
-
-## wsl
-wsl(Windows Subsystem for Linux) 是一个为在Windows 10上能够原生运行Linux二进制可执行文件(ELF格式)的兼容层.
-
-[wsl+arch 教程](./wsl/readme.md)
+配置之后的 arch+i3wm 如图示
+![示例](./attach/i3-demo.png)
