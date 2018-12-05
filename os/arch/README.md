@@ -14,7 +14,7 @@
 3. [i3wm桌面环境安装配置](./i3wm_config.md)
 4. [config目录](./config/): 直接从我的config中copy过来的
 5. [脚本](./script)
-    - [ssh端口转发+mycli+退出自动断开端口转发](/script/ssh_mysql.sh)
+    - [ssh端口转发+mycli+退出自动断开端口转发](./script/ssh_mysql.sh)
 
 配置之后的 arch+i3wm 如图示
 ![示例](./attach/i3-demo.png)

@@ -11,7 +11,7 @@
 ### 脚本安装
 执行以下命令即可， [脚本源码点这里](./config.sh)
 ```Bash
-curl -sSL https://github.com/everywan/soft/blob/master/arch/osx/config.sh | sh -
+curl -sSL https://github.com/everywan/soft/blob/master/os/osx/config.sh | sh -
 ```
 
 ### 手动安装
@@ -34,9 +34,9 @@ curl -sSL https://github.com/everywan/soft/blob/master/arch/osx/config.sh | sh -
 执行以下命令即可.
 ```Bash
 # 备份
-curl -sSL https://github.com/everywan/note/blob/master/collect/soft/os/osx/backup-restore.sh backup | sh -
+curl -sSL https://github.com/everywan/soft/blob/master/os/osx/script/backup-restore.sh backup | sh -
 # 恢复
-curl -sSL https://github.com/everywan/note/blob/master/collect/soft/os/osx/backup-restore.sh restore | sh -
+curl -sSL https://github.com/everywan/soft/blob/master/os/osx/script/backup-restore.sh restore | sh -
 ```
 
 #### iTerm2配置指南
