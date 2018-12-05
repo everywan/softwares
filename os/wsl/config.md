@@ -78,3 +78,4 @@ i3
 
 ## 补充
 1. 在 archLinux 中打开 chrome 需要加 `--no-sandbox` 选项, 否则会报错(`Network namespace supported`)
+2. 虽然 wsl 与 win 是共享目录的, 但是文件系统是不一样的. 如在 wsl 创建一个文件, 然后在 win 下修改文件名称, 但是wsl中文件名称依旧没变化, 另外, 两者的权限也是不一样的.
