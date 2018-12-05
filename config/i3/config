@@ -63,7 +63,7 @@ bindsym $mod+e [class="code"] focus
 # xrandr 多显示器显示的大小、方向、镜像
 exec --no-startup-id xrandr --output HDMI-2  --auto --left-of eDP-1
 # 允许窗口之间来回切换
-workspace_auto_back_and_forth yes
+# workspace_auto_back_and_forth yes
 
 # focus tabs/app/windows
 bindsym $mod+$left focus left
