@@ -32,10 +32,20 @@
 安装i3
 ```Bash
 # xorg Server 桌面环境基础;  feh是图片查看工具, 用于设置壁纸;  rofi是app启动器, i3lock用于锁屏使用
-sudo pacman -S xorg xorg-xinit termite feh rofi scrot i3lock
+sudo pacman -S xorg xorg-xinit termite feh rofi
+sudo pacman -S scrot i3lock imagemagick
 cp /etc/X11/xinit/xinitrc ~/.xinitrc
 aurman -S i3
 ```
+
+i3 自身不带半透明, 淡入淡出等效果, 需要安装独立的 compositor(合成器). 
+- termite 设置透明度无效就是因为没有 compositor 导致的.
+- compton 是一个独立的合成管理器, 可以用来给i3添加各种视觉效果(半透明, 淡入淡出).
+
+安装&使用compton: `pacman -S compton`, 然后在 `~/.xinitrc` 中添加 `exec compton -b &` 就可以实现在 startx 启动xserver时启动compton.
+- 参考: [Compton_arch](https://wiki.archlinux.org/index.php/Compton_(简体中文))
+- 当使用 `nvidia-340xx-utils` 驱动时, compton 启动可能报错. 建议换为 libglvnd
+    - 如果卸载后启动startx报错, 则重新安装下 xorg 即可: `pacman -S xorg`
 
 配置i3
 **简洁才是好配置的王道**

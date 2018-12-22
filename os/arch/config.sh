@@ -10,7 +10,7 @@ function main(){
     sudo pacman -Syu
     sudo pacman -S openssh vim wget curl rsync git
     sudo pacman -S nmap ydcv tree privoxy zsh expect autossh
-    sudo pacman -S code chromium
+    sudo pacman -S code chromium guake
 
     sudo systemctl start sshd
     sudo systemctl enable sshd
@@ -77,13 +77,15 @@ function isInstall(){
 }
 
 function install_shadowsock(){
-    git clone https://github.com/shadowsocks/shadowsocks.git
-    pushd shadowsocks
-    git checkout origin/master -b master
-    sudo python setup.py install
-    # use systemctl start ss
-    # systemctl start shadowsocks@config
-    popd
+    # 使用arch包, 已经添加到了 systemd 管理
+    sudo pacman -S shadowsocks
+    sudo systemctl start shadowsocks@config
+    # 使用 sslocal 管理, 可以作为服务端
+    # git clone https://github.com/shadowsocks/shadowsocks.git
+    # pushd shadowsocks
+    # git checkout origin/master -b master
+    # sudo python setup.py install
+    # popd
 }
 
 function install_docker(){
