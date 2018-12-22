@@ -1,6 +1,6 @@
 # Arch Linux 配置
 
-执行脚本: `curl -sSL https://github.com/everywan/soft/blob/master/os/osx/config.sh | sh -`
+执行脚本: `curl -sSL https://github.com/everywan/soft/blob/master/os/arch/config.sh | sh -`
 
 ## 前置配置
 ### 配置网络
