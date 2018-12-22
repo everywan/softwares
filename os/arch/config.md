@@ -1,5 +1,7 @@
 # Arch Linux 配置
 
+执行脚本: `curl -sSL https://github.com/everywan/soft/blob/master/os/osx/config.sh | sh -`
+
 ## 前置配置
 ### 配置网络
 如果在安装系统时预先安装了 `wpa_supplicant`, 并且拷贝了网络配置文件, 则直接 `netctl start/stop/status/enable profile` 就可以启动链接.

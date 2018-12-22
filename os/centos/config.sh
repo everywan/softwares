@@ -7,35 +7,21 @@ readonly NOT_INSTALL="not_install"
 readonly WORK_DIR=`dirname $0`
 
 function main(){
-    sudo pacman -Syu
-    sudo pacman -S openssh vim wget curl rsync git
-    sudo pacman -S nmap ydcv tree vscode chromium privoxy zsh expect
-
-    sudo systemctl start sshd
-    sudo systemctl enable sshd
+    sudo yum update
+    sudo yum install vim git tree nmap wget curl rsync openssh -y
 
     if [ $(isInstall zsh) == NOT_INSTALL ];then
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     fi
 
-    echo "安装ss"
-    if [ $(isInstall sslocal) == NOT_INSTALL ];then
-        install_shadowsock    
-    fi
-    
     echo "安装pip && 配置豆瓣源"
     if [ $(isInstall pip) == NOT_INSTALL ];then
         install_pip    
     fi
-
+    
     echo "安装docker"
     if [ $(isInstall docker) == NOT_INSTALL ];then
         install_docker    
-    fi
-
-    echo "安装aurman"
-    if [ $(isInstall aurman) == NOT_INSTALL ];then
-        install_aurman    
     fi
 
     echo "安装ossutil"
@@ -46,17 +32,8 @@ function main(){
     echo "安装Go, 版本 1.11.2"
     if [ $(isInstall go) == NOT_INSTALL ];then
         wget -c https://dl.google.com/go/go1.11.2.darwin-amd64.tar.gz -O go.tar.gz
-        tar -xzf go.tar.gz && sudo mv go /usr/local/src && sudo ln -s /usr/local/src/go/bin/go /usr/local/bin/go    
+        tar -xzf go.tar.gz && mv go /usr/local/src/ && ln -s /usr/local/src/go/bin/go /usr/local/bin/go    
     fi
-
-    # 选择安装: TLP:电池管理, trash-put: 回收站
-    sudo pacman -S tlp trash-put
-
-    # deepin截图软件
-    aurman -S deepin-screenshot
-
-    # mysql客户端(mycli)
-    aurman -S mycli
 }
 
 # 判断是否安装
@@ -66,16 +43,6 @@ function isInstall(){
     else
         echo NOT_INSTALL
     fi
-}
-
-function install_shadowsock(){
-    git clone https://github.com/shadowsocks/shadowsocks.git
-    pushd shadowsocks
-    git checkout origin/master -b master
-    sudo python setup.py install
-    # use systemctl start ss
-    # systemctl start shadowsocks@config
-    popd
 }
 
 function install_docker(){
@@ -107,15 +74,6 @@ index-url = https://pypi.doubanio.com/simple/
 use-mirrors = true  
 mirrors = https://pypi.doubanio.com/simple/ 
 EOF
-}
-
-function install_aurman(){
-    git clone https://aur.archlinux.org/aurman.git
-    pushd aurman
-    # 导入gpg
-    gpg --recv-keys 465022E743D71E39
-    makepkg -si
-    popd
 }
 
 function install_ossutil(){
