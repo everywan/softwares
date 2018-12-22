@@ -1,0 +1,11 @@
+[Unit]
+Description=AutoSSH service for port 2222
+After=network.target
+
+[Service]
+Type=forking
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 2223 -fCNR 2222:localhost:22 -i /root/.ssh/id_rsa wzs@127.0.0.1
+
+[Install]
+WantedBy=multi-user.target

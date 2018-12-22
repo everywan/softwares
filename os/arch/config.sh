@@ -9,10 +9,15 @@ readonly WORK_DIR=`dirname $0`
 function main(){
     sudo pacman -Syu
     sudo pacman -S openssh vim wget curl rsync git
-    sudo pacman -S nmap ydcv tree code chromium privoxy zsh expect
+    sudo pacman -S nmap ydcv tree privoxy zsh expect autossh
+    sudo pacman -S code chromium
 
     sudo systemctl start sshd
     sudo systemctl enable sshd
+    # autossh 自动反向代理, 注意 需要先使用ssh登录过, 并且是免密登录
+    # 配置参考: https://github.com/everywan/note/blob/d1ca2a7753e447e480107d037237a34a5cadf583/application/os/linux/basic_cmd.md
+    # sudo systemctl start autossh
+    # sudo systemctl enable autossh
 
     if [ $(isInstall zsh) == NOT_INSTALL ];then
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -57,6 +62,9 @@ function main(){
 
     # mysql客户端(mycli)
     aurman -S mycli
+
+    # git flow
+    wget --no-check-certificate -q  https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install stable; rm gitflow-installer.sh
 }
 
 # 判断是否安装

@@ -7,8 +7,8 @@
         - [中文字体支持](#中文字体支持)
         - [fcitx](#fcitx)
 
-<!-- /TOC -->
-# 桌面/中文环境配置
+<!-- /TOC --># 桌面/中文环境配置
+
 - [arch_xorg介绍](https://wiki.archlinux.org/index.php/Xorg_(简体中文))
 - [arch_窗口管理器介绍](https://wiki.archlinux.org/index.php/Window_manager_(简体中文))
 
@@ -31,8 +31,8 @@
 
 安装i3
 ```Bash
-# xorg Server 桌面环境基础;  feh是图片查看工具, 用于设置壁纸;  rofi是app启动器
-sudo pacman -S xorg xorg-xinit termite feh rofi
+# xorg Server 桌面环境基础;  feh是图片查看工具, 用于设置壁纸;  rofi是app启动器, i3lock用于锁屏使用
+sudo pacman -S xorg xorg-xinit termite feh rofi scrot i3lock
 cp /etc/X11/xinit/xinitrc ~/.xinitrc
 aurman -S i3
 ```
@@ -83,6 +83,7 @@ aurman -S i3
     export LC_CTYPE=en_US.UTF-8
     export LC_ALL=zh_CN.UTF-8
     ```
+5. 安装中文字体: `sudo pacman -S wqy-microhei`
 
 ### fcitx
 - [参考](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))
