@@ -9,7 +9,7 @@ readonly WORK_DIR=`dirname $0`
 function main(){
     sudo pacman -Syu
     sudo pacman -S openssh vim wget curl rsync git
-    sudo pacman -S nmap ydcv tree vscode chromium privoxy zsh expect
+    sudo pacman -S nmap ydcv tree code chromium privoxy zsh expect
 
     sudo systemctl start sshd
     sudo systemctl enable sshd
@@ -123,15 +123,16 @@ function install_ossutil(){
     sudo mv ossutil64\?spm=a2c4g.11186623.2.11.3638779cVMqV6m /usr/local/bin/ossutil
 }
 
-if [ $(basename "$0") == "config.sh" ]; then
-    if [ ! -d "/tmp/install_aaa" ]; then
-        mkdir -p /tmp/install_aaa
-    else
-        sudo rm -rf /tmp/install_aaa/*
-    fi
-    pushd /tmp/install_aaa
-
-    main
-
-    popd
+if [ ! -d "/tmp/install_aaa" ]; then
+    mkdir -p /tmp/install_aaa
+else
+    sudo rm -rf /tmp/install_aaa/*
 fi
+pushd /tmp/install_aaa
+
+main
+
+popd
+
+# if [ $(basename "$0") == "config.sh" ]; then
+# fi
