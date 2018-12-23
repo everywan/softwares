@@ -1,11 +1,9 @@
+## Centos
+一般而言, 我比较喜欢在服务器端安装centos, 原因如下
+1. 系统比较保守, 一般只会更新已经很稳定的功能(centos定位就是稳定的服务器端)
+2. 服务器端使用centos的比例较大, 问题容易解决(没有数据支撑)
+
+其次, 因为是用于服务器端, 所以我一般选择没有界面的 Centos minimal 镜像. 本次主要介绍 centos arm 版的安装, x86 版是之前捣鼓的记录, 没有再次实践.
+
 ## centos(arm)
-安装系统为 centos mini 版系统(没有桌面, 附加软件最少的那一版). 
-
-默认为 centos mini 版系统的安装, 无界面版, 主要用于服务器/树梅派
-
-https://www.cnblogs.com/jiangtu/p/6883618.html
-
-wifi配置
-
-nmtui
-nmcli d wifi connect ssid password "pwd"
+主要用于服务器/树梅派
