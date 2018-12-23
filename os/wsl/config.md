@@ -99,3 +99,4 @@ i3
 
 ## 补充
 1. 在 archLinux 中打开 chrome 需要加 `--no-sandbox` 选项, 否则会报错(`Network namespace supported`)
+2. 在wsl中不能使用systemd, 可以使用 service 命令启动
