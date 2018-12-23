@@ -76,6 +76,26 @@ i3
 5. 启动 i3: `i3`
 5. 中文输入法就不配置了, 目前用处不大. 需要的参考 arch 下 中文输入法的配置即可, 类似的.
 
+## wsl的文件系统
+在wsl使用时, 可能遇到以下问题
+- win下文件到wsl下权限全部变成0777
+- 在 wsl 创建一个文件, 然后在 win 下修改文件名称, 但是wsl中文件名称依旧没变化, 另外, 两者的权限也是不一样的.
+
+很容易猜测到, 是因为 wsl 和 win 的文件系统是不同的, 导致其写入的metadata不同, 然后导致在win删除后, wsl识别错误的情况. 具体情况如下
+
+在 WSL 中, Microsoft 实现了两种文件系统, 用于支持不同的使用场景:
+1. VolFs: 着力于在 Windows 文件系统上提供完整的 Linux 文件系统特性, 通过各种手段实现了对 Inodes,Directory entries,File objects,File descriptors,Special file types 的支持. 比如为了支持 Windows 上没有的 Inodes, VolFs 会把文件权限等信息保存在文件的 NTFS Extended Attributes 中.
+    - WSL 中的 `/` 使用的就是 VolFs 文件系统.
+2. DrvFs: 着力于提供与 Windows 文件系统的互操作性. 与 VolFs 不同, 为了提供最大的互操作性, DrvFs 不会在文件的 NTFS Extended Attributes 中储存附加信息, 而是从 Windows 的文件权限（Access Control Lists, 就是你右键文件 > 属性 > 安全选项卡中的那些权限配置）推断出该文件对应的的 Linux 文件权限. 
+    - 所有 Windows 盘符挂载至 WSL 下的 /mnt 时都是使用的 DrvFs 文件系统
+
+所以, 当你在 win 下操作 wsl 中的文件时, 如果该文件所在的文件系统是 VolFs, 那么新的操作并不会更改文件的元数据(NTFS Extended Attributes), 就会导致 wsl 读取不到该文件的部分元数据, 从而出现异常.
+
+知道了原因, 解决办法就好说了: 在win下只操作 DrvFs 格式的文件系统. 如
+1. 将需要更改的文件移动到C盘等DrvFs文件系统中.
+2. 创建一个其他数据盘, 如D盘, 格式为 fat 等win/linux都可以读取的盘, 然后以 DrvFs 格式挂载磁盘, 存储win/wsl都要访问的数据
+
+参考: [WSL 配置指北：打造 Windows 最强命令行](https://segmentfault.com/a/1190000016677670)
+
 ## 补充
 1. 在 archLinux 中打开 chrome 需要加 `--no-sandbox` 选项, 否则会报错(`Network namespace supported`)
-2. 虽然 wsl 与 win 是共享目录的, 但是文件系统是不一样的. 如在 wsl 创建一个文件, 然后在 win 下修改文件名称, 但是wsl中文件名称依旧没变化, 另外, 两者的权限也是不一样的.
