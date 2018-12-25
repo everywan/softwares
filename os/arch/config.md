@@ -13,6 +13,9 @@
 1. `sudo systemctl start netctl-auto@wlp4s0.service`, `sudo systemctl enable netctl-auto@wlp4s0.service`,
 2. 其中的 `wlp4s0` 改为自己的无线网卡名
 
+也可以通过配置文件管理网络. 具体参考: [静态IP配置](/develop/static-ip.md)
+- arch 配置文件可以参考 `/etc/netctl/example/` 下的示例
+
 ### 添加用户
 `useradd -m -g users -G wheel wzs`: 将 `wzs` 换为你的名字
 - 修改密码:`passwd wzs`
@@ -31,12 +34,16 @@
 1. zsh配置
     - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
 2. 更改默认shell命令: `chsh`
-3. 调节笔记本合盖等动作触发的程序
-    - 参考 [笔记本设置](https://wiki.archlinux.org/index.php/Power_management#Power_management_with_systemd)
-    - 配置文件路径: `/etc/systemd/logind.conf`
-    - 使配置生效: `systemctl restart systemd-logind`
+3. 一指定目录为默认目录: `chroot`
 4. tlp(电源管理软件) 采用默认配置即可
     - [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
+
+#### 登录管理配置
+配置项为 logind.conf, 可通过 `man logind.conf` 查看具体值. 可以调节 电源按钮, 空闲触发的操作等.
+- 配置文件路径: `/etc/systemd/logind.conf`
+- 使配置生效: `systemctl restart systemd-logind`
+- 参考 [笔记本设置](https://wiki.archlinux.org/index.php/Power_management#Power_management_with_systemd)
+- [屏幕显示控制](https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%9C%A8_X_%E4%B8%AD%E8%AE%BE%E5%AE%9A_DPMS)
 
 #### 备份系统
 基本的安装配置后, 第一件事肯定是要先备份下系统, 然后就可以乱搞了...

@@ -8,11 +8,9 @@ readonly WORK_DIR=`dirname $0`
 
 function main(){
     sudo yum update
-    sudo yum install vim git tree nmap wget curl rsync openssh -y
+    sudo yum install vim git tree nmap wget curl zsh rsync openssh -y
 
-    if [ $(isInstall zsh) == NOT_INSTALL ];then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    fi
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     echo "安装pip && 配置豆瓣源"
     if [ $(isInstall pip) == NOT_INSTALL ];then

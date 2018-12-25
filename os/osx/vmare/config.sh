@@ -31,7 +31,7 @@ function main(){
 
     echo "安装Go, 版本 1.11.2"
     if [ $(isInstall go) == NOT_INSTALL ];then
-        wget -c https://dl.google.com/go/go1.11.2.darwin-amd64.tar.gz -O go.tar.gz
+        wget -c https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz -O go.tar.gz
         tar -xzf go.tar.gz && mv go /usr/local/src/ && ln -s /usr/local/src/go/bin/go /usr/local/bin/go    
     fi
 }
