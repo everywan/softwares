@@ -61,7 +61,7 @@ tar -jcvf /backup/backup.tar.bz2 /backup/backup
 # setfacl --restore=backup_permissions.txt
 ```
 
-#### 桌面/中文环境配置
+#### 桌面/中文/字体环境配置
 - [参考: arch 桌面环境配置](./i3wm_config.md)
 
 #### 多显示器配置

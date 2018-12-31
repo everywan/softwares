@@ -5,7 +5,9 @@
     - [polybar配置](#polybar配置)
     - [中文配置](#中文配置)
         - [中文字体支持](#中文字体支持)
+        - [字体推荐](#字体推荐)
         - [fcitx](#fcitx)
+    - [高分辨率配置](#hdpi)
 
 <!-- /TOC --># 桌面/中文环境配置
 
@@ -93,7 +95,15 @@ i3 自身不带半透明, 淡入淡出等效果, 需要安装独立的 composito
     export LC_CTYPE=en_US.UTF-8
     export LC_ALL=zh_CN.UTF-8
     ```
-5. 安装中文字体: `sudo pacman -S wqy-microhei`
+5. 安装基础中文字体: `sudo pacman -S wqy-microhei`
+
+### 字体推荐
+```Bash
+# 网评最佳编程字体, 使用了下, 确实很赞
+sudo pacman -Ss ttf-inconsolata
+# Mac 字体
+aurman -S ttf-mac-fonts
+```
 
 ### fcitx
 - [参考](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))
@@ -123,3 +133,20 @@ export XMODIFIERS=@im=fcitx
     - 详细参见配置文件
 2. 其他用法
     - 剪切板: `Ctrl + ;`
+
+## hdpi
+建议上 4k 显示器.
+
+注意, 不要使用 xrandr 的缩放, 直接在对应的n软件里调节字体大小即可.
+```Bash
+# 查看已安装的字体(默认 /usr/share/fonts)
+fc-list
+# 刷新字体缓存
+fc-cache -vf
+# 使用xrandr缩放 (不建议)
+xrandr --output DP-1 --scale 0.5x0.5
+```
+
+4k 27寸显示器可以考虑以下配置
+1. fcitx 字体大小修改
+    - `vim /usr/share/fcitx/skin/classic/fcitx_skin.conf`, 字体 25 即可
