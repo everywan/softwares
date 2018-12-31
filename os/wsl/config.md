@@ -3,6 +3,30 @@
 1. [wsl的安装与使用](https://zhuanlan.zhihu.com/p/34885179)
 2. [安装arch on wsl](https://wiki.archlinux.org/index.php/Install_on_WSL_(简体中文))
 
+## wsl 自启脚本
+参考: [WSL 服务自动启动的正确方法](https://zhuanlan.zhihu.com/p/47733615)
+
+1. 编写linux启动脚本:
+    ```Bash
+    # sudo vim /etc/init.d/wsl_init.sh
+    #! /bin/sh
+    /etc/init.d/cron $1
+    /etc/init.d/ssh $1
+    ```
+2. 添加权限, 免密执行脚本
+    ```Bash
+    chmod +x /etc/init.d/wsl_init.sh
+    # chmod ... && vim /etc/sudoers
+    %sudo ALL=NOPASSWD: /etc/init.d/wsl_init.sh
+    ```
+3. 添加到win自启
+    ```Bash
+    # win+r 后 执行 `shell:startup`, 在该目录创建脚本
+    # vim wsl_init.vbs
+    Set ws = CreateObject("Wscript.Shell")
+    ws.run "debian run sudo /etc/init.wsl start", vbhide
+    ```
+
 ## 安装arch
 主要分为以下步骤:
 1. 启用win10 wsl支持
