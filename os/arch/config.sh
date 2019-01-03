@@ -12,6 +12,9 @@ function main(){
     sudo pacman -S nmap ydcv tree privoxy zsh expect autossh
     sudo pacman -S code chromium guake
 
+    # 可选. tig: git cli可视化
+    sudo pacman -S tig
+
     sudo systemctl start sshd
     sudo systemctl enable sshd
     # autossh 自动反向代理, 注意 需要先使用ssh登录过, 并且是免密登录
@@ -25,33 +28,33 @@ function main(){
 
     echo "安装ss"
     if [ $(isInstall sslocal) == NOT_INSTALL ];then
-        install_shadowsock    
+        install_shadowsock
     fi
     
     echo "安装pip && 配置豆瓣源"
     if [ $(isInstall pip) == NOT_INSTALL ];then
-        install_pip    
+        install_pip
     fi
 
     echo "安装docker"
     if [ $(isInstall docker) == NOT_INSTALL ];then
-        install_docker    
+        install_docker
     fi
 
     echo "安装aurman"
-    if [ $(isInstall aurman) == NOT_INSTALL ];then
-        install_aurman    
+    if [ $(isInstall yay) == NOT_INSTALL ];then
+        install_yay
     fi
 
     echo "安装ossutil"
     if [ $(isInstall ossutil) == NOT_INSTALL ];then
-        install_ossutil    
+        install_ossutil
     fi
 
     echo "安装Go, 版本 1.11.2"
     if [ $(isInstall go) == NOT_INSTALL ];then
         wget -c https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz -O go.tar.gz
-        tar -xzf go.tar.gz && sudo mv go /usr/local/src && sudo ln -s /usr/local/src/go/bin/go /usr/local/bin/go  
+        tar -xzf go.tar.gz && sudo mv go /usr/local/src && sudo ln -s /usr/local/src/go/bin/go /usr/local/bin/go
     fi
 
     # # 选择安装: TLP:电池管理, trash-put: 回收站
@@ -120,10 +123,8 @@ EOF
 }
 
 function install_aurman(){
-    git clone https://aur.archlinux.org/aurman.git
-    pushd aurman
-    # 导入gpg
-    gpg --recv-keys 465022E743D71E39
+    git clone https://aur.archlinux.org/yay.git
+    pushd yay
     makepkg -si
     popd
 }
