@@ -37,7 +37,7 @@
 sudo pacman -S xorg xorg-xinit termite feh rofi
 sudo pacman -S scrot i3lock imagemagick
 cp /etc/X11/xinit/xinitrc ~/.xinitrc
-aurman -S i3
+yay -S i3
 ```
 
 i3 自身不带半透明, 淡入淡出等效果, 需要安装独立的 compositor(合成器). 
@@ -59,6 +59,10 @@ i3 自身不带半透明, 淡入淡出等效果, 需要安装独立的 composito
     - 使用 scratchpad: scratchpad 是一个临时窗口存储区域, 可以方便的调出与隐藏. 详细参见i3介绍
 3. 出现问题用过 `1` 指定的log文件查看原因
 
+配置建议规则
+1. keep simply. 不要添加无用的.
+2. 如果你很频繁使用某套快捷键, 那么参照你使用的配置i3. 如果没有, 建议参照 vim 的快捷键配置
+
 
 提示技巧
 多看配置以及官方文档
@@ -75,7 +79,7 @@ i3 自身不带半透明, 淡入淡出等效果, 需要安装独立的 composito
 - [特殊符号网站, 用于在状态栏显示图标](http://cn.piliapp.com/symbol/)
 
 安装
-1. 安装 polybar: `aurman -S polybar`
+1. 安装 polybar: `yay -S polybar`
 2. 运行 polybar: [参考启动脚本](./config/polybar/launch.sh)
 3. 配置随i3启动: 在 i3-config 文件最后添加: `exec_always --no-startup-id $HOME/.config/polybar/launch.sh`, 并注释掉 i3-bar.
 
@@ -102,8 +106,11 @@ i3 自身不带半透明, 淡入淡出等效果, 需要安装独立的 composito
 # 网评最佳编程字体, 使用了下, 确实很赞
 sudo pacman -Ss ttf-inconsolata
 # Mac 字体
-aurman -S ttf-mac-fonts
+yay -S ttf-mac-fonts
 ```
+
+emoji 字体推荐: `sudo pacman -S noto-fonts-emoji`
+- [官方网站](https://www.google.com/get/noto/help/emoji/)
 
 ### fcitx
 - [参考](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))

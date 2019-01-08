@@ -43,3 +43,8 @@
 |交换字符|xp|x+p, x是删除一个字符并复制到剪切板, p是复制|
 |交换行|ddp|dd+p|
 |调换两个单词|deep||
+
+
+## vimium
+vim 基于 chrome 的组建, 
+https://sspai.com/post/27723

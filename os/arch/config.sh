@@ -41,7 +41,7 @@ function main(){
         install_docker
     fi
 
-    echo "安装aurman"
+    echo "安装yay"
     if [ $(isInstall yay) == NOT_INSTALL ];then
         install_yay
     fi
@@ -61,10 +61,10 @@ function main(){
     # sudo pacman -S tlp trash-put
 
     # deepin截图软件
-    aurman -S deepin-screenshot
+    yay -S deepin-screenshot
 
     # mysql客户端(mycli)
-    aurman -S mycli
+    yay -S mycli
 
     # git flow
     wget --no-check-certificate -q  https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install stable; rm gitflow-installer.sh
@@ -122,7 +122,7 @@ mirrors = https://pypi.doubanio.com/simple/
 EOF
 }
 
-function install_aurman(){
+function install_yay(){
     git clone https://aur.archlinux.org/yay.git
     pushd yay
     makepkg -si

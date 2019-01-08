@@ -121,7 +121,7 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
 
 开启声音并设置快捷键
 1. 启动声音
-    - 安装工具包: `sudo pacman -S alas-util` (alsa 默认已经安装, alas-util包含alsamixer)
+    - 安装工具包: `sudo pacman -S alsa-utils` (alsa 默认已经安装, alas-util包含alsamixer)
     - 用户加入 audio 组: `sudo usermod -a -G audio wzs`  或 `sudo gpasswd -a wzs audio`
     - 进入 `alsamixer` 调节配置
     - 测试是否有声音 `speaker-test -c 8`
