@@ -1,12 +1,16 @@
-# VIM使用教程
+# VIM
+
+vim 参考 ex 命令, 与 vimL/vimscript 语言(其实是一个, 不过名字没统一而已)
+
+
 > 参考: [vim常用指令](https://www.jianshu.com/p/dde77e3b299f)
 > [剪切板命令](https://www.cnblogs.com/softwaretesting/archive/2011/07/12/2104434.html)
 
-多参考英语释义, 以及大写一般是原有模式的 前后/行首/行尾/整行操作
+多参考英语释义, 大写一般是原有模式的 前后/行首/行尾/整行操作
 
 键位图: ![vim-key](./attach/vim-key.png)
 
-|指令|作用|详解|
+|作用|指令|详解|
 |:----:|:-----|:-----|
 |移动到词尾|e||
 |移动到词首|b||
@@ -46,5 +50,33 @@
 
 
 ## vimium
-vim 基于 chrome 的组建, 
-https://sspai.com/post/27723
+vim 基于 chrome 的vim插件.
+
+参考
+1. 官方: https://github.com/philc/vimium
+2. https://sspai.com/post/27723
+
+常用指令: 支持 hjklgG 等vim命令
+
+|作用|指令|详解|
+|:----:|:-----|:-----|
+|左右切换tab|J/K|大写的jk|
+|打开页面链接|f/F|f: 当页打开,F: 新标签页打开|
+|新页打开url/书签/历史记录|t|tabNew(使用tab切换选项)|
+|当页打开url/书签/历史记录|o|open(使用tab切换选项)|
+|复制当前url|yy|与vim同|
+|打开复制的页面|p/P|当页/新标签|
+|翻滚半屏|d/u||
+
+
+组合使用
+
+|作用|指令|详解|
+|:----:|:-----|:-----|
+|复制链接url|yf|y+f|
+
+chrome 快捷键
+
+|作用|指令|详解|
+|:----:|:-----|:-----|
+|切换焦点|f6|输入栏/书签/正文焦点切换|
