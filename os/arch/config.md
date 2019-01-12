@@ -9,10 +9,12 @@
             - [休眠支持](#休眠支持)
             - [DPMS](#dpms)
         - [系统备份](#系统备份)
-        - [多显示器配置](#多显示器配置)
         - [时间同步](#时间同步)
         - [回收站](#回收站)
         - [ossutil设置](#ossutil设置)
+    - [中文支持](#中文支持)
+        - [字体](#字体)
+        - [输入法](#输入法)
     - [硬件设备管理](#硬件设备管理)
         - [声卡配置](#声卡配置)
         - [蓝牙设置](#蓝牙设置)
@@ -119,20 +121,6 @@ tar -jcvf /backup/backup.tar.bz2 /backup/backup
 # setfacl --restore=backup_permissions.txt
 ```
 
-### 多显示器配置
-> 参考 [xrandr_arch_doc](https://wiki.archlinux.org/index.php/Xrandr_)
-
-xrandr 是 X window 下管理多显示器的工具. 使用xrandr管理多显示器输出.
-1. 安装: `sudo pacman -S xorg-xrandr`
-2. 常用命令与示例
-    ```Bash
-    xrandr                  # 显示所有可用的显示器
-    # 输出图像到 HDMI-2 所连接的显示器, 分辨率自适应, 显示在 eDP-1 显示器的左边
-    xrandr --output HDMI-2 --auto --left-of eDP-1
-    # 关闭 HDMI-2 连接的显示器
-    xrandr --output HDMI-2 --off
-    ```
-
 ### 时间同步
 使用 systemd-timesyncd 进行时间同步. _systemd-timesyncd 是一个用于跨网络同步系统时钟的守护服务_.
 1. [参考: systemd-timesyncd_arch](https://wiki.archlinux.org/index.php/Systemd-timesyncd_)
@@ -153,6 +141,76 @@ arch 默认没有回收站功能, 删除会直接 rm 掉, 偶尔让你变得很�
 阿里云OSS同步工具, 已经在 自动化脚本中 安装&配置 过
 1. [文档](https://help.aliyun.com/document_detail/50452.html)
 2. oss 配置信息(bucket与密码等): `ossutil config`
+
+
+## 中文支持
+> 参考 [中文支持](https://wiki.archlinux.org/index.php/Localization/Simplified_Chinese_(简体中文))
+
+术语介绍
+1. .xinitrc is run by xinit (and therefore also startx). In addition to configuration, it is also responsible for starting the root X program (usually a window manager such as Gnome, KDE, i3, etc.). This usually applies when X is started manually by the user (with starx or similar).
+2. .xsession is similar to .xinitrc but is used by display managers (such as lightdm, or sddm) when a user logs in. However, with modern DMs the user can usually choose a window manager to start, and the DM may or may not run the .xsession file.
+3. .xprofile is just for setting up the environment when logging in with an X session (usually via a display manager). It is similar to your .profile file, but specific to x sessions.
+
+启用arch的中文支持: 设置正确的locale并安装合适的中文字体. 流程如下
+1. 安装中文 locale
+    1. `vim /etc/locale.gen`, 取消 `zh_CN.UTF-8 UTF-8` 和 `en_US.UTF-8 UTF-8` 前的注释.
+    2. 执行 `locale-gen`, 使系统应用更改.
+2. 启用中文 locale: 根据如下作用域, 在不同的文件添加 `LANG=en_US.UTF-8`
+    - `/etc/locale.conf`: 全局 locale. (不推荐使用全局中文, 会导致tty乱码)
+    - `.bashrc`: 终端启动时.
+    - `.xinitrc`: 使用 xinit/startx 等启动x时.
+    - `.xprofile`: 登录管理器启动时.
+3. 图形界面启用中文: 在 `.xinitrc` 和 `.xprofile` 添加如下内容, 两个文件的区别见上述.
+    ```Bash
+    # 在 .xinitrc 文件中, 将此内容放到 exec _example_WM_or_DE_ 之前
+    export LANG=zh_CN.UTF-8
+    export LANGUAGE=zh_CN:en_US
+    export LC_CTYPE=en_US.UTF-8
+    # 仅 .xprofile 文件支持
+    export LC_ALL="zh_CN.UTF-8"
+    ```
+
+参考
+1. [xprofile-vs-xsession-vs-xinitrc](https://stackoverflow.com/questions/41397361/xprofile-vs-xsession-vs-xinitrc)
+
+### 字体
+- 基础中文字体: `sudo pacman -S wqy-microhei`
+- 网评最佳编程字体: `sudo pacman -Ss ttf-inconsolata`
+- Mac字体: `sudo pacman -Ss ttf-inconsolata`
+- emoji字体: `sudo pacman -S noto-fonts-emoji`
+    - [官方网站](https://www.google.com/get/noto/help/emoji/)
+
+常用命令
+```Bash
+# 查看已安装的字体(默认 /usr/share/fonts)
+fc-list
+# 刷新字体缓存
+fc-cache -vf
+```
+
+### 输入法
+> 参考 [fcitx](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))
+
+fcitx 是 Linux 下最常用的输入法. 配置流程如下
+1. 安装: `sudo pacman -S fcitx fcitx-googlepinyin`
+2. 创建 .xprofile, 设置桌面环境下的环境变量
+    ```Bash
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS=@im=fcitx
+    ```
+3. 在 xinitrc 中加载 xprofile, 并且启动 fcitx
+    ```Bash
+    [ -f /etc/xprofile ] && source /etc/xprofile
+    [ -f ~/.xprofile ] && source ~/.xprofile
+    fcitx -r &
+    ```
+4. 修改 fcitx 配置
+    - 配置文件路径: `~/.config/fcitx/`, `/usr/share/fcitx`
+    - 注意在退出fcitx的情况下修改配置, 否则配置可能被覆盖.
+
+用法
+- 剪切板: `Ctrl + ;`
 
 
 ## 硬件设备管理
@@ -190,8 +248,6 @@ arch 默认没有回收站功能, 删除会直接 rm 掉, 偶尔让你变得很�
 
 ### 蓝牙设置
 安装 `blueman`, 即可使用 `blueman-manager` 启动蓝牙桌面管理程序. 支持蓝牙耳机, 不用折腾而且还好用的软件
-
-
 
 ## 笔记本配置
 
