@@ -39,8 +39,9 @@
 ### i3快捷键
 i3wm 快捷键方案: 编程层: $mod
 1. 具体配置请参照i3wm配置文件. [配置文件](/os/arch/config/i3/config)
-2. `$mod+e` 作为 终端window 的快捷键
-3. `$mod+q` 作为 quikefix 的快捷键
+2. `$mod+tab` 作为 termite window 的切换快捷键
+2. `$mod+e` 作为 quikefix(即scrapad) 的快捷键
+3. `$mod+q` 作为 rofi 窗口查询的快捷键
 
 ### vimium
 vim 基于 chrome 的vim插件.

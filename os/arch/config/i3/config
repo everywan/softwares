@@ -1,10 +1,10 @@
 # i3 config file (v4)
-font pango:monospace 15
+font pango:monospace 13
 
-set $up k
-set $down j
-set $left h
-set $right l
+set $up w
+set $down s
+set $left a
+set $right d
 
 set $mod Mod4
 set $alt Mod1
@@ -15,17 +15,26 @@ floating_modifier $mod
 bindsym $mod+space exec --no-startup-id "rofi -show run"
 bindsym $mod+Return exec --no-startup-id termite "~/.config/termite/config"
 
+# 显示器/窗口/app 查询/切换
+bindsym $mod+q exec --no-startup-id "rofi -show window"
+
+bindsym $mod+Shift+l exec "scrot /tmp/lockscreen.pn    g && mogrify -scale 50% -gaussian-blur 0x4 -gamma 0    .8 -scale 200% /tmp/lockscreen.png && i3lock -i /tm    p/lockscreen.png && sleep 3; xset dpms force off"
+
 # kill focus app
 bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r restart
 
 # quikefix
-bindsym $mod+q scratchpad show
+bindsym $mod+e scratchpad show
+bindsym $mod+Shift+e move scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
 
 # 自定义切换键
-bindsym $mod+e workspace $ws9
-bindsym $mod+Shift+e move container to workspace $ws9
+bindsym $mod+Tab workspace $ws9
+bindsym $mod+Shift+Tab move container to workspace $ws9
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -33,9 +42,6 @@ bindsym $mod+f fullscreen toggle
 # change container layout
 bindsym $mod+Shift+t layout toggle tabbed split
 bindsym $mod+Shift+y split toggle
-
-# 显示器/窗口/app 切换
-bindsym $mod+Tab exec --no-startup-id "rofi -show window"
 
 # 常用程式切换快捷键
 # bindsym $mod+t [class="Termite"] focus
@@ -51,7 +57,7 @@ bindsym $mod+Tab exec --no-startup-id "rofi -show window"
 # bindsym XF86MonBrightnessUp exec --no-startup-id backlight -inc 100
 
 # 允许窗口之间来回切换
-# workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth yes
 
 # screenshot
 bindsym $alt+Ctrl+a exec deepin-screenshot
