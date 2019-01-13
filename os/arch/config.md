@@ -59,7 +59,7 @@ arch 官方推荐列表
 1. zsh配置
     - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
 2. 更改默认shell命令: `chsh`
-3. 一指定目录为默认目录: `chroot`
+3. 指定目录为默认目录: `chroot`
 4. tlp(电源管理软件) 采用默认配置即可
     - [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
 
