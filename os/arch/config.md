@@ -116,7 +116,7 @@ rsync -arpogv /* /backup/backup --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/
 # 备份权限(需要先安装 acl)
 getfacl -R / > /backup/backup_permissions.txt
 # 压缩备份
-tar -jcvf /backup/backup.tar.bz2 /backup/backup
+tar -jcvf /backup/backup.tar.bz2 /backup/backup /backup/backup_permissions.txt
 # 恢复权限
 # setfacl --restore=backup_permissions.txt
 ```
