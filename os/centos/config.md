@@ -83,5 +83,8 @@ Nginx 配置: 当使用 EPEL 源时, 直接从 源安装即可, 且支持 system
 1. centos7 默认是启用 selinux 的. 所以当 selinux 验证不通过时, 使用 systemctl 启动会报错. (systemd脚本启动会通过selinx的认证)
     - 原文: `Nginx will fail to start if /run/nginx.pid already exists but has the wrong SELinux context.`, 文件路径: `/usr/lib/systemd/system/nginx.service`
 
+### 支持NTFS
+`yum install ntfsprogs.armv7hl`
+
 ## 参考
 1. [为树莓派装上 CentOS 7 系统](https://sspai.com/post/42793)
