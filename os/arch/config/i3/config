@@ -18,7 +18,7 @@ bindsym $mod+Return exec --no-startup-id termite "~/.config/termite/config"
 # 显示器/窗口/app 查询/切换
 bindsym $mod+q exec --no-startup-id "rofi -show window"
 
-bindsym $mod+Shift+l exec "scrot /tmp/lockscreen.pn    g && mogrify -scale 50% -gaussian-blur 0x4 -gamma 0    .8 -scale 200% /tmp/lockscreen.png && i3lock -i /tm    p/lockscreen.png && sleep 3; xset dpms force off"
+bindsym $mod+Shift+l exec "scrot /tmp/lockscreen.png && mogrify -scale 50% -gaussian-blur 0x4 -gamma 0.8 -scale 200% /tmp/lockscreen.png && i3lock -i /tmp/lockscreen.png && sleep 3; xset dpms force off"
 
 # kill focus app
 bindsym $mod+Shift+q kill
@@ -33,8 +33,8 @@ bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
 
 # 自定义切换键
-bindsym $mod+Tab workspace $ws9
-bindsym $mod+Shift+Tab move container to workspace $ws9
+bindsym $mod+Tab workspace $ws10
+bindsym $mod+Shift+Tab move container to workspace $ws10
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -125,16 +125,16 @@ gaps outer 5
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 5 px or 5 ppt
+        bindsym $down       resize grow height 5 px or 5 ppt
+        bindsym $up         resize shrink height 5 px or 5 ppt
+        bindsym $right      resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width 1 px or 1 ppt
+        bindsym Down        resize grow height 1 px or 1 ppt
+        bindsym Up          resize shrink height 1 px or 1 ppt
+        bindsym Right       resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
