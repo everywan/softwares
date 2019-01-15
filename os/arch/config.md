@@ -1,26 +1,27 @@
 <!-- TOC -->
 
 - [Arch Linux 配置](#arch-linux-配置)
-    - [前置配置](#前置配置)
-        - [配置网络](#配置网络)
-        - [配置用户](#配置用户)
-    - [推荐配置](#推荐配置)
-        - [电源管理](#电源管理)
-            - [休眠支持](#休眠支持)
-            - [DPMS](#dpms)
-        - [系统备份](#系统备份)
-        - [时间同步](#时间同步)
-        - [回收站](#回收站)
-        - [ossutil设置](#ossutil设置)
-    - [中文支持](#中文支持)
-        - [字体](#字体)
-        - [输入法](#输入法)
-    - [硬件设备管理](#硬件设备管理)
-        - [声卡配置](#声卡配置)
-        - [蓝牙设置](#蓝牙设置)
-    - [笔记本配置](#笔记本配置)
-        - [亮度调节](#亮度调节)
-        - [Trackpoint](#trackpoint)
+  - [前置配置](#前置配置)
+    - [配置网络](#配置网络)
+    - [配置用户](#配置用户)
+  - [推荐配置](#推荐配置)
+    - [电源管理](#电源管理)
+      - [休眠支持](#休眠支持)
+      - [DPMS](#dpms)
+    - [系统备份](#系统备份)
+    - [时间同步](#时间同步)
+    - [回收站](#回收站)
+    - [内网穿透](#内网穿透)
+    - [ossutil设置](#ossutil设置)
+  - [中文支持](#中文支持)
+    - [字体](#字体)
+    - [输入法](#输入法)
+  - [硬件设备管理](#硬件设备管理)
+    - [声卡配置](#声卡配置)
+    - [蓝牙设置](#蓝牙设置)
+  - [笔记本配置](#笔记本配置)
+    - [亮度调节](#亮度调节)
+    - [Trackpoint](#trackpoint)
 
 <!-- /TOC -->
 # Arch Linux 配置
@@ -136,6 +137,11 @@ tar -jcvf /backup/backup.tar.bz2 /backup/backup /backup/backup_permissions.txt
 arch 默认没有回收站功能, 删除会直接 rm 掉, 偶尔让你变得很难受. 所以使用 `trash-cli` 实现回收站功能
 1. 设置 rm 为移动到到回收站: `vim ~/.zshrc`, 添加: `alias rm="trash-put $1"`
 2. 恢复系统等意外情况出现权限不允许时: 在根目录创建 `/.Trash`, 权限660, 且设置t权限. `chmod a+rw /.Trash;chmod +t /.Trash;`
+
+### 内网穿透
+使用frp软件进行内网穿透, 配置参考官网 [frp](https://github.com/fatedier/frp/blob/master/README.md).
+
+frp 可以通过编写脚本实现由 systemd 管理, 脚本编写方式参考 [systemd](/develop/systemd.md#systemd脚本), 脚本参考 [frpc](./script/frpc.service) [frps](./script/frps.service)
 
 ### ossutil设置
 阿里云OSS同步工具, 已经在 自动化脚本中 安装&配置 过

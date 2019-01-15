@@ -1,0 +1,14 @@
+# /etc/systemd/system/frps.service
+
+[Unit]
+Description=frp server service
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=60
+ExecStart=/usr/local/bin/frps -c /etc/frp/frps.ini
+
+[Install]
+WantedBy=multi-user.target

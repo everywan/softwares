@@ -1,0 +1,14 @@
+# /etc/systemd/system/frpc.service
+
+[Unit]
+Description=frp client service
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=60
+ExecStart=/usr/local/bin/frpc -c /etc/frp/frpc.ini
+
+[Install]
+WantedBy=multi-user.target
