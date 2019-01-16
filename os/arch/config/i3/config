@@ -12,13 +12,13 @@ set $alt Mod1
 floating_modifier $mod
 
 # rofi/termite
-bindsym $mod+space exec --no-startup-id "rofi -show run"
+bindsym $mod+space exec --no-startup-id "rofi -dpi 200 -show run"
 bindsym $mod+Return exec --no-startup-id termite "~/.config/termite/config"
 
 # 显示器/窗口/app 查询/切换
-bindsym $mod+q exec --no-startup-id "rofi -show window"
+bindsym $mod+q exec --no-startup-id "rofi -dpi 200 -show window"
 
-bindsym $mod+Shift+l exec "scrot /tmp/lockscreen.png && mogrify -scale 50% -gaussian-blur 0x4 -gamma 0.8 -scale 200% /tmp/lockscreen.png && i3lock -i /tmp/lockscreen.png && sleep 3; xset dpms force off"
+bindsym $mod+Shift+l exec "scrot /tmp/lockscreen.png && mogrify -scale 50% -gaussian-blur 0x4 -gamma 0.8 -scale 200% /tmp/lockscreen.png && i3lock -i /tmp/lockscreen.png && sleep 10; xset dpms force off"
 
 # kill focus app
 bindsym $mod+Shift+q kill
