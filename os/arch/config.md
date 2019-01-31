@@ -59,6 +59,7 @@ arch 官方推荐列表
 我写的配置脚本比较简单, 没有做到全自动化. 需要手动配置的部分如下
 1. zsh配置
     - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
+    - use zsh like vim: `bindkey -v`
 2. 更改默认shell命令: `chsh`
 3. 指定目录为默认目录: `chroot`
 4. tlp(电源管理软件) 采用默认配置即可
