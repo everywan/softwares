@@ -1,33 +1,42 @@
-<!-- TOC -->
-
-- [Arch Linux 配置](#arch-linux-配置)
-  - [前置配置](#前置配置)
-    - [配置网络](#配置网络)
-    - [配置用户](#配置用户)
-  - [推荐配置](#推荐配置)
-    - [电源管理](#电源管理)
-      - [休眠支持](#休眠支持)
+- [Arch Linux 配置](#arch-linux-%E9%85%8D%E7%BD%AE)
+  - [必备软件](#%E5%BF%85%E5%A4%87%E8%BD%AF%E4%BB%B6)
+    - [网络](#%E7%BD%91%E7%BB%9C)
+    - [用户](#%E7%94%A8%E6%88%B7)
+    - [桌面环境安装](#%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)
+    - [中文支持](#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81)
+      - [字体](#%E5%AD%97%E4%BD%93)
+      - [输入法](#%E8%BE%93%E5%85%A5%E6%B3%95)
+    - [必备软件安装脚本](#%E5%BF%85%E5%A4%87%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC)
+    - [时间同步](#%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5)
+    - [电源管理](#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86)
+      - [休眠支持](#%E4%BC%91%E7%9C%A0%E6%94%AF%E6%8C%81)
       - [DPMS](#dpms)
-    - [系统备份](#系统备份)
-    - [时间同步](#时间同步)
-    - [回收站](#回收站)
-    - [内网穿透](#内网穿透)
-    - [ossutil设置](#ossutil设置)
-  - [中文支持](#中文支持)
-    - [字体](#字体)
-    - [输入法](#输入法)
-  - [硬件设备管理](#硬件设备管理)
-    - [声卡配置](#声卡配置)
-    - [蓝牙设置](#蓝牙设置)
-  - [笔记本配置](#笔记本配置)
-    - [亮度调节](#亮度调节)
+  - [硬件配置](#%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE)
+    - [声卡配置](#%E5%A3%B0%E5%8D%A1%E9%85%8D%E7%BD%AE)
+    - [蓝牙设置](#%E8%93%9D%E7%89%99%E8%AE%BE%E7%BD%AE)
+    - [亮度调节](#%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82)
     - [Trackpoint](#trackpoint)
+  - [推荐软件](#%E6%8E%A8%E8%8D%90%E8%BD%AF%E4%BB%B6)
+    - [回收站](#%E5%9B%9E%E6%94%B6%E7%AB%99)
+    - [内网穿透](#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F)
+    - [ossutil设置](#ossutil%E8%AE%BE%E7%BD%AE)
+    - [系统备份](#%E7%B3%BB%E7%BB%9F%E5%A4%87%E4%BB%BD)
+  - [问题](#%E9%97%AE%E9%A2%98)
 
-<!-- /TOC -->
 # Arch Linux 配置
+配置流程如下
+1. 首先配置网络, 添加个人用户.
+2. 配置桌面环境, 中文输入法等中文支持(方便联网排查问题, 复制粘贴命令等)
+3. 针对不同的硬件, 进行不同的配置
+4. 安装zsh等必备软件
+5. 修改软件配置
+6. 遇到需要的软件再去安装, 切忌妄想一步登天.
 
-## 前置配置
-### 配置网络
+一般而言, 我喜欢讲配置文件等备份到 oss 上, 所以我需要更早的安装 ossutil, 并且将文件拷贝下来. oss下载脚本如下
+1. 脚本: `/usr/local/bin/ossutil -e oss-cn-beijing.aliyuncs.com cp -fur oss://cloud-cn/arch ./cloud`
+
+## 必备软件
+### 网络
 如果在安装系统时预先安装了 `wpa_supplicant`, 并且拷贝了网络配置文件, 则直接 `netctl start/stop/status/enable profile` 就可以启动链接.
 - profile 只是文件名称, 不含路径
 - 如果没有拷贝文件, 那么可以使用 `wifi-menu` 重新建立链接配置
@@ -40,21 +49,85 @@
 也可以通过配置文件管理网络. 具体参考: [静态IP配置](/develop/static-ip.md)
 - arch 配置文件可以参考 `/etc/netctl/example/` 下的示例
 
-### 配置用户
+### 用户
 添加用户: `useradd -m -g users -G wheel wzs`: 将 `wzs` 换为你的名字
-- 修改密码:`passwd wzs`
-- users 是所有普通用户的集合(相较与如docker等用户而言). 也被称为 staff 组
-- wheel 是一个特殊组, 包含root权限
+1. 修改密码:`passwd wzs`
+2. users 是所有普通用户的集合(相较与如docker等用户而言). 也被称为 staff 组
+3. wheel 是一个特殊组, 包含root权限
 
-## 推荐配置
+### 桌面环境安装
+### 中文支持
+> 参考 [中文支持](https://wiki.archlinux.org/index.php/Localization/Simplified_Chinese_(简体中文))
 
-arch 官方推荐列表
-- [arch_推荐软件](https://wiki.archlinux.org/index.php/General_recommendations_)
-- [arch_常用软件列表](https://wiki.archlinux.org/index.php/General_recommendations_)
+术语介绍
+1. .xinitrc is run by xinit (and therefore also startx). In addition to configuration, it is also responsible for starting the root X program (usually a window manager such as Gnome, KDE, i3, etc.). This usually applies when X is started manually by the user (with starx or similar).
+2. .xsession is similar to .xinitrc but is used by display managers (such as lightdm, or sddm) when a user logs in. However, with modern DMs the user can usually choose a window manager to start, and the DM may or may not run the .xsession file.
+3. .xprofile is just for setting up the environment when logging in with an X session (usually via a display manager). It is similar to your .profile file, but specific to x sessions.
 
-建议先看下官方教程, 然后根据自己的需求写一个自己的自动化配置脚本. 如下是我的 [配置脚本](./config.sh): 包括vim/ssh/nmap等基础工具, 也有 ss,docker,pip 等软件与配置.
-- 执行脚本: `curl -sSL https://raw.githubusercontent.com/everywan/soft/master/os/arch/config.sh | sh -`
-- 有兴趣的同学可以使用 export/awk/sed/Python 等实现更多的自动化配置.
+启用arch的中文支持: 设置正确的locale并安装合适的中文字体. 流程如下
+1. 安装中文 locale
+    1. `vim /etc/locale.gen`, 取消 `zh_CN.UTF-8 UTF-8` 和 `en_US.UTF-8 UTF-8` 前的注释.
+    2. 执行 `locale-gen`, 使系统应用更改.
+2. 启用中文 locale: 根据如下作用域, 在不同的文件添加 `LANG=en_US.UTF-8`
+    - `/etc/locale.conf`: 全局 locale. (不推荐使用全局中文, 会导致tty乱码)
+    - `.bashrc`: 终端启动时.
+    - `.xinitrc`: 使用 xinit/startx 等启动x时.
+    - `.xprofile`: 登录管理器启动时.
+3. 图形界面启用中文: 在 `.xinitrc` 和 `.xprofile` 添加如下内容, 两个文件的区别见上述.
+    ```Bash
+    # 在 .xinitrc 文件中, 将此内容放到 exec _example_WM_or_DE_ 之前
+    export LANG=zh_CN.UTF-8
+    export LANGUAGE=zh_CN:en_US
+    export LC_CTYPE=en_US.UTF-8
+    # 仅 .xprofile 文件支持
+    export LC_ALL="zh_CN.UTF-8"
+    ```
+
+参考
+1. [xprofile-vs-xsession-vs-xinitrc](https://stackoverflow.com/questions/41397361/xprofile-vs-xsession-vs-xinitrc)
+
+#### 字体
+- 基础中文字体: `sudo pacman -S wqy-microhei`
+- 网评最佳编程字体: `sudo pacman -S ttf-inconsolata`
+- Mac字体: `sudo pacman -S ttf-inconsolata`
+- emoji字体: `sudo pacman -S noto-fonts-emoji`
+    - [官方网站](https://www.google.com/get/noto/help/emoji/)
+
+常用命令
+```Bash
+# 查看已安装的字体(默认 /usr/share/fonts)
+fc-list
+# 刷新字体缓存
+fc-cache -vf
+```
+
+#### 输入法
+> 参考 [fcitx](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))
+
+fcitx 是 Linux 下最常用的输入法. 配置流程如下
+1. 安装: `sudo pacman -S fcitx`. 优先推荐搜狗输入法: `yay -S fcitx-sogoupinyin`.
+2. 创建 .xprofile, 设置桌面环境下的环境变量
+    ```Bash
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS=@im=fcitx
+    ```
+3. 在 xinitrc 中加载 xprofile, 并且启动 fcitx
+    ```Bash
+    [ -f /etc/xprofile ] && source /etc/xprofile
+    [ -f ~/.xprofile ] && source ~/.xprofile
+    fcitx -r &
+    ```
+4. 修改 fcitx 配置
+    - 配置文件路径: `~/.config/fcitx/`, `/usr/share/fcitx`
+    - 注意在退出fcitx的情况下修改配置, 否则配置可能被覆盖.
+
+用法
+- 剪切板: `Ctrl + ;`
+
+### 必备软件安装脚本
+1. 执行脚本: `curl -sSL https://raw.githubusercontent.com/everywan/soft/master/os/arch/config.sh | sh -`
+2. 有兴趣的同学可以使用 export/awk/sed/Python 等实现更多的自动化配置.
 
 我写的配置脚本比较简单, 没有做到全自动化. 需要手动配置的部分如下
 1. zsh配置
@@ -64,6 +137,17 @@ arch 官方推荐列表
 3. 指定目录为默认目录: `chroot`
 4. tlp(电源管理软件) 采用默认配置即可
     - [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
+
+### 时间同步
+使用 systemd-timesyncd 进行时间同步. _systemd-timesyncd 是一个用于跨网络同步系统时钟的守护服务_.
+1. [参考: systemd-timesyncd_arch](https://wiki.archlinux.org/index.php/Systemd-timesyncd_)
+2. 启动 systemd-timesyncd, 设置自动同步: `sudo timedatectl set-ntp true`
+2. 配置时间同步服务器: `/etc/systemd/timesyncd.conf`
+    ````
+    [Time]
+    NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
+    FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
+    ````
 
 ### 电源管理
 > 参考 [电源管理](https://wiki.archlinux.org/index.php/Power_management_(简体中文))
@@ -97,7 +181,7 @@ arch 官方推荐列表
     HOOKS="base udev autodetect modconf block filesystems keyboard fsck" ==> HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck"
     # 重新生成 initramfs 镜像
     mkinitcpio -p linux
-    ``
+    ```
 
 其他参考
 - [Archlinux休眠设置](https://www.cnblogs.com/xiaozhang9/p/6443478.html)
@@ -108,119 +192,8 @@ arch 官方推荐列表
 DPMS 可以在计算机一定时间无操作时, 锁定/休眠计算机 或 将显示器置于节电模式. 配置文件为 `/etc/systemd/logind.conf`, 可通过 `man logind.conf` 查看具体信息.
 - 使配置生效: `systemctl restart systemd-logind`
 
-### 系统备份
-基本的安装配置后, 第一件事肯定是要先备份下系统, 然后就可以乱搞了...
-
-使用 rsync 备份文件, 使用 acl 备份权限, 使用 tar 压缩备份, 使用 ossutil 上传备份到oss.
-```Bash
-# 备份系统, 恢复系统只需要换下 文件夹顺序就行了 
-rsync -arpogv /* /backup/backup --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/backup/*}
-# 备份权限(需要先安装 acl)
-getfacl -R / > /backup/backup_permissions.txt
-# 压缩备份
-tar -jcvf /backup/backup.tar.bz2 /backup/backup /backup/backup_permissions.txt
-# 恢复权限
-# setfacl --restore=backup_permissions.txt
-```
-
-### 时间同步
-使用 systemd-timesyncd 进行时间同步. _systemd-timesyncd 是一个用于跨网络同步系统时钟的守护服务_.
-1. [参考: systemd-timesyncd_arch](https://wiki.archlinux.org/index.php/Systemd-timesyncd_)
-2. 启动 systemd-timesyncd, 设置自动同步: `sudo timedatectl set-ntp true`
-2. 配置时间同步服务器: `/etc/systemd/timesyncd.conf`
-    ````
-    [Time]
-    NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
-    FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
-    ````
-
-### 回收站
-arch 默认没有回收站功能, 删除会直接 rm 掉, 偶尔让你变得很难受. 所以使用 `trash-cli` 实现回收站功能
-1. 设置 rm 为移动到到回收站: `vim ~/.zshrc`, 添加: `alias rm="trash-put $1"`
-2. 恢复系统等意外情况出现权限不允许时: 在根目录创建 `/.Trash`, 权限660, 且设置t权限. `chmod a+rw /.Trash;chmod +t /.Trash;`
-
-### 内网穿透
-使用frp软件进行内网穿透, 配置参考官网 [frp](https://github.com/fatedier/frp/blob/master/README.md).
-
-frp 可以通过编写脚本实现由 systemd 管理, 脚本编写方式参考 [systemd](/develop/systemd.md#systemd脚本), 脚本参考 [frpc](./script/frpc.service) [frps](./script/frps.service)
-
-### ossutil设置
-阿里云OSS同步工具, 已经在 自动化脚本中 安装&配置 过
-1. [文档](https://help.aliyun.com/document_detail/50452.html)
-2. oss 配置信息(bucket与密码等): `ossutil config`
-
-
-## 中文支持
-> 参考 [中文支持](https://wiki.archlinux.org/index.php/Localization/Simplified_Chinese_(简体中文))
-
-术语介绍
-1. .xinitrc is run by xinit (and therefore also startx). In addition to configuration, it is also responsible for starting the root X program (usually a window manager such as Gnome, KDE, i3, etc.). This usually applies when X is started manually by the user (with starx or similar).
-2. .xsession is similar to .xinitrc but is used by display managers (such as lightdm, or sddm) when a user logs in. However, with modern DMs the user can usually choose a window manager to start, and the DM may or may not run the .xsession file.
-3. .xprofile is just for setting up the environment when logging in with an X session (usually via a display manager). It is similar to your .profile file, but specific to x sessions.
-
-启用arch的中文支持: 设置正确的locale并安装合适的中文字体. 流程如下
-1. 安装中文 locale
-    1. `vim /etc/locale.gen`, 取消 `zh_CN.UTF-8 UTF-8` 和 `en_US.UTF-8 UTF-8` 前的注释.
-    2. 执行 `locale-gen`, 使系统应用更改.
-2. 启用中文 locale: 根据如下作用域, 在不同的文件添加 `LANG=en_US.UTF-8`
-    - `/etc/locale.conf`: 全局 locale. (不推荐使用全局中文, 会导致tty乱码)
-    - `.bashrc`: 终端启动时.
-    - `.xinitrc`: 使用 xinit/startx 等启动x时.
-    - `.xprofile`: 登录管理器启动时.
-3. 图形界面启用中文: 在 `.xinitrc` 和 `.xprofile` 添加如下内容, 两个文件的区别见上述.
-    ```Bash
-    # 在 .xinitrc 文件中, 将此内容放到 exec _example_WM_or_DE_ 之前
-    export LANG=zh_CN.UTF-8
-    export LANGUAGE=zh_CN:en_US
-    export LC_CTYPE=en_US.UTF-8
-    # 仅 .xprofile 文件支持
-    export LC_ALL="zh_CN.UTF-8"
-    ```
-
-参考
-1. [xprofile-vs-xsession-vs-xinitrc](https://stackoverflow.com/questions/41397361/xprofile-vs-xsession-vs-xinitrc)
-
-### 字体
-- 基础中文字体: `sudo pacman -S wqy-microhei`
-- 网评最佳编程字体: `sudo pacman -Ss ttf-inconsolata`
-- Mac字体: `sudo pacman -Ss ttf-inconsolata`
-- emoji字体: `sudo pacman -S noto-fonts-emoji`
-    - [官方网站](https://www.google.com/get/noto/help/emoji/)
-
-常用命令
-```Bash
-# 查看已安装的字体(默认 /usr/share/fonts)
-fc-list
-# 刷新字体缓存
-fc-cache -vf
-```
-
-### 输入法
-> 参考 [fcitx](https://wiki.archlinux.org/index.php/Fcitx_(简体中文))
-
-fcitx 是 Linux 下最常用的输入法. 配置流程如下
-1. 安装: `sudo pacman -S fcitx fcitx-googlepinyin`
-2. 创建 .xprofile, 设置桌面环境下的环境变量
-    ```Bash
-    export GTK_IM_MODULE=fcitx
-    export QT_IM_MODULE=fcitx
-    export XMODIFIERS=@im=fcitx
-    ```
-3. 在 xinitrc 中加载 xprofile, 并且启动 fcitx
-    ```Bash
-    [ -f /etc/xprofile ] && source /etc/xprofile
-    [ -f ~/.xprofile ] && source ~/.xprofile
-    fcitx -r &
-    ```
-4. 修改 fcitx 配置
-    - 配置文件路径: `~/.config/fcitx/`, `/usr/share/fcitx`
-    - 注意在退出fcitx的情况下修改配置, 否则配置可能被覆盖.
-
-用法
-- 剪切板: `Ctrl + ;`
-
-
-## 硬件设备管理
+## 硬件配置
+> 注: 机器为ThinkPad. 其他机器请稍加注意.
 
 工具简介
 1. udev: arch 下的设备管理器, 负责所有的硬件添加/删除/加载事件.
@@ -256,8 +229,6 @@ fcitx 是 Linux 下最常用的输入法. 配置流程如下
 ### 蓝牙设置
 安装 `blueman`, 即可使用 `blueman-manager` 启动蓝牙桌面管理程序. 支持蓝牙耳机, 不用折腾而且还好用的软件
 
-## 笔记本配置
-
 ### 亮度调节
 tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`. 直接重写数值, 就可以改变亮度.
 
@@ -288,3 +259,43 @@ Thinkpad 小红点配置
     xinput set-prop _id_ _id_ 0.25
     ```
 2. 参考: [小红点配置](https://www.jianshu.com/p/b9677e9e56ec)
+
+## 推荐软件
+arch 官方推荐列表
+- [arch_推荐软件](https://wiki.archlinux.org/index.php/General_recommendations_)
+- [arch_常用软件列表](https://wiki.archlinux.org/index.php/General_recommendations_)
+
+### 回收站
+arch 默认没有回收站功能, 删除会直接 rm 掉, 偶尔让你变得很难受. 所以使用 `trash-cli` 实现回收站功能
+1. 设置 rm 为移动到到回收站: `vim ~/.zshrc`, 添加: `alias rm="trash-put $1"`
+2. 恢复系统等意外情况出现权限不允许时: 在根目录创建 `/.Trash`, 权限660, 且设置t权限. `chmod a+rw /.Trash;chmod +t /.Trash;`
+
+### 内网穿透
+使用frp软件进行内网穿透, 配置参考官网 [frp](https://github.com/fatedier/frp/blob/master/README.md).
+
+frp 可以通过编写脚本实现由 systemd 管理, 脚本编写方式参考 [systemd](/develop/systemd.md#systemd脚本), 脚本参考 [frpc](./script/frpc.service) [frps](./script/frps.service)
+
+### ossutil设置
+阿里云OSS同步工具, 已经在 自动化脚本中 安装&配置 过
+1. [文档](https://help.aliyun.com/document_detail/50452.html)
+2. oss 配置信息(bucket与密码等): `ossutil config`
+
+### 系统备份
+基本的安装配置后, 第一件事肯定是要先备份下系统, 然后就可以乱搞了...
+
+使用 rsync 备份文件, 使用 acl 备份权限, 使用 tar 压缩备份, 使用 ossutil 上传备份到oss.
+```Bash
+# 备份系统, 恢复系统只需要换下 文件夹顺序就行了 
+rsync -arpogv /* /backup/backup --exclude={/dev/*,/proc/*,/sys/*,/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/backup/*}
+# 备份权限(需要先安装 acl)
+getfacl -R / > /backup/backup_permissions.txt
+# 压缩备份
+tar -jcvf /backup/backup.tar.bz2 /backup/backup /backup/backup_permissions.txt
+# 恢复权限
+# setfacl --restore=backup_permissions.txt
+```
+
+## 问题
+1. fcitx 输入法出现漏字: 输入拼音时, 字母直接出现在输入框.
+    - 问题复现: 输入 `窗口管理器` 可以测试
+    - 修复: 重新安装 `fcitx-im`, 并且重启系统

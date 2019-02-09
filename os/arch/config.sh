@@ -7,24 +7,24 @@ readonly NOT_INSTALL="not_install"
 readonly WORK_DIR=`dirname $0`
 
 function main(){
-    sudo pacman -Syu
-    sudo pacman -S openssh vim wget curl rsync git
-    sudo pacman -S nmap ydcv tree privoxy zsh expect autossh
-    sudo pacman -S code chromium guake
-
-    # 可选. tig: git cli可视化
-    sudo pacman -S tig
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S --noconfirm openssh vim wget curl rsync git
+    sudo pacman -S --noconfirm nmap ydcv tree privoxy zsh expect
+    sudo pacman -S --noconfirm code chromium guake tig trash-put
 
     sudo systemctl start sshd
     sudo systemctl enable sshd
-    # autossh 自动反向代理, 注意 需要先使用ssh登录过, 并且是免密登录
+
+    git config --global user.name "wzs"
+    git config --global user.email "zhensheng.five@gmail.com"
+    
+    # autossh 自动反向代理, 注意 需要先使用ssh登录过, 并且是免密登录. (替换为frp)
     # 配置参考: https://github.com/everywan/note/blob/d1ca2a7753e447e480107d037237a34a5cadf583/application/os/linux/basic_cmd.md
     # sudo systemctl start autossh
     # sudo systemctl enable autossh
 
-    if [ $(isInstall zsh) == NOT_INSTALL ];then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    fi
+    echo "安装 oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     echo "安装ss"
     if [ $(isInstall sslocal) == NOT_INSTALL ];then
@@ -57,17 +57,17 @@ function main(){
         tar -xzf go.tar.gz && sudo mv go /usr/local/src && sudo ln -s /usr/local/src/go/bin/go /usr/local/bin/go
     fi
 
-    # # 选择安装: TLP:电池管理, trash-put: 回收站
-    # sudo pacman -S tlp trash-put
-
     # deepin截图软件
-    yay -S deepin-screenshot
+    # yay -S deepin-screenshot
 
-    # mysql客户端(mycli)
+    echo "mysql客户端(mycli)"
     yay -S mycli
 
-    # git flow
+    echo "git flow"
     wget --no-check-certificate -q  https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install stable; rm gitflow-installer.sh
+
+    echo "选择安装: TLP:电池管理"
+    sudo pacman -S tlp
 }
 
 # 判断是否安装
@@ -82,7 +82,7 @@ function isInstall(){
 function install_shadowsock(){
     # 使用arch包, 已经添加到了 systemd 管理
     sudo pacman -S shadowsocks
-    sudo systemctl start shadowsocks@config
+    # sudo systemctl start shadowsocks@config
     # 使用 sslocal 管理, 可以作为服务端
     # git clone https://github.com/shadowsocks/shadowsocks.git
     # pushd shadowsocks
