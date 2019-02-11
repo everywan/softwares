@@ -7,10 +7,13 @@ readonly NOT_INSTALL="not_install"
 readonly WORK_DIR=`dirname $0`
 
 function main(){
+    # useradd -m -g users -G wheel wzs
     sudo pacman -Syu --noconfirm
     sudo pacman -S --noconfirm openssh vim wget curl rsync git
     sudo pacman -S --noconfirm nmap ydcv tree privoxy zsh expect
     sudo pacman -S --noconfirm code chromium guake tig trash-put
+    # 自己选择是否去掉注释
+    # sudo pacman -S --noconfirm tlp
 
     sudo systemctl start sshd
     sudo systemctl enable sshd
@@ -18,41 +21,31 @@ function main(){
     git config --global user.name "wzs"
     git config --global user.email "zhensheng.five@gmail.com"
     
-    # autossh 自动反向代理, 注意 需要先使用ssh登录过, 并且是免密登录. (替换为frp)
-    # 配置参考: https://github.com/everywan/note/blob/d1ca2a7753e447e480107d037237a34a5cadf583/application/os/linux/basic_cmd.md
-    # sudo systemctl start autossh
-    # sudo systemctl enable autossh
-
-    echo "安装 oh-my-zsh"
+    echo "------------------------ 安装 oh-my-zsh -------------------------\n"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-    echo "安装ss"
     if [ $(isInstall sslocal) == NOT_INSTALL ];then
         install_shadowsock
     fi
     
-    echo "安装pip && 配置豆瓣源"
     if [ $(isInstall pip) == NOT_INSTALL ];then
         install_pip
     fi
 
-    echo "安装docker"
     if [ $(isInstall docker) == NOT_INSTALL ];then
         install_docker
     fi
 
-    echo "安装yay"
     if [ $(isInstall yay) == NOT_INSTALL ];then
         install_yay
     fi
 
-    echo "安装ossutil"
     if [ $(isInstall ossutil) == NOT_INSTALL ];then
         install_ossutil
     fi
 
-    echo "安装Go, 版本 1.11.2"
     if [ $(isInstall go) == NOT_INSTALL ];then
+        echo "------------------------ 安装 go -------------------------\n"
         wget -c https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz -O go.tar.gz
         tar -xzf go.tar.gz && sudo mv go /usr/local/src && sudo ln -s /usr/local/src/go/bin/go /usr/local/bin/go
     fi
@@ -60,14 +53,17 @@ function main(){
     # deepin截图软件
     # yay -S deepin-screenshot
 
-    echo "mysql客户端(mycli)"
+    echo "------------------------ 安装 mycli -------------------------\n"
     yay -S mycli
 
-    echo "git flow"
+    echo "------------------------ 安装 gitflow -------------------------\n"
     wget --no-check-certificate -q  https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install stable; rm gitflow-installer.sh
 
-    echo "选择安装: TLP:电池管理"
-    sudo pacman -S tlp
+    # autossh 自动反向代理, 注意 需要先使用ssh登录过, 并且是免密登录. (替换为frp)
+    # 配置参考: https://github.com/everywan/note/blob/d1ca2a7753e447e480107d037237a34a5cadf583/application/os/linux/basic_cmd.md
+    # sudo systemctl start autossh
+    # sudo systemctl enable autossh
+
 }
 
 # 判断是否安装
@@ -80,6 +76,7 @@ function isInstall(){
 }
 
 function install_shadowsock(){
+    echo "------------------------ 安装 ss  -------------------------\n"
     # 使用arch包, 已经添加到了 systemd 管理
     sudo pacman -S shadowsocks
     # sudo systemctl start shadowsocks@config
@@ -92,6 +89,7 @@ function install_shadowsock(){
 }
 
 function install_docker(){
+    echo "------------------------ 安装 docker  -------------------------\n"
     curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
     echo "配置docker免sudo"
     sudo usermod -aG docker ${USER}
@@ -109,6 +107,7 @@ EOF
 }
 
 function install_pip(){
+    echo "------------------------ 安装 pip  -------------------------\n"
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     sudo python get-pip.py -i https://pypi.doubanio.com/simple/
     mkdir ~/.pip
@@ -123,6 +122,7 @@ EOF
 }
 
 function install_yay(){
+    echo "------------------------ 安装 yay -------------------------\n"
     git clone https://aur.archlinux.org/yay.git
     pushd yay
     makepkg -si
@@ -130,6 +130,7 @@ function install_yay(){
 }
 
 function install_ossutil(){
+    echo "------------------------ 安装 ossutil -------------------------\n"
     wget -c http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/50452/cn_zh/1524643963683/ossutil64\?spm\=a2c4g.11186623.2.11.3638779cVMqV6m
     sudo mv ossutil64\?spm=a2c4g.11186623.2.11.3638779cVMqV6m /usr/local/bin/ossutil
 }
@@ -140,9 +141,7 @@ else
     sudo rm -rf /tmp/install_aaa/*
 fi
 pushd /tmp/install_aaa
-
 main
-
 popd
 
 # if [ $(basename "$0") == "config.sh" ]; then

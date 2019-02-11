@@ -2,21 +2,23 @@
   - [必备软件](#%E5%BF%85%E5%A4%87%E8%BD%AF%E4%BB%B6)
     - [网络](#%E7%BD%91%E7%BB%9C)
     - [用户](#%E7%94%A8%E6%88%B7)
+    - [必备软件安装脚本](#%E5%BF%85%E5%A4%87%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC)
     - [桌面环境安装](#%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85)
     - [中文支持](#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81)
       - [字体](#%E5%AD%97%E4%BD%93)
       - [输入法](#%E8%BE%93%E5%85%A5%E6%B3%95)
-    - [必备软件安装脚本](#%E5%BF%85%E5%A4%87%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC)
     - [时间同步](#%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5)
     - [电源管理](#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86)
       - [休眠支持](#%E4%BC%91%E7%9C%A0%E6%94%AF%E6%8C%81)
       - [DPMS](#dpms)
   - [硬件配置](#%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE)
+    - [独立显卡](#%E7%8B%AC%E7%AB%8B%E6%98%BE%E5%8D%A1)
     - [声卡配置](#%E5%A3%B0%E5%8D%A1%E9%85%8D%E7%BD%AE)
     - [蓝牙设置](#%E8%93%9D%E7%89%99%E8%AE%BE%E7%BD%AE)
     - [亮度调节](#%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82)
     - [Trackpoint](#trackpoint)
   - [推荐软件](#%E6%8E%A8%E8%8D%90%E8%BD%AF%E4%BB%B6)
+    - [chrome](#chrome)
     - [回收站](#%E5%9B%9E%E6%94%B6%E7%AB%99)
     - [内网穿透](#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F)
     - [ossutil设置](#ossutil%E8%AE%BE%E7%BD%AE)
@@ -26,9 +28,9 @@
 # Arch Linux 配置
 配置流程如下
 1. 首先配置网络, 添加个人用户.
-2. 配置桌面环境, 中文输入法等中文支持(方便联网排查问题, 复制粘贴命令等)
-3. 针对不同的硬件, 进行不同的配置
-4. 安装zsh等必备软件
+2. 安装zsh等必备软件
+3. 配置桌面环境, 中文输入法等中文支持(方便联网排查问题, 复制粘贴命令等)
+4. 针对不同的硬件, 进行不同的配置
 5. 修改软件配置
 6. 遇到需要的软件再去安装, 切忌妄想一步登天.
 
@@ -54,6 +56,20 @@
 1. 修改密码:`passwd wzs`
 2. users 是所有普通用户的集合(相较与如docker等用户而言). 也被称为 staff 组
 3. wheel 是一个特殊组, 包含root权限
+
+### 必备软件安装脚本
+1. 执行脚本: `curl -sSL https://raw.githubusercontent.com/everywan/soft/master/os/arch/config.sh | sh -`
+    - 由于脚本没有进行容错处理, 所以
+2. 有兴趣的同学可以使用 export/awk/sed/Python 等实现更多的自动化配置.
+
+我写的配置脚本比较简单, 没有做到全自动化. 需要手动配置的部分如下
+1. zsh配置
+    - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
+    - use zsh like vim: `bindkey -v`
+2. 更改默认shell命令: `chsh`
+3. 指定目录为默认目录: `chroot`
+4. tlp(电源管理软件) 采用默认配置即可
+    - [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
 
 ### 桌面环境安装
 ### 中文支持
@@ -90,8 +106,8 @@
 - 基础中文字体: `sudo pacman -S wqy-microhei`
 - 网评最佳编程字体: `sudo pacman -S ttf-inconsolata`
 - Mac字体: `sudo pacman -S ttf-inconsolata`
-- emoji字体: `sudo pacman -S noto-fonts-emoji`
-    - [官方网站](https://www.google.com/get/noto/help/emoji/)
+- emoji字体: `sudo pacman -S ttf-font-awesome`
+    - [官方网站](https://fontawesome.com/icons?d=gallery)
 
 常用命令
 ```Bash
@@ -106,6 +122,8 @@ fc-cache -vf
 
 fcitx 是 Linux 下最常用的输入法. 配置流程如下
 1. 安装: `sudo pacman -S fcitx`. 优先推荐搜狗输入法: `yay -S fcitx-sogoupinyin`.
+   1. 同时安装 `sudo pacman -S fcitx-gtk2 fcitx-gtk3 fcitx-qt4 fcitx-qt5`, 否则某些拼音的面板不能显示.
+   2. 同时需要在 `.config/fcitx/profile` 中启用相应的拼音输入法
 2. 创建 .xprofile, 设置桌面环境下的环境变量
     ```Bash
     export GTK_IM_MODULE=fcitx
@@ -124,19 +142,6 @@ fcitx 是 Linux 下最常用的输入法. 配置流程如下
 
 用法
 - 剪切板: `Ctrl + ;`
-
-### 必备软件安装脚本
-1. 执行脚本: `curl -sSL https://raw.githubusercontent.com/everywan/soft/master/os/arch/config.sh | sh -`
-2. 有兴趣的同学可以使用 export/awk/sed/Python 等实现更多的自动化配置.
-
-我写的配置脚本比较简单, 没有做到全自动化. 需要手动配置的部分如下
-1. zsh配置
-    - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
-    - use zsh like vim: `bindkey -v`
-2. 更改默认shell命令: `chsh`
-3. 指定目录为默认目录: `chroot`
-4. tlp(电源管理软件) 采用默认配置即可
-    - [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
 
 ### 时间同步
 使用 systemd-timesyncd 进行时间同步. _systemd-timesyncd 是一个用于跨网络同步系统时钟的守护服务_.
@@ -167,17 +172,17 @@ fcitx 是 Linux 下最常用的输入法. 配置流程如下
 启用休眠支持
 1. 创建 swap 分区: 休眠需要将内存中的内容写入swap分区, 建议大小与内存大小相同, 或与所使用的内存大小相同. (swap分区创建参照 arch安装文档)
 2. (可选)修改 `/sys/power/image_size` 为swap大小. (这里我设置的是32G)
-    - `sudo tee /etc/tmpfiles.d/modify_power_image_size.conf <<< "w /sys/power/image_size - - - - 34359734272`
+    - `sudo tee /etc/tmpfiles.d/modify_power_image_size.conf <<< "w /sys/power/image_size - - - - 34359734272"`
 3. 在bootloader中添加resume参数: 参考 _Suspend and hibernate_
     ```Bash
     vim /etc/default/grub
-    # 示例
+    # 示例, 注意更换 /dev/sda3 为自己电脑上 交换分区 的位置
     GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable"  ==> GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable resume=/dev/sda3"
     # 更新 grub 配置
     grub-mkconfig -o /boot/grub/grub.cfg
     
     vim /etc/mkinitcpio.conf
-    # 示例
+    # 示例, 添加了 resume
     HOOKS="base udev autodetect modconf block filesystems keyboard fsck" ==> HOOKS="base udev resume autodetect modconf block filesystems keyboard fsck"
     # 重新生成 initramfs 镜像
     mkinitcpio -p linux
@@ -201,6 +206,26 @@ DPMS 可以在计算机一定时间无操作时, 锁定/休眠计算机 或 将�
 2. xev: xorg下用于获取按键ID.
     - 参考: [Extra_keyboard_keys](https://wiki.archlinux.org/index.php/Extra_keyboard_keys_(简体中文))
 
+### 独立显卡
+特指Nvidia显卡, 以MX150为例. 此处使用 Bumblebee.
+
+1. 安装 nvidia 驱动: `sudo pacman -S nvidia`
+2. 安装 bumblebee: `sudo pacman -S bumblebee mesa`
+3. 添加到用户组: `sudo gpasswd -a user bumblebee`
+4. 启用 bumblebee 服务: `sudo systemctl enable bumblebeed.service`
+5. 重启系统
+
+测试
+1. 测试独立显卡是否工作: 执行 `nvidia-smi`, 如果输出信息 则证明独立显卡正常
+2. 测试 bumblebee
+   1. 安装 `sudo pacman -S mesa-demos`
+   2. 执行 `optirun glxgears -info`, 如无反应, 则执行 `optirun glxspheres64` (64位系统), 如果出现动画窗口, 则说明 Optimus 和 Bumblebee 正在工作.
+
+参考文章
+1. [NVIDIA Optimus](https://wiki.archlinux.org/index.php/NVIDIA_Optimus_)
+2. [Nvidia 驱动](https://wiki.archlinux.org/index.php/NVIDIA_)
+3. [Bumblebee](https://wiki.archlinux.org/index.php/Bumblebee_)
+
 ### 声卡配置
 - [参考: 高级 Linux 声音体系](https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_)
 
@@ -219,11 +244,11 @@ DPMS 可以在计算机一定时间无操作时, 锁定/休眠计算机 或 将�
     ```
 3. [状态栏显示_polybar](./config/polybar/config): 查找alsa 模块
 
-1. 使用 alsamixer 管理声音输出(在 alas-util 包中)
+4. 使用 alsamixer 管理声音输出(在 alas-util 包中)
     - 使用介绍: `m`切换静音/非静音
     - f6 切换声卡, 其他参考软件界面说明
     - esc 退出
-2. 测试输出声音: `speaker-test -c 8`
+5. 测试输出声音: `speaker-test -c 8`
     - `-c 8` 表示7.1声道
 
 ### 蓝牙设置
@@ -242,7 +267,7 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
 4. 添加i3快捷键绑定:
     - 使用 `xev` 获取键值
     - 在i3配置文件中添加绑定: `bindsym XF86MonBrightnessDown exec --no-startup-id backlight -dec 100`
-5. 官方写的根据 `udev-rules` 也可以更改权限, 但是我试了下失败了.. 权限没有更改成功(文件组没有变化). 流程如下
+5. 官方写的根据 `udev-rules` 更改组权限(需重启)
     - 添加 `.rules` 规则: `vim /etc/udev/rules.d/99-backlight.rules`
     ````
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"
@@ -264,6 +289,13 @@ Thinkpad 小红点配置
 arch 官方推荐列表
 - [arch_推荐软件](https://wiki.archlinux.org/index.php/General_recommendations_)
 - [arch_常用软件列表](https://wiki.archlinux.org/index.php/General_recommendations_)
+
+### chrome
+chrome 首次登录下载 SwitchOmega 需要翻墙, 因为我使用 ss 搭的梯子, 基于ss这里有两种办法
+1. 设置Socket环境变量, 然后在当前shell打开chrome, 此时chrome可以通过ss翻墙.
+   1. 设置socket版本: `export SOCKS_VERSION=5`
+   2. 设置socket服务器: `export SOCKS_SERVER="http://127.0.0.1:1080"`
+2. 设置http_proxy环境变量, 通过HTTP代理翻墙. HTTP 代理可通过 Provixy 实现(Provixy可以将socket代理转为http代理). 此处不再详述
 
 ### 回收站
 arch 默认没有回收站功能, 删除会直接 rm 掉, 偶尔让你变得很难受. 所以使用 `trash-cli` 实现回收站功能
