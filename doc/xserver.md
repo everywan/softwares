@@ -102,6 +102,12 @@ extra/xf86-video-fbdev
 glxgears： 测试帧数
 glxinfo | grep "direct rendering"： 了解 glxinfo
 
+xorg 日志输出的错误并不一定真正影响最后的使用. 不要在这里浪费太多的时间.
+arch nvidia op.. 官方文档给出的 xorg.conf 是没有必要的， 多参考 `/user/share/X11/xorg.conf.d` 下的配置. 主要是
+1. outputclass: 与显卡有关
+2. libinput: 输入设备
+3. 显示器不需要配置， 新版的 xorg 会自动配置显示器。 除非你有特殊需求。
+
 ### 独立显卡
 特指Nvidia显卡, 以MX150为例. 此处使用 Bumblebee.
 
