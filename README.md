@@ -1,4 +1,2 @@
-# soft
-收录的软件, 包括 arch的安装与配置, i3wm的配置, wsl的配置, osx的配置等
-
-- [OS对比](/os/README.md)
+# ITS
+我的IT系统配置, 目前主要为 arch Linux 系统的安装与后续配置

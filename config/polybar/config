@@ -1,0 +1,272 @@
+[colors]
+background = #222
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #FFFFBC
+alert = #bd2c40
+format-charging-underline = #FFFFBC
+format-discharging-underline = #C0C0C0
+warning = #e60053
+
+
+[bar/example]
+monitor = ${env:MONITOR:eDP1}
+width = 100%
+height = 30
+offset-x = 0
+offset-y = 0
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = ttf-liberation-sans:fixed:pixelsize=12;1
+font-1 = source han sans cn:pixelsize=12:antialias=false;1
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
+font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
+font-4 = "material icons:pixelsize=16;3"
+
+modules-left = i3
+;modules-center = mpd
+modules-center = xwindow
+;modules-right = network cpu memory temperature battery0 battery1 alsa backlight date
+modules-right = network cpu memory temperature battery0 alsa backlight date
+
+;tray-position = right
+;tray-padding = 2
+;tray-background = ${colors.background}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+width = 50
+label-maxlen = 45
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-focused = %name%
+label-unfocused = %name%
+label-visible = %name%
+label-urgent = %name%
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding} |
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label =  %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+label =  %percentage_used%%
+
+[module/network]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+downspeed:min:max = 5
+accumulate-stats = true
+unknown-as-up = true
+
+# format-connected = <ramp-signal> <label-connected>
+format-connected = <label-connected>
+
+format-disconnected = <label-disconnected>
+
+format-packetloss = <animation-packetloss> <label-connected>
+
+label-connected = %downspeed% %essid%
+label-connected-foreground = ${colors.foreground}
+
+label-disconnected = disconnect
+label-disconnected-foreground = ${colors.warning}
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-framerate = 500
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%Y-%m-%d"
+time = %H:%M
+;time-alt = %H:%M:%S
+label = %date% %time%
+
+[module/battery0]
+type = internal/battery
+battery = BAT0
+adapter = ADP0
+full-at = 90
+
+format-charging = <animation-charging><label-charging>
+format-charging-underline = ${colors.format-charging-underline}
+label-charging = %percentage%%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.format-discharging-underline}
+label-discharging = %percentage%%
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 500
+
+[module/battery1]
+type = internal/battery
+battery = BAT1
+adapter = ADP0
+full-at = 90
+
+format-charging = <animation-charging><label-charging>
+format-charging-underline = ${colors.format-charging-underline}
+label-charging = %percentage%%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.format-discharging-underline}
+label-discharging = %percentage%%
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 500
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <label>
+format-warn = <label-warn>
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.warning}
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+label =  %percentage%%
+
+[module/alsa]
+type = internal/alsa
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+master-mixer = Master
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+mapped = true
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+
+label-muted = 
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
