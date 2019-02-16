@@ -7,4 +7,4 @@ function install(){
     sudo mv ossutil64\?spm=a2c4g.11186623.2.11.3638779cVMqV6m /usr/local/bin/ossutil
 }
 
-install()
+install

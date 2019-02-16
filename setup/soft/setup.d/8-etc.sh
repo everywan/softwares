@@ -10,4 +10,4 @@ function install(){
     sudo pacman -S --noconfirm tlp
 }
 
-install()
+install

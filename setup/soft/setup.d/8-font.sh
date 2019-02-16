@@ -7,4 +7,4 @@ function install(){
     fc-cache -vf
 }
 
-install()
+install

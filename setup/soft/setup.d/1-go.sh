@@ -7,4 +7,4 @@ function install(){
     rm go.tar.gz
 }
 
-install()
+install

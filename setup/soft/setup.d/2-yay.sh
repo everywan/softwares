@@ -8,4 +8,4 @@ function install(){
     popd
 }
 
-install()
+install

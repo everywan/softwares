@@ -16,4 +16,4 @@ function install(){
     # sudo cp ~/cloud/backup/config/shadowsocks /etc
 }
 
-install()
+install

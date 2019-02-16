@@ -7,4 +7,4 @@ function install(){
     rm gitflow-installer.sh
 }
 
-install()
+install

@@ -15,4 +15,4 @@ mirrors = https://pypi.doubanio.com/simple/
 EOF
 }
 
-install()
+install

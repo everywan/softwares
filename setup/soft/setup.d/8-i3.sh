@@ -6,4 +6,4 @@ function install(){
     yay -S i3 polybar
 }
 
-install()
+install

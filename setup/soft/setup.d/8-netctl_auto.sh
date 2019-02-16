@@ -8,4 +8,4 @@ function install(){
     sudo systemctl enable netctl-auto@wlp3s0.service
 }
 
-install()
+install

@@ -9,4 +9,4 @@ function install(){
     yay -S deepin-screenshot
 }
 
-install()
+install

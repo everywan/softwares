@@ -19,4 +19,4 @@ EOF
     sudo systemctl restart docker
 }
 
-install()
+install

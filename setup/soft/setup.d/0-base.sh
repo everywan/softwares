@@ -6,4 +6,4 @@ function install(){
     sudo pacman -S --noconfirm openssh gvim wget curl rsync git
 }
 
-install()
+install
