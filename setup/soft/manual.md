@@ -5,6 +5,7 @@
     - [恢复备份](#%E6%81%A2%E5%A4%8D%E5%A4%87%E4%BB%BD)
     - [中文支持](#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81)
   - [收尾配置](#%E6%94%B6%E5%B0%BE%E9%85%8D%E7%BD%AE)
+    - [桌面配置](#%E6%A1%8C%E9%9D%A2%E9%85%8D%E7%BD%AE)
     - [电源管理](#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86)
     - [硬件配置](#%E7%A1%AC%E4%BB%B6%E9%85%8D%E7%BD%AE)
     - [其他软件配置](#%E5%85%B6%E4%BB%96%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE)
@@ -54,6 +55,9 @@ ln -s ~/cloud/backup/config/xprofile ~/.xprofile
 3. 备份系统: [备份系统](/doc/script/backup.sh)
 4. 重启系统
 
+### 桌面配置
+参考 [Linux_GUI_i3wm](/doc/gui.md#i3)
+
 ### 电源管理
 首次安装参考 [电源管理](/doc/power-manger.md)
 
@@ -98,8 +102,6 @@ vim /etc/udev/rules.d/99-backlight.rules
 # ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"
 # ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chmod g+w /sys/class/backlight/%k/brightness"
 ```
-
-显卡配置: 未整理
 
 ### 其他软件配置
 
