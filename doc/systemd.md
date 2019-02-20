@@ -1,3 +1,8 @@
+- [systemd](#systemd)
+  - [systemd脚本](#systemd%E8%84%9A%E6%9C%AC)
+    - [脚本示例](#%E8%84%9A%E6%9C%AC%E7%A4%BA%E4%BE%8B)
+  - [启动脚本](#%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC)
+
 # systemd
 > 参考 [systemd](https://wiki.archlinux.org/index.php/systemd_(简体中文))
 
@@ -59,9 +64,9 @@ KillMode
 | none          | 没有进程会被杀掉, 只是执行服务的stop命令       |
 
 ### 脚本示例
-- [frpc.service](/os/arch/script/frpc.service)
-- [frps.service](/os/arch/script/frps.service)
-- [autossh.service](/os/arch/script/autossh.service)
+- [frpc.service](./service/frpc.service)
+- [frps.service](./service/frps.service)
+- [autossh.service](./service/autossh.service)
 
 ## 启动脚本
 ```Bash

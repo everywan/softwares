@@ -1,18 +1,3 @@
-`startx`: 启动 Xserver 与 Xclient
-
-`sudo X`: 启动 X 服务器, 默认端口6000, 第0个服务器.
-- 格式: `sudo X :a.b`, a表示端口, 从6000开始. 如 :0=>6000, :1=>6001. b暂且无用处
-
-客户端直接执行: `termite --display localhost:0`. termite 表示要执行的软件, localhost 可省略, 0表示监听6000端口的xserver.
-
-或者导入 DISPLAY 环境变量, xclient 会自动读取. `export DISPLAY=xxx.xxx.xxx.xxx:0.0`
-
-对于win, 需要开通6000端口, 或者通过端口转发映射6000端口.
-
-术语介绍
-1. .xinitrc is run by xinit (and therefore also startx). In addition to configuration, it is also responsible for starting the root X program (usually a window manager such as Gnome, KDE, i3, etc.). This usually applies when X is started manually by the user (with starx or similar).
-2. .xsession is similar to .xinitrc but is used by display managers (such as lightdm, or sddm) when a user logs in. However, with modern DMs the user can usually choose a window manager to start, and the DM may or may not run the .xsession file.
-3. .xprofile is just for setting up the environment when logging in with an X session (usually via a display manager). It is similar to your .profile file, but specific to x sessions.
 
 问题
 1. startx 做了什么
@@ -23,22 +8,6 @@
 参考
 1. https://blog.csdn.net/clozxy/article/details/5488699
 
-startx 实际上调用的 xinit, xinit 执行 X 程序, 最后调起 xserver, 启动xserver 相关设置通过参数/或者xinitrc等配置文件传入, 如监听端口等.
-
-当指定 Xserver 时(通过DISPLAY环境变量指定端口, 从而确定xserver), 直接执行 GUI 程序就可以将相关数据传递给xserver, xserver 将数据给渲染器, 渲染出图(其中, 显卡如何参与的正在看)
-
-xinit: 二进制程序, 用法: xinit [[client] options] [--[server] display options].
-
-当不指定client时, xinit 会查找 HOME 目录下的 .xinitrc(如果不存在则使用 /etc/X11/xinit/xinitrc), 并且调用 execvp 执行该文件. options 默认为 xterm -geometry +1+1 -n login -display:0
-
-当不指定server时, xinit 会查找 HOME 目录下的 .xserverrc(如果不存在则使用 /etc/X11/xinit/xserverrc), 并且调用 execvp 执行该文件. options 默认为 display:0 (6000端口).
-
-xinit 启动时, 会先启动 xserver, 然后依次启动 xclient. 如果有命令是前台执行的, 那么他会阻塞后续命令的执行. 如果最后一个程序时后台执行的, 那么xinit会直接退出, 而不会等待命令执行完成.
-
-
-当退出最后一个xclient时, xserver 也会退出. 这是比我们自己写启动脚本的好处.
-
-startx: 脚本, 通过调用xinit实现相应功能. 执行参数判断/文件断言等操作, 然后将真正使用的配置传递给 xinit.
 
 
 好了, 回归最后一个问题, Xorg是如何启动的, 与独显/集显如何交互的

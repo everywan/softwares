@@ -1,0 +1,166 @@
+- [Linux桌面环境](#linux%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83)
+  - [图形接口协议](#%E5%9B%BE%E5%BD%A2%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE)
+    - [xorg](#xorg)
+      - [startx](#startx)
+      - [Nvidia显卡配置](#nvidia%E6%98%BE%E5%8D%A1%E9%85%8D%E7%BD%AE)
+  - [窗口管理器](#%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E5%99%A8)
+    - [i3wm](#i3wm)
+      - [安装](#%E5%AE%89%E8%A3%85)
+      - [合成器](#%E5%90%88%E6%88%90%E5%99%A8)
+      - [启动](#%E5%90%AF%E5%8A%A8)
+      - [用法和配置](#%E7%94%A8%E6%B3%95%E5%92%8C%E9%85%8D%E7%BD%AE)
+      - [状态栏Polybar](#%E7%8A%B6%E6%80%81%E6%A0%8Fpolybar)
+      - [HDPI](#hdpi)
+      - [多显示器](#%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8)
+
+# Linux桌面环境
+
+Linux 桌面环境一般由如下几部分组成
+1. 图形接口协议: 为GUI环境提供基本的框架协议, 包括屏幕绘制, 设备交互, 图像呈现等. 目前有 xwindow 和 wayland.
+2. 协议实现: xwindow 的实现为 X.org, wayland 的实现为 wayland compositer.
+3. 相应的桌面程序, 主要分为以下三类, 合起来统称为桌面环境.
+   1. 窗口管理器: 管理窗口. 控制 窗口的显示/隐藏/顺序/大小等状态 的程序, 在 X 中, 窗口管理器直接与Xserver进行交互.
+   2. 锁屏管理器: 锁屏界面. 可以理解为 windows 的锁屏解锁界面.
+   3. 登录管理器: 也称显示管理器, 用于启动桌面环境, 然后进行图形界面登录(当不使用登录管理器时, 需要通过 startx/xinit/x 手动启用 Xserver/xclient)
+
+## 图形接口协议
+目前常用的窗口协议有 x window system 与 wayland. x window system 是目前较为流行且广泛支持的协议标准, wayland 是为了取代 x 而提出的新标准, 与 x 不兼容, GUI应用需要支持 wayland 协议才能正常显示. 需要注意的是, x 与 wayland 都只是协议, 并不是具体的软件. x协议在linux下的实现为 x.org, wayland 的实现为 wayland compositer.
+
+> 协议为GUI环境提供基本的框架: 在屏幕上描绘, 体现图像与移动程序窗口, 同时也受理/运行/管理电脑与鼠标/键盘的交互程序. 不过, X并没有管理到用户界面, 而是由其他以X为基础的实现来负责. 正因为如此, 以X为基础环境所开发成的视觉样式非常地多, 不同的程序可能有截然不同的接口体现. X作为系统内核之上的程序应用层发挥作用. [Window manager_Arch](https://wiki.archlinux.org/index.php/Window_manager_)
+
+x 主要分为 xclient 和 xserver 两部分, xserver 负责屏幕上绘制各种元素, 窗口移动等, 以及相应外围设备的交互(主要是输入设备). xclient 负责执行程序业务逻辑, 接收xserver发送的事件通知, 即我们启动的GUI程序. xserver 是一个后台进程. 以xorg举例, 通常启动GUI程序的流程为
+1. 启动 xserver, 指定端口或使用默认端口(默认6000端口, 标记为第0个xserver, 后续依次递增)
+   1. 示例: `X :a.b` : X为xorg程序, a 表示端口, b 目前没有使用.
+2. 设定 DISPLAY 环境变量, 用于指定与xclient交互的xserver. 也可以在启动 xclient 时指定xserver
+   1. 示例: `export DISPLAY=xxx.xxx.xxx.xxx:0.0`
+3. 启动 xclient: `termite --display localhost:0`. termite 表示要执行的软件, localhost 可省略, 0表示监听6000端口的xserver. 如果设定 DISPLAY 变量, 则无需 display 参数
+
+两者的架构区别详情见链接 [Wayland Architecture](https://wayland.freedesktop.org/architecture.html), 图示如下.
+
+![x-architecture](./attach/x-architecture.png) ![wayland-architecture](./attach/wayland-architecture.png)
+
+### xorg
+xorg 这里只简单介绍下使用, 有兴趣进一步研究的同学可以学习 x 协议以及 xorg 源码. PS: 了解 xrog 后, 我才知道 wsl 也可以通过 x 开启图形界面...
+
+
+
+#### startx
+startx 做了什么?
+
+startx 其实是脚本, 通过调用 xinit 启动 xclient 和 xserver. 与直接执行xinit不同的是, startx 还负责参数判断/文件断言等操作, 然后将真正使用的配置传递给 xinit.
+
+xinit 是二进制程序, 用法格式为 `xinit [[client] options] [--[server] display options]`
+1. 当不指定server时, xinit 会查找 `$HOME` 目录下的 `.xserverrc` (如果不存在则使用 `/etc/X11/xinit/xserverrc` ), 并且调用 `execvp` 执行该文件. options 默认为 `display:0`
+2. 当不指定client时, xinit 会查找 `$HOME` 目录下的 `.xinitrc` (如果不存在则使用 `/etc/X11/xinit/xinitrc` ), 并且调用 `execvp` 执行该文件. options 默认为 `xterm -geometry +1+1 -n login -display:0`
+
+xinit 启动时, 会先启动 xserver, 然后依次启动 xclient. 如果有命令是前台执行的, 那么他会阻塞后续命令的执行. 如果最后一个程序时后台执行的, 那么xinit会直接退出, 而不会等待命令执行完成. 除此之外, 当退出最后一个 xclient 时, xinit 也会将 xserver 退出.
+
+startx/xinit 可以理解为 xorg 启动的服务程序, 你可以自己写脚本实现这些功能. 与 xorg 本身并无太大关系
+
+startx 常用的配置文件如下
+1. .xinitrc is run by xinit (and therefore also startx). In addition to configuration, it is also responsible for starting the root X program (usually a window manager such as Gnome, KDE, i3, etc.). This usually applies when X is started manually by the user (with starx or similar).
+2. .xsession is similar to .xinitrc but is used by display managers (such as lightdm, or sddm) when a user logs in. However, with modern DMs the user can usually choose a window manager to start, and the DM may or may not run the .xsession file.
+3. .xprofile is just for setting up the environment when logging in with an X session (usually via a display manager). It is similar to your .profile file, but specific to x sessions.
+
+#### Nvidia显卡配置
+
+
+## 窗口管理器
+> 参考: [窗口管理器](https://wiki.archlinux.org/index.php/Window_manager_(简体中文))
+
+平铺式窗口管理器时我选择Linux的原因之一.
+
+在平铺式管理器中, 使用比较多的有 i3/sway/dwm/awesome/xmoad. 简介如下
+1. dwm 最为精简, 不过每次修改配置都需要该源码(源码只有两千多行, 很精简)
+2. xmoad 使用 haskell 语言开发, 如果你熟悉该语言可以尝试此版本.
+3. awesome 使用 lua 作为配置语言.
+4. sway 是 i3 的 wayland 版.
+5. i3wm
+
+其实这几个软件大体上差别并不大, 关于这个我没有特别的建议(因为我也没用过), 有兴趣的同学可以自己逐个尝试下.
+
+### i3wm
+> 参考: [i3_arch](https://wiki.archlinux.org/index.php/I3_(简体中文))   
+
+#### 安装
+```Bash
+# 安装 xorg
+sudo pacman -S xorg xorg-xinit 
+# feh: 图片查看工具, 用于设置壁纸;  rofi: app启动器, i3lock: 锁屏管理器
+sudo pacman -S termite feh rofi scrot i3lock imagemagick
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+yay -S i3
+```
+
+#### 合成器
+> 参考: [Compton](https://wiki.archlinux.org/index.php/Compton_(简体中文))
+
+i3 自身不带半透明, 淡入淡出等特效, 需要安装独立的 compositor(合成器). 
+- termite 设置透明度无效就是因为没有 compositor 导致的.
+- compton 是一个独立的合成管理器, 可以用来给i3添加各种视觉效果(半透明, 淡入淡出).
+
+使用 compton 作为 i3 的合成器:
+1. 安装: `pacman -S compton`
+2. 随桌面启动: `vim ~/.xinitrc`, 添加 `exec compton -b &`
+
+问题解决
+- 当使用 `nvidia-340xx-utils` 驱动时, 启动 compton 可能报错. 更换驱动为 libglvnd 即可解决.
+    - 如果卸载 nvidia-xx 后, 启动 startx 报错, 重新安装 xorg 即可解决: `pacman -S xorg`
+
+#### 启动
+因为我没有使用登录管理器, 而是直接使用startx启动的, 方法如下. 具体可参考 [xorg](#xorg)
+```Bash
+vim ~/.xinitrc
+# 在最后一行添加, 原因参照 [xorg](#xorg)
+exec i3
+# 带日志输出
+exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1
+```
+
+#### 用法和配置
+i3 的用法参考 [官方文档](https://i3wm.org/docs/userguide.html)
+1. 配置文件位置: `~/.config/i3/config`
+2. 了解 scraptchpad: 临时窗口存储区, 可以方便的隐藏/调出, 悬浮在所有窗口之上. 类似于 guake, 不过 guake 在上方显示, scraptch 位置可调.
+3. 工具
+    - 使用 `xprop` 可以查看窗口的class. (具体用法: 在浮动等非覆盖布局下, 输入 xprop, 然后点击窗口)
+
+**配置**
+
+配置i3的快捷键是一件很有意思的事情, 相比于 Win/OSX, 这种自由以及强大的配置, 对某些人有很强的吸引力.
+
+如果你有自己的快捷键方案/指导思想, 那么根据自己的想法配置就好了. 如果没有, 建议使用vim的方案. 我个人的配置方案如下
+1. [i3_vim_shortcut](./vim/shortcut.md)
+2. [i3配置文件](/config/vim/config)
+
+#### 状态栏Polybar
+> [官方文档](https://github.com/jaagr/polybar/wiki)
+
+使用polybar纯粹是网上看的别人的教程, 具体与 i3-bar 的区别有兴趣的同学可以自己尝试下.
+1. 安装: `yay -S polybar`
+2. 启动: 编写 polybar 启动脚本, 然后将脚本挂载到 i3 配置文件中, 实现随i3启动.
+    - [polybar启动脚本示例](./config/polybar/launch.sh)
+    - 随i3启动: 在 `~/.config/i3/config` 文件最后添加: `exec_always --no-startup-id $HOME/.config/polybar/launch.sh`, 并注释掉 i3-bar
+3. 配置: 参考官方文档
+    - emoji 符号推荐 font awesome, 具体参考 [font_install](/setup/soft/setup.d/8-font.sh)
+
+#### HDPI
+缩放： 直接在相关软件里设置字体大小即可(不建议使用 xrandr 的缩放, 因为缩放会失去 HDPI 本身的意义)
+- 使用xrandr缩放示例: `xrandr --output DP-1 --scale 0.5x0.5`
+
+各软件通过调节字体大小适应高分辨率即可
+1. fcitx 字体配置
+    - `vim /usr/share/fcitx/skin/classic/fcitx_skin.conf`, 字体 25 即可
+
+#### 多显示器
+> 参考 [xrandr_arch_doc](https://wiki.archlinux.org/index.php/Xrandr_)
+
+xrandr 是 X window 下管理多显示器的工具. 使用xrandr管理多显示器输出.
+1. 安装: `sudo pacman -S xorg-xrandr`
+2. 常用命令与示例
+    ```Bash
+    xrandr                  # 显示所有可用的显示器, 用于查询显示器的名称以及要输出的分辨率
+    # 输出图像到 HDMI2 所连接的显示器, 分辨率自适应, 显示在 eDP1 显示器的左边
+    xrandr --output HDMI2 --mode 3840x2160 --left-of eDP1
+    # 关闭 HDMI2 连接的显示器
+    xrandr --output HDMI2 --off
+    ```

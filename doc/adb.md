@@ -1,4 +1,5 @@
-arch 链接 android 调试
+# ADB
+关联： 安卓调试
 
 https://developer.android.com/studio/run/device
 
