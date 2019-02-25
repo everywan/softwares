@@ -7,6 +7,12 @@
 2. xev: xorg下用于获取按键ID.
     - 参考: [Extra_keyboard_keys](https://wiki.archlinux.org/index.php/Extra_keyboard_keys_(简体中文))
 
+## 主板
+UEFI: (Unified Extensible Firmware Interface) 统一的可扩展固定接口, 新一代的BIOS标准. 当PC启动时, 首先运行 UEFI BIOS, 然后载入操作系统.
+
+Secure Boot: Secure Boot 就是 UEFI 的一部分, 用于防止恶意软件侵入, 通过密钥加密实现. UEFI规定, 主板出场时, 必须内置一些可靠的公钥, 然后, 任何想要在这块主板上加载的操作系统或硬件驱动程序都必须经过公钥的认证, 及这些软件都必须被对应的私钥签署过
+
+
 ## 声卡配置
 开启声音并设置快捷键
 1. 启动声音
