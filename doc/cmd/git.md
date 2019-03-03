@@ -99,6 +99,17 @@
 6. `git flow hotfix start missing-link`: 修复正式版本中的问题(基于 master 分支)
 7. `git flow hotfix finish missing-link`: 完成修复, 提交到master
 
+### tag
+```Bash
+# 查看所有标签
+git tag
+git tag -a v0.1.0 -m "说明信息" <commit-id>
+# 查看标签
+git show
+# 显式提交标签. 默认不会提交标签
+git push origin v0.1.0
+```
+
 ### 忽略某些文件的变化
 - .gitignore文件可以使用github提供的模板, 有很多种类. [github地址](https://github.com/github/gitignore)
 - 当修改 .gitignore 后不生效：原因是 .gitignore 智能忽略那些没有被跟踪过的文件, 已经加入版本控制的 .gitignore 对其无效. 做以下处理即可：
