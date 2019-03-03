@@ -1,3 +1,15 @@
+- [笔记本配置](#%E7%AC%94%E8%AE%B0%E6%9C%AC%E9%85%8D%E7%BD%AE)
+  - [快捷键映射](#%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%98%A0%E5%B0%84)
+  - [声卡配置](#%E5%A3%B0%E5%8D%A1%E9%85%8D%E7%BD%AE)
+  - [亮度调节](#%E4%BA%AE%E5%BA%A6%E8%B0%83%E8%8A%82)
+  - [电源管理](#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86)
+    - [休眠支持](#%E4%BC%91%E7%9C%A0%E6%94%AF%E6%8C%81)
+    - [DPMS](#dpms)
+  - [蓝牙设置](#%E8%93%9D%E7%89%99%E8%AE%BE%E7%BD%AE)
+    - [Trackpoint](#trackpoint)
+  - [主板](#%E4%B8%BB%E6%9D%BF)
+  - [参考](#%E5%8F%82%E8%80%83)
+
 # 笔记本配置
 以下以 Thinkpad 为例.
 
@@ -7,11 +19,34 @@
 2. xev: xorg下用于获取按键ID.
     - 参考: [Extra_keyboard_keys](https://wiki.archlinux.org/index.php/Extra_keyboard_keys_(简体中文))
 
-## 主板
-UEFI: (Unified Extensible Firmware Interface) 统一的可扩展固定接口, 新一代的BIOS标准. 当PC启动时, 首先运行 UEFI BIOS, 然后载入操作系统.
+## 快捷键映射
+在 X 环境中, 使用 Xmodmap 可以修改键盘映射.
 
-Secure Boot: Secure Boot 就是 UEFI 的一部分, 用于防止恶意软件侵入, 通过密钥加密实现. UEFI规定, 主板出场时, 必须内置一些可靠的公钥, 然后, 任何想要在这块主板上加载的操作系统或硬件驱动程序都必须经过公钥的认证, 及这些软件都必须被对应的私钥签署过
+修改 `Caps_Lock + wasd` 为方向键的教程如下
+```Bash
+xmodmap -pke > curkeys.map
+keysym Caps_Lock = Mode_switch
+/*
+映射规则如下
+keycode <code> = <base> <shift> <new-mapping> <new-shift-mapping>
+示例: keycode  25  = w W Up Up
+new-mapping 是指使用 Mode_switch+key 组合键的映射
+*/
+// 修改wasd的组合键映射
+keycode  25 = w W Up Up
+keycode  38 = a A Left Left
+keycode  39 = s S Down Down
+keycode  40 = d D Right Right
 
+// 测试: 临时生效
+xmodmap curkeys.map
+// 测试: 当前用户永久生效
+mv curkeys.map ~/.Xmodmap
+```
+
+参考文章如下
+1. [使用组合键输入+号](https://chubuntu.com/questions/9007/typing-using-key-combinations.html)
+2. `man Xmodmap`
 
 ## 声卡配置
 开启声音并设置快捷键
@@ -100,6 +135,11 @@ Thinkpad 小红点配置
     # 设置值
     xinput set-prop _id_ _id_ 0.25
     ```
+
+## 主板
+UEFI: (Unified Extensible Firmware Interface) 统一的可扩展固定接口, 新一代的BIOS标准. 当PC启动时, 首先运行 UEFI BIOS, 然后载入操作系统.
+
+Secure Boot: Secure Boot 就是 UEFI 的一部分, 用于防止恶意软件侵入, 通过密钥加密实现. UEFI规定, 主板出场时, 必须内置一些可靠的公钥, 然后, 任何想要在这块主板上加载的操作系统或硬件驱动程序都必须经过公钥的认证, 及这些软件都必须被对应的私钥签署过
 
 ## 参考
 1. [Archlinux休眠设置](https://www.cnblogs.com/xiaozhang9/p/6443478.html)

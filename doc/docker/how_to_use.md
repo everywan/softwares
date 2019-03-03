@@ -17,28 +17,6 @@
 <!-- /TOC -->
 
 # 安装&入门
-## docker 安装
----
-### Linux
-- [阿里云镜像仓库地址](https://cr.console.aliyun.com/#/imageSearch)
-- 阿里云已经是 docker 在国内的正式代理, 也可以下载 docker 官网镜像, 推荐使用
-    ```Bash
-    # 安装docker
-    curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
-    # 加速器
-    sudo mkdir -p /etc/docker
-    sudo tee /etc/docker/daemon.json <<-'EOF'
-    {
-        "registry-mirrors": ["https://pfonbmyi.mirror.aliyuncs.com"]
-    }
-    EOF
-    sudo systemctl daemon-reload
-    sudo systemctl restart docker
-    ```
-- 错误处理: 根据报错内容处理即可
-    - deepin 等系统安装会报错, 抛出的错误中有 dkg 包的下载位置, 手动从镜像源上下载, 使用 dpkg命令 安装即可.
-        - 原因是 因为 deepin 的内核版本和 ubunutu 不同, 导致找不到相应的软件包(deepin 是基于 ubuntu 开发的)
-
 ## 容器操作
 > 多参考 man/help 和 [官方文档](https://docs.docker.com/engine/reference/run/#general-form)
 

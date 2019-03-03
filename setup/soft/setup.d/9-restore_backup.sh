@@ -14,6 +14,7 @@ function install(){
     # ln -s ~/cloud/config/termite .
     # ln -s ~/cloud/config/rofi .
     # sudo cp ~/cloud/backup/config/shadowsocks /etc
+    # sudo cp ~/cloud/backup/config/hosts /etc
 }
 
 install
