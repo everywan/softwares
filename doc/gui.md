@@ -78,7 +78,7 @@ Linux显卡配置主要分以下步骤. 注意不要使用 bumblebee 了, 13年�
 4. 测试独立显卡是否正常工作
 
 安装显卡驱动: 通过如下网站查询显卡支持的驱动版本, 一般新机器直接安装 nvidia 即可: `sudo pacman -S nvidia`
-1. [Nvidia 驱动_Arch](https://wiki.archlinux.org/index.php/NVIDIA_)
+1. [Nvidia 驱动_Arch](https://wiki.archlinux.org/index.php/NVIDIA)
 2. [Nvidia 官方文档](https://www.nvidia.com/Download/driverResults.aspx/141847/en-us), 看支持页面有没有自己的显卡.
 
 [xorg 显卡配置文件](/config/xorg/). 配置文件主要有两类, 一类配置输入设备, 一类配置显卡设备. 显示器不用自己配置, 新版本 xorg 可以自动识别.
@@ -86,6 +86,7 @@ Linux显卡配置主要分以下步骤. 注意不要使用 bumblebee 了, 13年�
 2. 当使用Nvidia显卡时, 只启用 `nvidia-outputclass.conf` 配置文件, 当使用集显时, 只启用 `intel-outputclass.conf` 配置文件(修改另一文件名后缀即可).
 
 修改内核模块: 通过修改 `/etc/modprobe.d/` 或 `/usr/lib/modprobe.d/` 即可, 内容如下
+
 ```Bash
 vim /usr/lib/modprobe.d/nvidia.conf
 # 使用 nvidia 闭源驱动时禁用 nouveau

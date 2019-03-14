@@ -110,6 +110,17 @@ git show
 git push origin v0.1.0
 ```
 
+### 提交本地仓库到远程服务器
+```Bash
+# 初始化仓库
+git init
+git add . && git commit -m "init"
+# 建立关联
+git remote add origin git@github.com:everywan/soft.git
+# 推送
+git push origin master -f
+```
+
 ### 忽略某些文件的变化
 - .gitignore文件可以使用github提供的模板, 有很多种类. [github地址](https://github.com/github/gitignore)
 - 当修改 .gitignore 后不生效：原因是 .gitignore 智能忽略那些没有被跟踪过的文件, 已经加入版本控制的 .gitignore 对其无效. 做以下处理即可：

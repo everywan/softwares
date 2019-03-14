@@ -92,11 +92,23 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
     - 执行 `udevadm test /sys/class/backlight/intel_backlight/` 测试rules加载
 
 ## 电源管理
-术语
-1. suspend: 挂起到内存, 类似与 windows 的睡眠.
-2. hibernate: 休眠, 将内存中的数据dump到disk, 断电后仍可以恢复.
-3. hybrid-sleep: 混合睡眠, 同时执行睡眠和休眠: 断电时从disk回复, 未断电从内存恢复. 其他还有延迟休眠等.
-4. `/sys/power/image_size`: image_size 用于控制将内存 dump 到硬盘时所占空间的大小, 在dump内存时, 系统尽量保证所占用的硬盘空间不会超过image_size设置的大小(dump内存到disk时会压缩数据). 默认是内存的2/5, 增大该值将提升休眠速度, 减小该值将减少空间占用
+通过修改 `/etc/systemd/logind.conf` 可以设置 合盖/电源按键/超时 等状态时触发的操作. 执行如下命令使配置生效: `systemctl restart systemd-logind`
+
+如果遇到不了解的配置, 参考 `man logind.conf`. 常用的值如下
+
+| 指令                         | 解释                                             |
+| :--                          | :--                                              |
+| HandleLidSwitch              | 笔记本合盖                                       |
+| HandleLidSwitchExternalPower | 当使用外置电源时合盖(应该是充电时)               |
+| HandleLidSwitchDocked        | 当笔记本外界各种设备时(作为Docked)               |
+| IdleAction                   | 空闲时操作                                       |
+| suspend                      | 挂起到内存, 类似与 windows 的睡眠                |
+| hibernate                    | 休眠, 将内存中的数据dump到disk, 断电后仍可以恢复 |
+| hybrid-sleep                 | 混合睡眠: 断电时从disk回复, 未断电从内存恢复     |
+
+
+休眠需要使用配置文件如下
+1. `/sys/power/image_size`: image_size 用于控制将内存 dump 到硬盘时所占空间的大小, 在dump内存时, 系统尽量保证所占用的硬盘空间不会超过image_size设置的大小(dump内存到disk时会压缩数据). 默认是内存的2/5, 增大该值将提升休眠速度, 减小该值将减少空间占用
 
 ### 休眠支持
 启用休眠支持教程如下
@@ -119,8 +131,15 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
     ```
 
 ### DPMS
-DPMS 可以在计算机一定时间无操作时, 锁定/休眠计算机 或 将显示器置于节电模式. 配置文件为 `/etc/systemd/logind.conf`, 可通过 `man logind.conf` 查看具体信息.
-- 使配置生效: `systemctl restart systemd-logind`
+DPMS 可以在计算机一定时间无操作时, 将显示器置于不同的节电模式.
+
+常用指令如下
+```Bash
+# dpms 显示器进入 待机界面/休眠界面/关闭屏幕 的时间
+# dpms standby suspend off
+xset +dpms dpms 600 800 900
+xset dpms force off    # 强制关闭屏幕
+```
 
 ## 蓝牙设置
 安装 `blueman`, 即可使用 `blueman-manager` 启动蓝牙桌面管理程序. 支持蓝牙耳机, 不用折腾而且还好用的软件

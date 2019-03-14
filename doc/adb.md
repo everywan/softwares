@@ -3,9 +3,10 @@
 
 https://developer.android.com/studio/run/device
 
-lsusb 查看设备是否链接上, 
-1. 添加 udev 规则, 替换id 为上述id
-2. 安装 android-tools 工具包(主要是adb命令)
-3. 修改权限`chmod a+r /etc/udev/rules.d/51-android.rules`
-4. 添加用户到组: `usermod -a -G adbusers wzs `
-5. 重启 udev: `sudo udevadm control --reload-rules`
+安卓设备连接chrome进行Webview调试
+1. 安装 android-tools 工具包(主要是adb命令)
+2. 添加文件 `/etc/udev/rules.d/51-android.rules`, 内容如下: `SUBSYSTEM=="usb",ATTRS{idVendor}=="18d1",ATTRS{idProduct}=="4ee7",MODE="0666",GROUP="plugdev"`, 其中 idVendor 为 lsusb 中的ID.
+3. 修改文件权限为 `a+r`
+4. 重启 udev: `sudo udevadm control --reload-rules`
+5. 重连手机
+6. 执行 `adb devices` 查看设备是否成功链接.
