@@ -79,6 +79,9 @@
        # - -p:commit时, 暂停容器
     ```
 
+### 查看日志
+使用 `docker logs containID` 查看日志
+
 ## 引用
 ### centos7-docker无法使用systemctl
 - 原因: 在centos7/centos7之后的版本中, 包含systemd命令但是默认没有生效.
