@@ -30,6 +30,26 @@
 - 如果用bin_PROGRAMS宏的话, 程序会被安装至/usr/local/bin这个目录
 - 一般需要root权限, 因为会向系统写文件
 
+## Makefile
+
+`.PHONY`: 在Makefile中, .PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target, 注意Makefile的target默认是文件. 
+
+[PHONY的作用](https://www.cnblogs.com/idorax/p/9306528.html)
+
+makefile 命令前后重载, 即后续命令会重载前一个命令. 如两个 install 时, 会使用最后一个install.
+
+```Makefile
+test:
+	echo "test"
+
+test2: test
+	echo "test2"
+```
+
+make test2 会先执行 test 的代码, 然后执行 test2 的代码
+
+不指定命令时, 一般会执行 makefile/Makefile 文件中的第一个命令. 所以一般将 all 放到第一个命令(命令没有默认值, all并不是预设关键字)
+
 ## ETC
 - make clean: 清除编译产生的可执行文件及目标文件(object file, *.o)
 - make distclean: 除了清除可执行文件和目标文件外, 把configure所产生的Makefile也清除掉
