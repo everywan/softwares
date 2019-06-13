@@ -9,12 +9,16 @@ function install(){
     # ln -s ~/cloud/backup/config/xinitrc ~/.xinitrc
     # ln -s ~/cloud/backup/config/xprofile ~/.xprofile
     # ln -s ~/cloud/backup/config/zshrc ~/.zshrc
+    # ln -s ~/cloud/backup/config/Xmodmap ~/.Xmodmap
+    # ln -s ~/cloud/backup/script ~/.config
     # ln -s ~/cloud/config/i3 ~/.config/
     # ln -s ~/cloud/config/polybar ~/.config/
     # ln -s ~/cloud/config/termite ~/.config/
     # ln -s ~/cloud/config/rofi ~/.config/
     # sudo ln -s ~/cloud/backup/config/shadowsocks /etc
     # sudo ln -s ~/cloud/backup/config/hosts /etc
+    # sudo ln -s ~/cloud/backup/script/backlight /usr/local/bin
+    # sudo ln -s ~/cloud/backup/script/fpay_mysql /usr/local/bin
 }
 
 install
