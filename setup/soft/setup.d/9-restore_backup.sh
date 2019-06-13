@@ -15,7 +15,6 @@ function install(){
     # ln -s ~/cloud/config/polybar ~/.config/
     # ln -s ~/cloud/config/termite ~/.config/
     # ln -s ~/cloud/config/rofi ~/.config/
-    # sudo ln -s ~/cloud/backup/config/shadowsocks /etc
     # sudo ln -s ~/cloud/backup/config/hosts /etc
     # sudo ln -s ~/cloud/backup/script/backlight /usr/local/bin
     # sudo ln -s ~/cloud/backup/script/fpay_mysql /usr/local/bin

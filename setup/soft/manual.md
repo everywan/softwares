@@ -42,8 +42,11 @@ sudo locale-gen
 ln -s ~/cloud/backup/config/xinitrc ~/.xinitrc
 
 sudo pacman -S fcitx-im
-yay -S fcitx-sogoupinyin
-# 然后在 `.config/fcitx/profile` 中启用相应的拼音输入法
+# arch 下安装搜狗输入法太麻烦了, 推荐安装 google输入法
+sudo pacman -S fcitx-googlepinyin
+# yay -S fcitx-sogoupinyin
+
+# 然后在 `.config/fcitx/profile` 中启用相应的拼音输入法, 需要修改字体大小则更改 `/usr/share/fcitx/skin/` 相应主题下的文件
 ln -s ~/cloud/backup/config/xprofile ~/.xprofile
 ```
 
@@ -101,6 +104,7 @@ sudo usermod -a -G video wzs
 vim /etc/udev/rules.d/99-backlight.rules
 # ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"
 # ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chmod g+w /sys/class/backlight/%k/brightness"
+# active after reboot
 ```
 
 ### 其他软件配置
@@ -108,10 +112,7 @@ vim /etc/udev/rules.d/99-backlight.rules
 **chrome**
 
 chrome 首次登录下载 SwitchOmega 需要翻墙, 因为我使用 ss 搭的梯子, 基于ss这里有两种办法
-1. 设置Socket环境变量, 然后在当前shell打开chrome, 此时chrome可以通过ss翻墙.
-   1. 设置socket版本: `export SOCKS_VERSION=5`
-   2. 设置socket服务器: `export SOCKS_SERVER="http://127.0.0.1:1080"`
-   3. 启动 chrome
+1. 设置Socket环境变量, 然后在当前shell打开chrome, 此时chrome可以通过ss翻墙. `chromium --proxy-server=socks5://127.0.0.1:1080`
 2. 设置http_proxy环境变量, 通过HTTP代理翻墙. HTTP 代理可通过 Provixy 实现(Provixy可以将socket代理转为http代理). 此处不再详述
 
 ## 链接
