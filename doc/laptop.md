@@ -105,6 +105,7 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
 | suspend                      | 挂起到内存, 类似与 windows 的睡眠                |
 | hibernate                    | 休眠, 将内存中的数据dump到disk, 断电后仍可以恢复 |
 | hybrid-sleep                 | 混合睡眠: 断电时从disk回复, 未断电从内存恢复     |
+| lock                         | 向dbus发送lock消息. 由 `loginctl` 控制           |
 
 
 休眠需要使用配置文件如下

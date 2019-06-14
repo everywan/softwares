@@ -46,6 +46,11 @@ fcitx 是 Linux 下最常用的输入法. 配置流程如下
 一些容易被忽视的用法
 1. 剪切板: `Ctrl + ;`
 
+### bug修复
+fcitx 输入法出现漏字: 输入拼音时, 字母直接出现在输入框.
+1. 问题复现: 输入 `窗口管理器` 可以测试
+2. 修复: 重新安装 `fcitx-im`, 并且重启系统
+
 ## 参考
 1. [中文支持](https://wiki.archlinux.org/index.php/Localization/Simplified_Chinese_(简体中文))
 2. [xprofile-vs-xsession-vs-xinitrc](https://stackoverflow.com/questions/41397361/xprofile-vs-xsession-vs-xinitrc)
