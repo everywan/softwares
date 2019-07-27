@@ -109,6 +109,13 @@ vim /etc/udev/rules.d/99-backlight.rules
 
 ### 其他软件配置
 
+**shadowsocks**
+```Bash
+# after copy shadowsocks config
+sudo systemctl enable shadowsocks@shadowsocks
+sudo systemctl start shadowsocks@shadowsocks
+```
+
 **chrome**
 
 chrome 首次登录下载 SwitchOmega 需要翻墙, 因为我使用 ss 搭的梯子, 基于ss这里有两种办法

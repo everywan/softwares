@@ -2,7 +2,7 @@
 
 function install(){
     echo "------------------------ i3安装 -------------------------\n"
-    sudo pacman -S --noconfirm xorg xorg-xinit termite feh rofi scrot compton
+    sudo pacman -S --noconfirm rofi
     yay -S i3 polybar
 }
 
