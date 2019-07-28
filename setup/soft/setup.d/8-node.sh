@@ -2,7 +2,8 @@
 
 function install(){
     echo "------------------------ node安装 -------------------------\n"
-    sudo pacman -S --noconfirm npm
+    # node-gym 需要python2
+    sudo pacman -S --noconfirm npm python2
     npm config set registry https://registry.npm.taobao.org
 }
 
