@@ -5,6 +5,7 @@
 2. 使用开源方案, 需要自备服务器. 推荐 阿里/腾讯云ECS, 搭配 NextCloud 或 Syncthing.
   - NextCloud 功能上更像传统云盘, 而 Syncthing 主要用于个设备文件同步
 3. 自己开发, 借助 oss/ecs 存储数据, 借助 fsync/upload 传输数据, 借助 inotify 监听文件更改(仅限linux).
+  - oss存在的问题是, 当时用 ossutil 上传数据时, 并非同步, 只是更新. 新增/更改的文件会被同步, 但是删除的文件在云端不会被删除.
 
 [NextCloud-docker](https://github.com/nextcloud/docker): 与正常云盘功能类似, 可以同步照片, 通讯录等. 全平台支持, linux界面比较老.
 

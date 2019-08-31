@@ -110,6 +110,13 @@ git show
 git push origin v0.1.0
 ```
 
+### 更改远程地址
+1. 直接更改地址: `git remote set-url origin [url]`
+2. 删除后新加: `git remote rm origin；git remote add origin [url]`
+3. 修改配置文件: `.git/config` remote 地址
+
+然后, 需要重新对应本地分支和远程分支: `git branch --set-upstream-to=origin/develop develop`
+
 ### 提交本地仓库到远程服务器
 ```Bash
 # 初始化仓库
