@@ -4,6 +4,7 @@ function install(){
     echo "------------------------ 安装 pip  -------------------------\n"
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     sudo python get-pip.py -i https://pypi.doubanio.com/simple/
+    sudo yum install epel-release
     mkdir ~/.pip
     tee ~/.pip/pip.conf <<-'EOF'
 [global]  
