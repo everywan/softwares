@@ -20,6 +20,7 @@ services:
       - ARIA2_PWD=adminadmin
       - ENABLE_AUTH=true
     restart: unless-stopped
+    privileged: true
   plex:
     image: spritsail/plex-media-server
     volumes:
@@ -29,6 +30,7 @@ services:
     environment:
       - PLEX_CLAIM=claim-7KUpCHxW6yozR56UA1YL # 请替换本TOKEN
     restart: unless-stopped
+    privileged: true
     hostname: "junv-plex-server" # change the name to whatever you like
     ports:
       - "32400:32400" # The web port

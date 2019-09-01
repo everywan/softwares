@@ -9,6 +9,7 @@ function install(){
     sudo pip install docker-compose
 
     echo "配置docker免sudo. 注意: 需要重新登入终端, user 才可以使用docekr组的权限"
+    sudo groupadd docker
     sudo usermod -aG docker ${USER}
     newgrp docker
     

@@ -11,7 +11,7 @@ function install(){
     git config --global user.email "zhensheng.five@gmail.com"
 
     # 更改主机名称
-    sudo hostname nas
+    sudo hostnamectl set-hostname nas
 }
 
 install
