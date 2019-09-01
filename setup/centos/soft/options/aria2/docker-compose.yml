@@ -21,24 +21,3 @@ services:
       - ENABLE_AUTH=true
     restart: unless-stopped
     privileged: true
-  plex:
-    image: spritsail/plex-media-server
-    volumes:
-      - /data/bin/plex/data:/media:rw # The media folder
-      - /data/bin/plex/transcode:/transcode # Transcoder temporary directory
-      - /data/bin/plex/config:/config # Configurations
-    environment:
-      - PLEX_CLAIM=claim-7KUpCHxW6yozR56UA1YL # 请替换本TOKEN
-    restart: unless-stopped
-    privileged: true
-    hostname: "junv-plex-server" # change the name to whatever you like
-    ports:
-      - "32400:32400" # The web port
-      - "3005:3005" # The following ports are optional
-      - "8324:8324"
-      - "32469:32469"
-      - "1900:1900"
-      - "32410:32410"
-      - "32412:32412"
-      - "32413:32413"
-      - "32414:32414"

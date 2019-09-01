@@ -1,0 +1,28 @@
+version: "2"
+services:
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - UMASK_SET=022 #optional
+      - PLEX_CLAIM=claim-7KUpsaHxW6yz56989U1YL # 请替换本TOKEN
+    volumes:
+      - /data/bin/plex/data:/media:rw # The media folder
+      - /data/bin/plex/transcode:/transcode # Transcoder temporary directory
+      - /data/bin/plex/config:/config # Configurations
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "32400:32400" # The web port
+      - "3005:3005" # The following ports are optional
+      - "8324:8324"
+      - "32469:32469"
+      - "1900:1900"
+      - "32410:32410"
+      - "32412:32412"
+      - "32413:32413"
+      - "32414:32414"
