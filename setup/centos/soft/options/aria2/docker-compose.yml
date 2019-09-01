@@ -7,7 +7,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /data/temp/filebrower/data:/data
+      - /data:/data
     #   - /some_folder:/root/conf/key
     #   - ~/test/aria2.conf:/root/conf/aria2.conf
     environment:
@@ -24,9 +24,9 @@ services:
   plex:
     image: spritsail/plex-media-server
     volumes:
-      - /data/temp/plex/data:/media:rw # The media folder
-      - /data/temp/plex/transcode:/transcode # Transcoder temporary directory
-      - /data/temp/plex/config:/config # Configurations
+      - /data/bin/plex/data:/media:rw # The media folder
+      - /data/bin/plex/transcode:/transcode # Transcoder temporary directory
+      - /data/bin/plex/config:/config # Configurations
     environment:
       - PLEX_CLAIM=claim-7KUpCHxW6yozR56UA1YL # 请替换本TOKEN
     restart: unless-stopped
