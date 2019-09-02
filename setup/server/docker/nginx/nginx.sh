@@ -1,0 +1,1 @@
+docker run -p 80:80 --name nginx -v /data/www:/www --privileged=true -v /data/nginx/etc/conf.d:/etc/nginx/conf.d -v /data/nginx/etc/nginx.conf:/etc/nginx/nginx.conf -v /data/nginx/logs:/www/logs -v /data/nginx/etc/html:/etc/nginx/html --rm nginx
