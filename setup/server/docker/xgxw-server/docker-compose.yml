@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  xgxw-go:
+    image: registry.cn-hongkong.aliyuncs.com/xgxw/xgxw-go
+    ports:
+      - "8000:80"
+    volumes:
+      - /data/www/xgxw/config:/config
+    restart: unless-stopped
+    command: "/usr/local/bin/xgxw server -c /config/config.yaml"
+    privileged: true
+
+

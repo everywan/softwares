@@ -99,6 +99,11 @@ PS: TMD, 再也不写前端了, 各种没意思的坑.
 
 最终部署方案如下
 1. 容器化服务, 且使用 docker-compose 管理docker.
+  - 私有仓库是借助 阿里云容器服务 实现的.
   - 以后有需求了或有时间了, 可以试试 k8s 等工具
 2. Nginx 反向代理
 3. 阿里云免费ssl证书
+
+docker-compose 参考
+1. [nginx](./docker/nginx)
+2. [后台服务server](./docker/xgxw-server)
