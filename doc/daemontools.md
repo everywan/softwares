@@ -1,12 +1,27 @@
-- [systemd](#systemd)
-  - [systemd脚本](#systemd%E8%84%9A%E6%9C%AC)
-    - [脚本示例](#%E8%84%9A%E6%9C%AC%E7%A4%BA%E4%BE%8B)
-  - [启动脚本](#%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC)
+# daemon守护进程
 
-# systemd
+守护进程是一种在后台执行的进程. 一般使用进程管理工具管理守护进程的状态(start/stop/restart/enable等).
+
+守护程序如 sshd.
+
+进程管理工具如 SysV_init/systemd/supervise.
+
+## 发展历程
+Linux系统的各种服务是如何被唤醒的
+
+SysV_init 历史, 简介
+
+service
+
+systemd
+
+supervise: supervise 一般用于管理自定义的程序, 比 systemd 更偏向用户, 如管理自己后台网站服务的状态(start/stop)
+
+## systemd
+
 > 参考 [systemd](https://wiki.archlinux.org/index.php/systemd_(简体中文))
 
-## systemd脚本
+### systemd脚本
 service 脚本位置一般按如下规则存储
 - `/usr/lib/systemd/system`: 软件包安装的systemd单元
 - `/etc/systemd/system`: 管理员安装的systemd单元, 优先级比 `usr/lib` 高
@@ -63,12 +78,12 @@ KillMode
 | mixed         | 主进程将收到SIGTERM信号, 子进程收到SIGKILL信号 |
 | none          | 没有进程会被杀掉, 只是执行服务的stop命令       |
 
-### 脚本示例
-- [frpc.service](./service/frpc.service)
-- [frps.service](./service/frps.service)
-- [autossh.service](./service/autossh.service)
+#### 脚本示例
+- [frpc.service](/doc/service/frpc.service)
+- [frps.service](/doc/service/frps.service)
+- [autossh.service](/doc/service/autossh.service)
 
-## 启动脚本
+### 启动脚本
 ```Bash
 systemctl daemon-reload       # 重载系统服务
 systemctl enable *.service    # 设置某服务开机启动      
@@ -79,3 +94,6 @@ systemctl reload *.service    # 重启某服务
 # systemctl 同时支持电脑的 挂起/休眠
 systemctl suspend             # 挂起
 ```
+
+## supervise
+
