@@ -54,14 +54,12 @@ nas/pc为主
 
 ## NAS
 ### 主板
-版型:
+nas小机箱使用 mini-itx 主板即可, CPU采用被动散热. 大机箱另谈.
 
-itx pc
-1. 整机推荐: 冥王峡谷
-2. DIY:
-  - 主板: mini-atx主板, 华硕 rog
-  - 机箱: 水冷快乐盒/乔博思A4/追风者
-  - 定制水冷
+mini-itx推荐如下
+1. j1900: 安装黑群辉或者linux
+2. j3455: 可以装 win10. 4核, MAX2.4G, 2M缓存, HD500显卡.
+3. j4105/j5005: 比 j3455 强一些. 4核, MAX 2.5/2.8G, 4M缓存, HD600/605显卡, 600与500 差别不大
 
 ### 系统
 - exsi 下载: http://dl1.technet24.ir/Downloads/Software/VMware/vCenter/
