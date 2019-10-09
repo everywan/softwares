@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=wzs
+      - MYSQL_PASSWORD=wzs
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - /data/mysql/conf.d:/etc/mysql/conf.d
+      - /data/mysql/data:/var/lib/mysql
+
+# docker run --name mysql -p 3306:3306 -v $PWD/config:/etc/mysql/conf.d -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=*** -d mysql:5.7
