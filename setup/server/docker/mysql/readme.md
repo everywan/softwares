@@ -17,6 +17,9 @@ grant all on xxx.* to 'root'@'%' identified by 'password' with grant option;
 -- 用户提权
 GRANT all ON databasename.tablename TO 'username'@'host';
 flush privileges;
+
+-- 创建测试表
+create table test (id INT auto_increment,`name` varchar(20) default "", socre INT default 0, primary key (id))engine innoDB DEFAULT CHARSET=utf8;
 ```
 
 存在的问题
