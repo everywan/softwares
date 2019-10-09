@@ -1,0 +1,13 @@
+# https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html
+
+[mysqld]
+# 开启binlog
+log_bin=ON
+# 设置 binlog 日志的基本文件名, 默认就是这个名称. 5.7 中, 该变量为系统变量而非参数
+# log_bin_basename=/var/lib/mysql/mysql-bin
+# 设置 binlog 文件的索引文件, 这个文件管理所有的binlog文件.
+log_bin_index=/var/lib/mysql/mysql-bin.index
+# 5.7 以上需要server-id, server-id 用于确认该binlog是集群中那台机器的.
+server-id=0
+
+# 查看是否开启成功: show variables like '%log_bin%'
