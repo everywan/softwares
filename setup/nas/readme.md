@@ -1,10 +1,5 @@
 # nas
-有如下几种方案
-1. 成品nas
-  - 群晖 qc 并不稳定
-  - 不支持 ss
-  - 性能弱, 价格还高
-2. exsi: 存在性能损耗, 机器性能很高可以考虑. 同时需要考虑体积和噪音的问题
-3. centos: 不能使用迅雷.
-4. win server: 可以使用迅雷, 性能要求高些.
-  - linux 下支持 rdesktop 连接 win, 手机也有相应软件.
+关于nas的通用配置方案, 已在其他文章中描述, 此文更多是偏向个人使用的自定义化配置和安装.
+- [nas](/doc/nas/readme.md)
+- [nas hardware config](/doc/nas/readme.md)
+- [nas soft config](/doc/nas/soft.md)
