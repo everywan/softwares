@@ -1,13 +1,19 @@
 #!/bin/bash
 # set -x
-# set -e
+set -e
 
-# curl -o- -L https://github.com/everywan/soft/setup/arch/soft/setup.sh | bash
+# curl -o- -L https://raw.githubusercontent.com/everywan/soft/master/setup/arch/soft/setup.sh | bash
 
 path="."
 
+need_cmd () {
+  if ! hash "$1" &>/dev/null; then
+    echo "need $1"
+    exit 1
+  fi
+}
 function setupPath(){
-  sudo pacman -Sy git
+  need_cmd git
   git clone https://github.com/everywan/soft
   path=/tmp/install/soft/setup/arch/soft/setup.d/
 }
@@ -31,5 +37,5 @@ if [ ! -d "/tmp/install" ]; then
 fi
 
 pushd /tmp/install
-main
+main $@
 popd
