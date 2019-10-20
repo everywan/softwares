@@ -40,13 +40,20 @@ PS: 还是服务器好, 不像NAS/PC那样, 一个选择少的可怜, 一个多�
 
 ## itxPC
 
+品牌整机推荐, 搜索 各品牌+mini主机 即可
+1. thinkcentre m920q, m720q
+  - [m920q 说明书](https://usermanual.wiki/Lenovo/m920qughmmzhcn.2018425694.pdf)
+2. intel NUC
+3. dell OptiPlex 
+4. hp g4
+5. 外星人 alpha
+
 机箱
 1. 追风者217air: 基本只能水冷(散热一般), 较重, 较大, 特别好看.
 2. sunmilo 定制机箱: 支持图案定制, 特别好看.
 3. Sans水冷快乐盒: 不可定制版的sunmilo, 各方面都挺像的.
 4. A4 sfx A50迷你ITX亚克力: 亚克里机箱, 坚固度和散热我很担心, 也很好看.
 5. Fractal Node202: 简洁美观的机箱.
-6. thinkcentre/nuc: 整机定制机器, 更小, 但是失去了自定义以及后续升级的可能.
 
 其实, 大机箱里, 也有很多不错的选择.
 1. 追风者217xe: 真的帅
