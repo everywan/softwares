@@ -12,9 +12,25 @@ need_cmd () {
     exit 1
   fi
 }
+
+fetch_repo () {
+    if [[ -d "/tmp/install/soft" ]]; then
+        pushd "/tmp/install/soft"
+        echo "已经下载 soft 仓库, 拉取更新"
+        git pull
+        popd
+    else
+      git clone https://github.com/everywan/soft
+      if [ $? -ne 0 ]; then
+        echo "git soft 仓库失败"
+        exit 0
+      fi
+    fi
+}
+
 function setupPath(){
   need_cmd git
-  git clone https://github.com/everywan/soft
+  fetch_repo
   path=/tmp/install/soft/setup/arch/soft/setup.d/
 }
 
