@@ -8,7 +8,7 @@
             "name": "WLinux",
             "source": "Windows.Terminal.Wsl",
             "colorScheme": "Night Owlish Light",
-            "acrylicOpacity": 0.75,
+            "acrylicOpacity": 0.4,
             "cursorColor": "#657B83",
             "fontSize": 14,
             "useAcrylic": true
@@ -24,6 +24,12 @@
             "hidden": true,
             "name": "Azure Cloud Shell",
             "source": "Windows.Terminal.Azure"
+        },
+        {
+            "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+            "name": "cmd",
+            "commandline": "cmd.exe",
+            "hidden": true
         }
     ],
     "schemes": [
@@ -49,5 +55,120 @@
             "yellow": "#DAAA01"
         }
     ],
-    "keybindings": []
+    "keybindings": [
+        {
+            "command": "splitHorizontal",
+            "keys": [
+                "ctrl+shift+h"
+            ]
+        },
+        {
+            "command": "splitVertical",
+            "keys": [
+                "ctrl+shift+v"
+            ]
+        },
+        {
+            "command": "moveFocusDown",
+            "keys": [
+                "alt+shift+s"
+            ]
+        },
+        {
+            "command": "moveFocusUp",
+            "keys": [
+                "alt+shift+w"
+            ]
+        },
+        {
+            "command": "moveFocusLeft",
+            "keys": [
+                "alt+shift+a"
+            ]
+        },
+        {
+            "command": "moveFocusRight",
+            "keys": [
+                "alt+shift+d"
+            ]
+        },
+        {
+            "command": "nextTab",
+            "keys": [
+                "alt+a"
+            ]
+        },
+        {
+            "command": "nextTab",
+            "keys": [
+                "alt+j"
+            ]
+        },
+        {
+            "command": "prevTab",
+            "keys": [
+                "alt+d"
+            ]
+        },
+        {
+            "command": "prevTab",
+            "keys": [
+                "alt+k"
+            ]
+        },
+        {
+            "command": "switchToTab0",
+            "keys":[
+                "alt+1"
+            ]
+        },
+        {
+            "command": "switchToTab1",
+            "keys":[
+                "alt+2"
+            ]
+        },
+        {
+            "command": "switchToTab2",
+            "keys":[
+                "alt+3"
+            ]
+        },
+        {
+            "command": "switchToTab3",
+            "keys":[
+                "alt+4"
+            ]
+        },
+        {
+            "command": "switchToTab4",
+            "keys":[
+                "alt+5"
+            ]
+        },
+        {
+            "command": "switchToTab5",
+            "keys":[
+                "alt+6"
+            ]
+        },
+        {
+            "command": "switchToTab6",
+            "keys":[
+                "alt+7"
+            ]
+        },
+        {
+            "command": "switchToTab7",
+            "keys":[
+                "alt+8"
+            ]
+        },
+        {
+            "command": "switchToTab8",
+            "keys":[
+                "alt+9"
+            ]
+        }
+    ]
 }
