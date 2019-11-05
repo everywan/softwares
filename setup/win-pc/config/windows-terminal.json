@@ -1,0 +1,174 @@
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "defaultProfile": "{7f586916-8357-53d4-bb2b-ca96f639898a}",
+    "profiles": [
+        {
+            "guid": "{7f586916-8357-53d4-bb2b-ca96f639898a}",
+            "hidden": false,
+            "name": "WLinux",
+            "source": "Windows.Terminal.Wsl",
+            "colorScheme": "Night Owlish Light",
+            "acrylicOpacity": 0.4,
+            "cursorColor": "#657B83",
+            "fontSize": 14,
+            "useAcrylic": true
+        },
+        {
+            "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+            "name": "Windows PowerShell",
+            "commandline": "powershell.exe",
+            "hidden": true
+        },
+        {
+            "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+            "hidden": true,
+            "name": "Azure Cloud Shell",
+            "source": "Windows.Terminal.Azure"
+        },
+        {
+            "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+            "name": "cmd",
+            "commandline": "cmd.exe",
+            "hidden": true
+        }
+    ],
+    "schemes": [
+        {
+            "background": "#FFFFFF",
+            "black": "#011627",
+            "blue": "#4876D6",
+            "brightBlack": "#7A8181",
+            "brightBlue": "#5CA7E4",
+            "brightCyan": "#00C990",
+            "brightGreen": "#49D0C5",
+            "brightPurple": "#697098",
+            "brightRed": "#F76E6E",
+            "brightWhite": "#989FB1",
+            "brightYellow": "#DAC26B",
+            "cyan": "#08916A",
+            "foreground": "#403F53",
+            "green": "#2AA298",
+            "name": "Night Owlish Light",
+            "purple": "#403F53",
+            "red": "#D3423E",
+            "white": "#7A8181",
+            "yellow": "#DAAA01"
+        }
+    ],
+    "keybindings": [
+        {
+            "command": "splitHorizontal",
+            "keys": [
+                "ctrl+shift+h"
+            ]
+        },
+        {
+            "command": "splitVertical",
+            "keys": [
+                "ctrl+shift+v"
+            ]
+        },
+        {
+            "command": "moveFocusDown",
+            "keys": [
+                "alt+shift+s"
+            ]
+        },
+        {
+            "command": "moveFocusUp",
+            "keys": [
+                "alt+shift+w"
+            ]
+        },
+        {
+            "command": "moveFocusLeft",
+            "keys": [
+                "alt+shift+a"
+            ]
+        },
+        {
+            "command": "moveFocusRight",
+            "keys": [
+                "alt+shift+d"
+            ]
+        },
+        {
+            "command": "nextTab",
+            "keys": [
+                "alt+a"
+            ]
+        },
+        {
+            "command": "nextTab",
+            "keys": [
+                "alt+j"
+            ]
+        },
+        {
+            "command": "prevTab",
+            "keys": [
+                "alt+d"
+            ]
+        },
+        {
+            "command": "prevTab",
+            "keys": [
+                "alt+k"
+            ]
+        },
+        {
+            "command": "switchToTab0",
+            "keys":[
+                "alt+1"
+            ]
+        },
+        {
+            "command": "switchToTab1",
+            "keys":[
+                "alt+2"
+            ]
+        },
+        {
+            "command": "switchToTab2",
+            "keys":[
+                "alt+3"
+            ]
+        },
+        {
+            "command": "switchToTab3",
+            "keys":[
+                "alt+4"
+            ]
+        },
+        {
+            "command": "switchToTab4",
+            "keys":[
+                "alt+5"
+            ]
+        },
+        {
+            "command": "switchToTab5",
+            "keys":[
+                "alt+6"
+            ]
+        },
+        {
+            "command": "switchToTab6",
+            "keys":[
+                "alt+7"
+            ]
+        },
+        {
+            "command": "switchToTab7",
+            "keys":[
+                "alt+8"
+            ]
+        },
+        {
+            "command": "switchToTab8",
+            "keys":[
+                "alt+9"
+            ]
+        }
+    ]
+}
