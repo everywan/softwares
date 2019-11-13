@@ -10,7 +10,7 @@ function install(){
 
     # notebook
     # [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)
-    # sudo pacman -S --noconfirm -q tlp
+    sudo pacman -S --noconfirm -q tlp
     git config --global user.name "wzs"
     git config --global user.email "zhensheng.five@gmail.com"
 }
