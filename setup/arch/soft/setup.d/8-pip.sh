@@ -13,6 +13,10 @@ index-url = https://pypi.doubanio.com/simple/
 use-mirrors = true  
 mirrors = https://pypi.doubanio.com/simple/ 
 EOF
+  
+  sudo cp -r ~/.pip /root/
+  sudo pacman -S ipython
+  sudo pip install IPython
 }
 
 install

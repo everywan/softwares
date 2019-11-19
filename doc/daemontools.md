@@ -96,4 +96,61 @@ systemctl suspend             # 挂起
 ```
 
 ## supervise
+supervise: supervise 一般用于管理自定义的程序, 比 systemd 更偏向用户, 如管理自己后台网站服务的状态(start/stop)
 
+supervisectl 常用命令
+```Bash
+supervisectl status # 查看所有服务状态
+supervisectl start/stop/restart service # 管理服务(启动/etc..)
+supervisectl reload   # 重载supervised, 一般用来重新加载配置文件
+```
+
+### 配置文件
+supervise 自身配置
+```Conf
+# supervised conf
+[unix_http_server]
+file=/tmp/supervisor-www.sock
+
+[supervisord]
+logfile = /data/log/supervisord/www.log
+logfile_maxbytes = 50MB
+logfile_backups=10
+loglevel = info
+pidfile = /tmp/supervisord-www.pid
+nodaemon = false
+minfds = 1024
+minprocs = 200
+umask = 022
+environment=JAVA_HOME="/data/server/jdk"
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor-www.sock
+```
+
+supervise 根据配置文件配置管理进程, 进程配置文件示例如下
+```Conf
+[program:example-go]
+command=/data/www/example-go/run
+directory=/data/www/example-go
+autostart=true
+autorestart=true
+startsecs=1
+startretries=3
+exitcodes=0,2
+stopsignal=TERM
+redirect_stderr=false
+stdout_logfile=/data/log/supervisord/example-stdout.log
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=1
+stdout_capture_maxbytes=0
+stdout_events_enabled=false
+stderr_logfile=/data/log/supervisord/example-stderr.log
+stderr_logfile_maxbytes=50MB
+stderr_logfile_backups=1
+stderr_capture_maxbytes=0
+stderr_events_enabled=false
+```

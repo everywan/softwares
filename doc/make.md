@@ -31,6 +31,9 @@
 - 一般需要root权限, 因为会向系统写文件
 
 ## Makefile
+Makefile 通常用于大型工程/复杂工程的编译. Makefile 定义一系列的规则, 指定那些文件需要先编译, 那些文件需要后编译, 那些文件需要重新编译, 以及其他复杂操作.
+
+make命令可以根据Makefile定义的规则, 自动的根据当前的文件修改的情况来确定哪些文件需要重编译, 从而自己编译所需要的文件和链接目标程序.
 
 `.PHONY`: 在Makefile中, .PHONY后面的target表示的也是一个伪造的target, 而不是真实存在的文件target, 注意Makefile的target默认是文件. 
 
