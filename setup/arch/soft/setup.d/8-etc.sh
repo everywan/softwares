@@ -6,7 +6,7 @@ function install(){
     sudo pacman -S --noconfirm -q code chromium tig trash-cli shadowsocks
     # shadowsocks need copy.
     # vim 风格的 pdf 阅读器, a/s 控制按宽度/高度适配, +/- 缩放
-    sudo pacman -S --noconfirm -q zathurazathura-pdf-poppler 
+    sudo pacman -S --noconfirm -q zathura zathura-pdf-poppler 
 
     # notebook
     # [参考官方文档](https://linrunner.de/en/tlp/docs/tlp-configuration.html)

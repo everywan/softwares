@@ -110,7 +110,7 @@ supervise 自身配置
 ```Conf
 # supervised conf
 [unix_http_server]
-file=/tmp/supervisor-www.sock
+file=/tmp/supervisor-www.sock   ; UNIX socket 文件，supervisorctl 与 supervised 交互
 
 [supervisord]
 logfile = /data/log/supervisord/www.log
