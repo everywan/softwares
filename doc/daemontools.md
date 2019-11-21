@@ -105,6 +105,32 @@ supervisectl start/stop/restart service # 管理服务(启动/etc..)
 supervisectl reload   # 重载supervised, 一般用来重新加载配置文件
 ```
 
+supervise 一般使用流程如下
+1. 编写 supervisord.conf, 添加 program 配置
+2. 编写启动命令, 有两种方式, 一是直接运行命令, 设置 SIGINT 为终止信号量即可. 第二可以编写启动脚本, 自定义终止信号量以及其他操作.
+
+推荐使用脚本启动程序. 示例如下
+```Bash
+#!/bin/bash
+
+_term() {
+echo "Caught SIGTERM signal!"
+    kill -TERM "$child" 2>/dev/null
+}
+
+trap _term SIGTERM  # 当接收到 SIGINT 信号时关闭程序
+
+# 自定义处理, 启动进程时, 如果有 upload, 则用其作为执行文件
+# 如此便可在 restart 时直接更换执行的进程, 而不必手动 stop/start
+if [ -f example.upload ]; then
+    mv example.upload example 
+fi
+
+./example --config=config.yaml
+child=$!      ; 获取进程的pid
+wait "$child" ; 等待进程结束
+```
+
 ### 配置文件
 supervise 自身配置
 ```Conf
@@ -134,14 +160,14 @@ serverurl=unix:///tmp/supervisor-www.sock
 supervise 根据配置文件配置管理进程, 进程配置文件示例如下
 ```Conf
 [program:example-go]
-command=/data/www/example-go/run
+command=/data/www/example-go/run  ; 启动脚本
 directory=/data/www/example-go
 autostart=true
-autorestart=true
+autorestart=true      ; 是否自动重启
 startsecs=1
 startretries=3
 exitcodes=0,2
-stopsignal=TERM
+stopsignal=TERM       ; 终止信号, stop 进程时会发出
 redirect_stderr=false
 stdout_logfile=/data/log/supervisord/example-stdout.log
 stdout_logfile_maxbytes=50MB
