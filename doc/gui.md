@@ -1,20 +1,3 @@
-- [Linux桌面环境](#linux%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83)
-  - [图形接口协议](#%E5%9B%BE%E5%BD%A2%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE)
-    - [xorg](#xorg)
-      - [startx](#startx)
-      - [Nvidia显卡配置](#nvidia%E6%98%BE%E5%8D%A1%E9%85%8D%E7%BD%AE)
-    - [参考](#%E5%8F%82%E8%80%83)
-    - [术语](#%E6%9C%AF%E8%AF%AD)
-  - [窗口管理器](#%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E5%99%A8)
-    - [i3wm](#i3wm)
-      - [安装](#%E5%AE%89%E8%A3%85)
-      - [合成器](#%E5%90%88%E6%88%90%E5%99%A8)
-      - [启动](#%E5%90%AF%E5%8A%A8)
-      - [用法和配置](#%E7%94%A8%E6%B3%95%E5%92%8C%E9%85%8D%E7%BD%AE)
-      - [状态栏Polybar](#%E7%8A%B6%E6%80%81%E6%A0%8Fpolybar)
-      - [HDPI](#hdpi)
-      - [xrandr-多显示器](#xrandr-多显示器)
-
 # Linux桌面环境
 
 Linux 桌面环境一般由如下几部分组成
@@ -220,4 +203,16 @@ xrandr --output HDMI2 --off
 xrandr --output HDMI2 --brightness 0.5
 # 设置为主屏幕
 xrandr --output HDMI2 --primary
+```
+## 其他
+### 字体推荐
+大家可以去 [slant](https://www.slant.co/topics/67/~best-programming-fonts#88) 找下最近比较火的编程字体.
+
+或者在 `/usr/share/fonts` 下看看有那些字体, 在 termite/vscode 一个个试试看喜欢那个.
+
+安装, 持续更新参考 [arch 字体安装](/soft/setup/arch/soft/setup.d/8-font.sh)
+```Bash
+sudo pacman -S --noconfirm -q wqy-microhei ttf-inconsolata
+yay -S ttf-mac-fonts
+fc-cache -vf
 ```

@@ -50,6 +50,15 @@ sudo pacman -S fcitx-googlepinyin
 ln -s ~/cloud/backup/config/xprofile ~/.xprofile
 ```
 
+### 字体配置
+在 2k14寸/4k27寸 屏幕下
+1. termite终端: Inconsolata 字号:27
+2. vscode: Lucida Console, 字号默认, 放大4倍.
+3. chrome: 175% 缩放
+  - standard: Lucida Console
+  - sans: Lucida Grande
+4. 备用: 中文等宽字体 wqy-microhei
+
 ## 收尾配置
 1. zsh配置
     - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
