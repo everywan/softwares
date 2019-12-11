@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  spakr2.2:
+    image: wzs/spark2.2
+    ports:
+      - "2201:22"
+    volumes:
+      - /data/temp/spark2.2:/data
+    restart: unless-stopped
+
