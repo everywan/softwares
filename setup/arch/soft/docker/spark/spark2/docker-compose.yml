@@ -9,3 +9,7 @@ services:
       - /data/temp/spark2.2:/data
     restart: unless-stopped
 
+networks:
+  default:
+    external:
+      name: hive_default
