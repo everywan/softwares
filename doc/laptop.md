@@ -92,7 +92,8 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
     - 执行 `udevadm test /sys/class/backlight/intel_backlight/` 测试rules加载
 
 ## 电源管理
-通过修改 `/etc/systemd/logind.conf` 可以设置 合盖/电源按键/超时 等状态时触发的操作. 执行如下命令使配置生效: `systemctl restart systemd-logind`
+通过修改 `/etc/systemd/logind.conf` 可以设置 合盖/电源按键/超时 等状态时触发的操作. 
+执行如下命令使配置生效: `systemctl restart systemd-logind`
 
 如果遇到不了解的配置, 参考 `man logind.conf`. 常用的值如下
 
@@ -109,7 +110,14 @@ tp-x1 的亮度调节文件是 `/sys/class/backlight/intel_backlight/brightness`
 
 
 休眠需要使用配置文件如下
-1. `/sys/power/image_size`: image_size 用于控制将内存 dump 到硬盘时所占空间的大小, 在dump内存时, 系统尽量保证所占用的硬盘空间不会超过image_size设置的大小(dump内存到disk时会压缩数据). 默认是内存的2/5, 增大该值将提升休眠速度, 减小该值将减少空间占用
+1. `/sys/power/image_size`: image_size 用于控制将内存 dump 到硬盘时所占空间的大小, 在dump内存时,
+系统尽量保证所占用的硬盘空间不会超过image_size设置的大小(dump内存到disk时会压缩数据). 默认是内存
+的2/5, 增大该值将提升休眠速度, 减小该值将减少空间占用
+
+有三种挂起方式
+1. suspend to ram: 即suspend. 挂起到内存, 低功耗. 将机器中大部分与ram无关的设备断电, 机器状态保存到ram中.
+2. suspend to disk: 即hibernate. 挂起到硬盘(swap分区), 完全断电. 开机时从swap恢复.
+3. suspend to both: 即hybrid-sleep. 同时挂起到 ram/disk. 没断电则从内存恢复, 断电则从硬盘恢复.
 
 ### 休眠支持
 启用休眠支持教程如下
