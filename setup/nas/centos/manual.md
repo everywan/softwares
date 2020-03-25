@@ -4,7 +4,7 @@
 nmtio(NetworkManager TUI) 网络管理文本用户界面, 用于以TUI的方式管理网络. centos7 默认包含 nmtui, 这里我们使用此工具配置wifi.
 1. 查看现有wifi: `nmcli d wifi`
 2. 连接wifi:  `nmcli d wifi connect ssid password "pwd"`
-3. 添加/配置配置文件. 参考: [静态IP配置](/doc/static-ip.md)
+3. 添加/配置配置文件. 参考: [静态IP配置](/soft/static-ip.md)
   - centos 配置文件在: `/etc/sysconfig/network-scripts/ifcfg-*`
 4. 配置防火墙, 开启 80 端口. (公网建议修改为其他端口)
     ```Bash

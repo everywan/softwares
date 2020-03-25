@@ -36,7 +36,7 @@ win-termite 更新比较快, 这里写的后续可能就不适用了.
 
 推荐大家关注 github 官方文档介绍. 
 - [github](https://github.com/microsoft/terminal)
-- [SettingsSchema](https://github.com/microsoft/terminal/blob/master/doc/cascadia/SettingsSchema.md)
+- [SettingsSchema](https://github.com/microsoft/terminal/blob/master/soft/cascadia/SettingsSchema.md)
 
 配色推荐网站 http://terminal.sexy/
 

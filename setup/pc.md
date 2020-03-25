@@ -12,7 +12,7 @@
   - 刀片
 
 自组机器, 机箱很难选出自己满意的, 附机箱挑选建议如下, 带厂商名单
-- [机箱挑选建议](/doc/hardware/case.md#how-to-pick)
+- [机箱挑选建议](/soft/hardware/case.md#how-to-pick)
 
 服务器为主
 1. 超微: 服务器机箱, 专门做服务器领域的, 超微主板很有名气, 也有质量.
@@ -62,4 +62,4 @@ PS: 还是服务器好, 不像NAS/PC那样, 一个选择少的可怜, 一个多�
 
 ## NAS
 nas 配置参考
-- [NAS硬件配置](/doc/nas/hardware.md)
+- [NAS硬件配置](/soft/nas/hardware.md)

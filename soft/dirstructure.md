@@ -73,6 +73,6 @@ usr最早是user的缩写, /usr的作用与现在的/home相同. 而目前其通
 
 ## 参考
 - [Linux 文件系统详解 | Linux 中国](https://zhuanlan.zhihu.com/p/38802277)
-- [BSD-Unix 目录结构](https://www.freebsd.org/doc/zh_CN/books/handbook/dirstructure.html)
+- [BSD-Unix 目录结构](https://www.freebsd.org/soft/zh_CN/books/handbook/dirstructure.html)
 - [目录结构-维基百科](https://zh.wikipedia.org/wiki/文件系统层次结构标准)
 - [Linux目录结构-linux_wiki](http://linux-wiki.cn/wiki/zh-hans/Linux目录结构)

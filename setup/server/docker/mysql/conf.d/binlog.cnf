@@ -1,4 +1,4 @@
-# https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html
+# https://dev.mysql.com/soft/refman/5.7/en/replication-options-binary-log.html
 
 [mysqld]
 # 开启binlog

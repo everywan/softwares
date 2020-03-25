@@ -71,7 +71,7 @@
 2. 境内服务器 * 1: 有公网IP
 
 在境内服务器上通过 frp/autossh 等工具, 映射海外服务器的ss端口即可解决.
-1. 配置与介绍: [端口映射](/soft/doc/port-mapping.md)
+1. 配置与介绍: [端口映射](/soft/soft/port-mapping.md)
 2. frpc/frps 安装: 在本项目 `/setup` 目录下寻找相应系统的安装脚本
 
 ## 知识点

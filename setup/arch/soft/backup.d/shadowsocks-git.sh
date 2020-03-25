@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function install(){
-  # 参考 /doc/shadowsocks.md
+  # 参考 /soft/shadowsocks.md
   echo "------------------------ shadowsocks安装(from git base centos) -------------------------\n"
   sudo yum install git
   mkdir ~/git

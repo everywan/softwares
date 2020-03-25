@@ -26,13 +26,13 @@
 3. 如果没有 `wpa_supplicant`, 那么请连接到无需密码的有线网络, 或者切换到U盘启动, 为此系统安装 `wpa_supplicant`. 具体参考 arch安装教程
 4. 其他
    1. [WIFI 自动切换参考自动脚本](./setup.d/8-netctl_auto.sh)
-   2. [静态IP配置](/doc/static-ip.md). 可参考 arch 默认的配置示例(位置 `/etc/netctl/example/`)
+   2. [静态IP配置](/soft/static-ip.md). 可参考 arch 默认的配置示例(位置 `/etc/netctl/example/`)
 
 ### 恢复备份
 一般而言, 如果不是首次安装的话, 通常会将配置文件保存在云上, 之后重装系统时从云上恢复. 这里我是将配置存储到 oss, 具体恢复方法参考 [oss-restore](./setup.d/9-restore_backup.sh), 同样, 在这个脚本里对配置文件进行了恢复. 根据自己需要更改此文件.
 
 ### 中文支持
-首次安装参考 [Linux中文支持](/doc/chinese.md).
+首次安装参考 [Linux中文支持](/soft/chinese.md).
 
 重装恢复简易流程如下
 ```Bash
@@ -64,14 +64,14 @@ ln -s ~/cloud/backup/config/xprofile ~/.xprofile
     - 主题修改为ys: `vim ~/.zshrc` 修改 `ZSH_THEME="ys"`
     - use zsh like vim: `bindkey -v`
 2. 更改默认shell命令: `chsh`
-3. 备份系统: [备份系统](/doc/script/backup.sh)
+3. 备份系统: [备份系统](/soft/script/backup.sh)
 4. 重启系统
 
 ### 桌面配置
-参考 [Linux_GUI_i3wm](/doc/gui.md#i3)
+参考 [Linux_GUI_i3wm](/soft/gui.md#i3)
 
 ### 电源管理
-首次安装参考 [电源管理](/doc/power-manger.md)
+首次安装参考 [电源管理](/soft/power-manger.md)
 
 休眠支持 简易流程如下
 ```Bash
@@ -101,14 +101,14 @@ sudo systemctl restart systemd-logind
 ```
 
 ### 硬件配置
-首次安装参考 [硬件配置](/doc/hardware.md)
+首次安装参考 [硬件配置](/soft/hardware.md)
 
 亮度调节 简易流程如下
 ```Bash
 sudo chgrp video /sys/class/backlight/intel_backlight/brightness
 sudo chmod 664 /sys/class/backlight/intel_backlight/brightness
 sudo usermod -a -G video wzs
-# 将 /doc/script/backlight.sh 添加到 $PATH
+# 将 /soft/script/backlight.sh 添加到 $PATH
 # 恢复 i3 配置文件. 其中包含快捷键映射
 vim /etc/udev/rules.d/99-backlight.rules
 # ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"

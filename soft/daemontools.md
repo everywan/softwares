@@ -79,9 +79,9 @@ KillMode
 | none          | 没有进程会被杀掉, 只是执行服务的stop命令       |
 
 #### 脚本示例
-- [frpc.service](/doc/service/frpc.service)
-- [frps.service](/doc/service/frps.service)
-- [autossh.service](/doc/service/autossh.service)
+- [frpc.service](/soft/service/frpc.service)
+- [frps.service](/soft/service/frps.service)
+- [autossh.service](/soft/service/autossh.service)
 
 ### 启动脚本
 ```Bash

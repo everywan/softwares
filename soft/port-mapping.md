@@ -6,7 +6,7 @@
 使用frp软件进行内网穿透/p2p, 配置参考官网 [frp](https://github.com/fatedier/frp/blob/master/README.md).
 - 内网穿透用于登录等小流量高网速操作, p2p 用于传输大文件
 
-frp 可以通过编写脚本实现由 systemd 管理, 脚本编写方式参考 [systemd](/doc/systemd.md#systemd脚本), 脚本参考 [frpc](./service/frpc.service) [frps](./service/frps.service)
+frp 可以通过编写脚本实现由 systemd 管理, 脚本编写方式参考 [systemd](/soft/systemd.md#systemd脚本), 脚本参考 [frpc](./service/frpc.service) [frps](./service/frps.service)
 
 配置示例如下
 
