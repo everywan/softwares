@@ -29,3 +29,6 @@ yolo: you only look once, one-stage算法, 仅用一个CNN网络直接预测不�
 darknet 深度学习框架, 训练模型用于ocr, yolo, 基于c实现.
 
 试了下, 识别率不如 tesseract
+
+## 商业方法
+使用 阿里/腾讯 的ocr识别. 在特定领域识别更准确, 如发票/报表等.
