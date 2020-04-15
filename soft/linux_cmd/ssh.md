@@ -39,62 +39,30 @@
 端口转发可以认为是代理的一部分和具体实现.
 
 ssh 有三种端口转发方式: 本地转发, 远程转发, 动态转发.
-1. 本地转发是指将所有访问 本地主机A:端口 的报文, 转发到远程主机B的指定端口.
-2. 远程转发是指将所有访问 远程主机B:端口 的报文, 转发到远程主机C的指定端口. B和C可以是同一主机.
-3. 动态转发 将在本地启动一个socket监听者, 将访问 本地主机A:端口 的请求全部通过socket都转发远程主机,
-  然后解析请求并转发.
 
+本地转发是指将所有访问 本地主机:端口 的报文, 转发到远程主机的指定端口.
+使用本地转发, 访问本地端口 其实是在 访问远程端口.
+
+远程转发是指将所有访问 远程主机:端口 的报文, 转发到其他主机(本地可以访问)的指定端口.
+使用远程转发, 访问远程端口其实是在访问 本地环境(本地或本地能访问的某个ip) 的某个端口
+
+动态转发 将在本地启动一个socket监听者, 将访问 本地主机A:端口 的请求全部通过socket都转发远程主机,
+然后解析请求并转发.
+
+动态转发我没有用过, 还需要在看看.
+
+----
 实现原理
 1. 本地转发启动服务监听本地端口, 当监听到请求时将其转发.
-2. 远程转发首先通过ssh在远程服务器执行命令, 启动服务监听指定端口, 当监听到请求时将其转发.
+2. 远程转发首先通过ssh在远程服务器执行命令, 启动服务监听指定端口, 当监听到请求时将其转发到本地, 然后请求.
 3. 动态转发在本地启动socket服务器, 监听本地端口, 当监听到请求时, 解析请求并转发.
 
+----
 相同点
 1. 使用ssh实现的端口转发都由ssh隧道发送.
 2. 本地转发/远程转发 参数格式相同, 都是 `请求源地址:转发目的地址`
 
-### 本地转发
-本地转发是指将所有访问 本地主机A:端口 的报文, 转发到远程主机B的指定端口.
-
-这里要求主机A是本地的某个ip. 一般是127.0.0.1, 当你有多个网卡时可以设置不同的ip值.
-
-用法
-```Bash
-ssh -fCN -L [机器A的IP或省略]:[A端口]:[远程机器B的IP或省略]:[B端口] [登陆B机器的用户名@服务器IP]
-# -C: 压缩所有数据.
-# -f: Requests ssh to go to background just before command execution. 即在执行命令前将ssh在后台执行. 会将
-#   ssh stdin 重定向到 /dev/null
-# -N: Do not execute a remote command.  This is useful for just forwarding ports
-
-# 代理3306端口, 本地所有访问 localhost:3306 的报文被转发至 xgxw.com:3306
-ssh -fNg -L 3306:localhost:3306 -p 22 wzs@xgxw.com
-
-# 本地所有访问 本地:8080 的报文都转发到 xgxw.com:8080.
-ssh -fNg -L 8080:xgxw.com:80 -p 22 wzs@test.xgxw.com
-```
-
-### 远程转发
-远程转发是指将所有访问 远程主机B:端口 的报文, 转发到远程主机C的指定端口. B和C可以是同一主机.
-
-用法
-```Bash
-ssh -fCN -R [B机器IP或省略]:[B机器端口]:[C机器的IP]:[C机器端口] [登陆B机器的用户名@服务器IP]
-
-# 所有访问 xgxw.com:8092 的报文都转发到 xgxw.com:3306.
-# 举例: 服务器3306端口没有开放, 但是8092开放了, 通过远程转发实现外网访问3306端口
-ssh -fNg -R 8092:xgxw.com:3306 -p 22 wzs@xgxw.com
-
-# 所有访问 test.xgxw.com:3306 的报文都转发到 xgxw.com:3306.
-# 举例: 服务器xgxw.com位于内网, 其3306端口不对外网开放, 但是测试服务器 test.xgxw.com 对外开放, 
-# 且可以访问服务器xgxw.com. 通过远程转发实现外网访问 xgxw.com:3306端口.
-ssh -fNg -R 3306:xgxw.com:3306 -p 22 wzs@test.xgxw.com
-```
-
-### 动态转发
-动态转发 将在本地启动一个socket监听者, 将访问 本地主机A:端口 的请求全部通过socket都转发远程主机,
-然后远程主机解析请求并转发.
-
-动态转发我没有用过, 还需要在看看.
+区别
 
 本地转发/远程转发 将 机器:端口 的报文*直接*转发到 目标机器:端口, 不做任何处理.
 因此两个端口的应用层协议是一般是相同的, 否则会解析失败. 
@@ -103,8 +71,41 @@ ssh -fNg -R 3306:xgxw.com:3306 -p 22 wzs@test.xgxw.com
 而动态转发使用socket协议实现, 启动动态转发将会在本地启动一个socket监听者, 访问动态端口的数据由ssh隧道
 转发, 并且根据报文中指定的协议和地址去请求相应的数据.
 
-用法
+### 使用示例
+本地转发
 ```Bash
+# 方法签名
+ssh -fCN -L [机器A的IP或省略]:[A端口]:[远程机器B的IP或省略]:[B端口] [登陆B机器的用户名@服务器IP]
+# 因为要监听机器A的某个端口, 所以该IP必须是本地注意的网卡ip
+
+# 代理3306端口, 本地所有访问 localhost:3306 的报文被转发至 xgxw.com:3306
+ssh -fNg -L 3306:localhost:3306 -p 22 wzs@xgxw.com
+
+# 本地所有访问 本地:8080 的报文都转发到 xgxw.com:80
+ssh -fNg -L 8080:xgxw.com:80 -p 22 wzs@test.xgxw.com
+
+# 参数介绍
+# -C: 压缩所有数据.
+# -f: Requests ssh to go to background just before command execution. 即在执行命令前将ssh在后台执行. 会将
+#   ssh stdin 重定向到 /dev/null
+# -N: Do not execute a remote command.  This is useful for just forwarding ports
+```
+
+远程转发
+```Bash
+# 方法签名
+ssh -fCN -R [B机器IP或省略]:[B机器端口]:[C机器的IP]:[C机器端口] [登陆B机器的用户名@服务器IP]
+
+# 所有访问 xgxw.com:3306 的报文都转发到 localhost:3306, localhost 是值本机.
+ssh -fNg -R 3306:localhost:3306 -p 22 wzs@xgxw.com
+
+# 所有访问 xgxw.com:3306 的报文都转发到 test.xgxw.com:3306.
+ssh -fNg -R 3306:test.xgxw.com:3306 -p 22 wzs@xgxw.com
+```
+
+动态转发
+```Bash
+# 方法签名
 ssh -fCN -D [A机器IP或省略]:[A机器端口] [登陆B机器的用户名@服务器IP]
 
 # 所有访问本地8080端口的报文都转发到 xgxw.com,
