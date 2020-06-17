@@ -1,0 +1,8 @@
+= Dgraph
+
+link:https://dgraph.io/docs/get-started[docs]
+
+.节点作用
+. Dgraph Zero controls the Dgraph cluster, assigns servers to a group, and re-balances data between server groups.
+. Dgraph Alpha hosts predicates and indexes. Predicates are either the properties associated with a node or the relationship between two nodes. Indexes are the tokenizers that can be associated with the predicates to enable filtering using appropriate functions.
+. Ratel serves the UI to run queries, mutations & altering schema.

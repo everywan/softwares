@@ -4,8 +4,9 @@
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 
-topic = "test_topic"
-bootstrap_servers=['127.0.0.1:9092']
+# 不知道为啥, 用 test_topic 作为 topic 名称就会挂掉, 发布出去消息
+topic = "tests"
+bootstrap_servers='127.0.0.1:9092'
 
 def produce():
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
@@ -15,7 +16,7 @@ def produce():
     
     # Block for 'synchronous' sends
     try:
-        record_metadata = future.get(timeout=10)
+        record_metadata = future.get(timeout=2)
     except KafkaError as e:
         print("发送失败. KafkaError: ", repr(e))
         return 

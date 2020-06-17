@@ -4,12 +4,11 @@
 from kafka import TopicPartition
 from kafka import KafkaConsumer
 
-topic = "test_topic"
-bootstrap_servers=['127.0.0.1:9092']
+topic = "tests"
+bootstrap_servers='127.0.0.1:9092'
 
 def consume():
-    consumer = KafkaConsumer(topic,
-                             bootstrap_servers)
+    consumer = KafkaConsumer(topic, bootstrap_servers=bootstrap_servers)
     for message in consumer:
         print ("收到消息: topic: %s, partition:%d, offset:%d, key:%s, value:%s" % (
             message.topic, message.partition, message.offset, message.key, message.value))
