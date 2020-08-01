@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    # command: redis-server /usr/local/etc/redis/redis.conf
+    # volumes:
+      # - ~/.docker/data/redis/data:/data
+      # - ~/.docker/data/redis/conf:/etc/mysql/conf.d
+
+# docker run -v /myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf --name myredis redis redis-server /usr/local/etc/redis/redis.conf
