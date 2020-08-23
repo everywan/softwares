@@ -12,9 +12,18 @@
 ## 安装
 - [Arch Linux安装教程](https://wiki.archlinux.org/index.php/Installation_guide_(简体中文))
 
+**注意**
+1. U盘启动要经常与官方最新安装盘同步, 否则pacman可能出现key不全的情况.
+2. 安装教程参考官方文档, 有些地方会存在更新.
+3. 根据最新的安装情况, 某些系统包已经与写本篇教程时不同了, 需要注意.
+  1. 最新版网络管理使用的 networkctl, 而原来用的 wifi-menu/netctl, 两者是有差别的. 稍后有空我会重新整理这部分
+  2. 最新版安装后没有 vi/vim, 所以建议在安装系统时就安装好 vi/vim/ssh. 配置好系统/网络后, 直接就可以从其他电脑上控制安装了.
+
+
 ###  准备
 1. 刻录U盘安装
     - Linux环境: `dd bs=4M if=/path/to/archlinux.iso of=/dev/sdx status=progress && sync`. (注意替换iso路径和U盘路径)
+    - mac下不需要加 ststus
 2. 重启电脑, 选择U盘启动
     - Thinkpad: 开机回车, 然后f12进入挂载启动页, 选择刻录的U盘即可.
 
