@@ -19,6 +19,10 @@
   1. 最新版网络管理使用的 networkctl, 而原来用的 wifi-menu/netctl, 两者是有差别的. 稍后有空我会重新整理这部分
   2. 最新版安装后没有 vi/vim, 所以建议在安装系统时就安装好 vi/vim/ssh. 配置好系统/网络后, 直接就可以从其他电脑上控制安装了.
 
+networkctl: https://wiki.archlinux.org/index.php/Systemd-networkd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+配置文件位置/示例参考文档.
+networkd 使用 systemd 管理, 启动 networkd 后, 使用 networkctl 启动具体配置
+
 
 ###  准备
 1. 刻录U盘安装
