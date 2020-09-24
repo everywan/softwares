@@ -18,3 +18,5 @@ image:./attach/i3-demo.png[i3桌面]
 * faq.md: 安装/使用上可能需要的问题解答.
 
 // linux版本比较, win/osx 比较
+
+因为服务端arch和本地使用的arch配置相差不大, 所以没有作区分, 只是部分安装脚本按类型分类了.
