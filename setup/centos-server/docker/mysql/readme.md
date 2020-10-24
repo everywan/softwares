@@ -10,7 +10,7 @@ mysql 操作
 
 sql操作
 ```sql
--- 修改密码
+-- 修改密码. mysqladmin 只能修改 root@localhost 的密码, 其他密码使用命令修改
 -- mysqladmin -u -p password newpwd 
 set password for 'xxx'@'%'=password('passwd');
 grant all on xxx.* to 'root'@'%' identified by 'password' with grant option; 

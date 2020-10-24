@@ -96,7 +96,10 @@ systemctl suspend             # 挂起
 ```
 
 ## supervise
-supervise: supervise 一般用于管理自定义的程序, 比 systemd 更偏向用户, 如管理自己后台网站服务的状态(start/stop)
+systemd/supervise区别
+1. systemd pid为1, 也就是说 systemd 是系统init后启动的第一个进程, systemd挂掉后其fork的所有进程会挂. 而supervise是启动后被启动的.
+2. supervise 日志较systemd更友好, 可以输出到指定文件, 而 systemd 日志查看较为困难.
+3. 启动脚本编写无太大差别, supervise 支持一个文件多个进程.
 
 supervisectl 常用命令
 ```Bash
@@ -126,7 +129,7 @@ if [ -f example.upload ]; then
     mv example.upload example 
 fi
 
-./example --config=config.yaml
+./example --config=config.yaml &
 child=$!      ; 获取进程的pid
 wait "$child" ; 等待进程结束
 ```
