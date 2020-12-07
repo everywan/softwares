@@ -160,6 +160,8 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 serverurl=unix:///tmp/supervisor-www.sock
 ```
 
+一般而言, 你需要先启动supercisord系统守护进程, 通过 `systemctl start supervised.service`. 如果你有多个项目, 每个项目下有多个service, 如果你希望每个项目单独起supervisor管理, 则需要替换配置文件中的 `supervisorctl.serverurl` 和 `unix_http_server.file`, 不同的项目使用不同的名称
+
 supervise 根据配置文件配置管理进程, 进程配置文件示例如下
 ```Conf
 [program:example-go]
