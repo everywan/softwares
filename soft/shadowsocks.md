@@ -27,6 +27,10 @@
     - 阿里云, 国外节点, 入门主机即可. 
     - Amazon, 新注册用户绑定信用卡后免费用一年乞丐版主机. 网速不太稳定.
 
+## 使用 systemd 管理 shadowsocks
+sserver 配置文件: [ssserver.service](/soft/service/ssserver.service)
+放入 `/etc/systemd/system/ssserver.service` 即可
+
 ## 客户端连接 socket 代理服务
 1. win下,启动 shadowsocks客户端 会直接将socket代理转为HTTP代理.
 1. linux下, 使用 `sslocal -c /etc/shadowsocks/shadowsocks.json -d start` 启动 本地socket代理

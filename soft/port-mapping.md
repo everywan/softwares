@@ -3,10 +3,26 @@
 
 [udp打洞/p2p穿透/种子 详解](https://www.cnblogs.com/LittleHann/p/5556185.html)
 
-使用frp软件进行内网穿透/p2p, 配置参考官网 [frp](https://github.com/fatedier/frp/blob/master/README.md).
+## frp
+[frp](https://github.com/fatedier/frp/blob/master/README.md)
+
+frp 是一个专注于内网穿透的高性能的反向代理应用, 可以将内网服务以安全,便捷的方式通过具有公网 IP 节点的中转暴露到公网.
+
+frp 支持 内网穿透模式 和 p2p 模式
 - 内网穿透用于登录等小流量高网速操作, p2p 用于传输大文件
 
-frp 可以通过编写脚本实现由 systemd 管理, 脚本编写方式参考 [systemd](/soft/systemd.md#systemd脚本), 脚本参考 [frpc](./service/frpc.service) [frps](./service/frps.service)
+### 使用
+frps 公网IP所在机器, frpc 是局域网机器所在机器.
+
+流程
+1. 在公网机器启动 frps 服务.
+2. 在局域网机器启动 frpc 服务, 然后 frpc 会自动与 frps 建立连接并保证连接有效(有自动重连).
+3. user 可以通过访问 frps 直接访问 frpc 服务所在的机器.
+
+frp 可以通过编写脚本实现由 systemd 管理. 脚本编写方式参考
+1. [systemd](/soft/systemd.md#systemd脚本)
+2. [frpc.service](./service/frpc.service)
+3. [frps.service](./service/frps.service)
 
 配置示例如下
 

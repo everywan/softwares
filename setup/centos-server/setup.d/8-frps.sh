@@ -2,11 +2,6 @@
 
 function install(){
   echo "------------------------ frps -------------------------\n"
-  git clone https://github.com/fatedier/frp.git
-  pushd frp
-  make frps
-  popd
-  sudo mkdir /etc/frp/
   sudo tee /etc/frp/frps.ini <<-'EOF'
 [common]
 bind_port = 6000

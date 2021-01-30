@@ -3,7 +3,7 @@
 function install(){
     echo "------------------------ 安装 oh-my-zsh -------------------------\n"
     sudo yum install -y zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install

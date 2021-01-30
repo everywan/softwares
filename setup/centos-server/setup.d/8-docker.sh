@@ -2,9 +2,13 @@
 
 function install(){
     echo "------------------------ 安装 docker  -------------------------\n"
+    # https://docs.docker.com/engine/install/centos/
     # curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
     sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-    sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    # 如果你的机器不能访问全球网, 不要执行下面这一步. 现在一般源仓库都有docker, 不去官方拉也行.
+    # sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
     sudo yum install -y docker
     sudo pip install docker-compose
 

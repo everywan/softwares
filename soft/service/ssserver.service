@@ -1,0 +1,14 @@
+# /etc/systemd/system/ssserver.service
+
+[Unit]
+Description=ssserver for shadowsocks. default config: /etc/shadowsocks/shadowsocks.json
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=60
+ExecStart=/usr/bin/ssserver -c /etc/shadowsocks/shadowsocks.json start
+
+[Install]
+WantedBy=multi-user.target
