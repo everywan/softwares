@@ -1,0 +1,17 @@
+export ZSH="/home/wzs/.oh-my-zsh"
+ZSH_THEME="ys"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# shorthand
+alias his='f(){ history|grep $1; }; f'
+alias c='clear'
+alias tigu='f() { tig status }; f'
+alias dc='f() { docker-compose $@ }; f'
+alias gc='f() { git checkout $@ }; f'
+alias gn='f() { grep -rn $@ }; f'
+alias fackgfw='f() { sslocal -c /etc/shadowsocks/shadowsocks.json -d start }; f'
+alias allproxy='f() { export ALL_PROXY=socks5://127.0.0.1:1080 }; f'
+alias unallproxy='f() { unset ALL_PROXY }; f'

@@ -8,6 +8,7 @@ services:
       - "6379:6379"
     restart: always
     # command: redis-server /usr/local/etc/redis/redis.conf
+    # command: redis-server --requirepass yourpassword
     # volumes:
       # - ~/.docker/data/redis/data:/data
       # - ~/.docker/data/redis/conf:/etc/mysql/conf.d

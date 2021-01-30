@@ -1,0 +1,4 @@
+= readme
+
+== 注意
+1. proxy_pass 是一定要记住, 你是在docker部署的nginx, 所以 127.0.0.1 是docker内部地址, 不是本机的!!
