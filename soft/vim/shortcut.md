@@ -77,6 +77,8 @@ linee2. this 'line' is right.
 | `i/I`               | 替换标识, i忽略大小写区别,I相反 |
 | `c`                 | 替换标识, 替换时需要确认        |
 
+## 粘贴锁进问题
+`set paste` 进入粘贴模式, 会自动设置一系列指令, 进行原格式粘贴.
 
 ## 参考
 1. [在vim中优雅的查找与替换](https://harttle.land/2016/08/08/vim-search-in-file.html)
