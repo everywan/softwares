@@ -2,7 +2,6 @@
 
 function install(){
     echo "------------------------ 安装 pip  -------------------------\n"
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     sudo python get-pip.py -i https://pypi.doubanio.com/simple/
     mkdir ~/.pip
     tee ~/.pip/pip.conf <<-'EOF'
@@ -16,7 +15,6 @@ EOF
   
   sudo cp -r ~/.pip /root/
   sudo pacman -S ipython
-  sudo pip install IPython
 }
 
 install

@@ -2,9 +2,10 @@
 
 function install(){
     echo "------------------------ 安装 spark -------------------------\n"
-    wget -c http://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-3.0.0-preview/spark-3.0.0-preview-bin-hadoop2.7.tgz -O spark.tgz
+    wget -c https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2-scala2.13.tgz -O spark.tgz
     tar -xzf spark.tgz && sudo mv spark /usr/local/src && sudo ln -s /usr/local/src/spark/bin/spark-submit /usr/local/bin/spark-submit
     rm spark.tgz
 }
 
-install
+# 建议使用 docker 替代
+# install

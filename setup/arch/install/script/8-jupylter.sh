@@ -10,4 +10,5 @@ function install(){
     sudo jupyter labextension install @jupyterlab-drawio
 }
 
-install
+# 建议使用 docker 替代
+# install
