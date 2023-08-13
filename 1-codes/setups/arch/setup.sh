@@ -1,28 +1,30 @@
+# 工作站
 #!/bin/bash
 # set -x
 set -e
 
-# 还是推荐手动选择要安装的脚本进行安装比较合适. 因为该脚本目前还不够完善.
+# 参考 https://spacevim.org/cn/install.sh 编写, 目前脚本还不完善.
 
-# curl -o- -L https://raw.githubusercontent.com/everywan/soft/master/setup/arch/soft/setup.sh | bash
+# curl -o- -L https://raw.githubusercontent.com/everywan/softwares/master/setup/arch/soft/setup.sh | bash
 
 path="."
+install_path="/tmp/install/softwares"
 
 need_cmd () {
   if ! hash "$1" &>/dev/null; then
-    echo "need $1"
+    echo "need install $1"
     exit 1
   fi
 }
 
 fetch_repo () {
-    if [[ -d "/tmp/install/soft" ]]; then
-        pushd "/tmp/install/soft"
+    if [[ -d $install_path ]]; then
+        pushd $install_path
         echo "已经下载 soft 仓库, 拉取更新"
         git pull
         popd
     else
-      git clone https://github.com/everywan/soft
+      git clone https://github.com/everywan/softwares
       if [ $? -ne 0 ]; then
         echo "git soft 仓库失败"
         exit 0
@@ -33,7 +35,7 @@ fetch_repo () {
 function setupPath(){
   need_cmd git
   fetch_repo
-  path=/tmp/install/soft/setup/arch/install/script
+  path=$install_path+"/1-codes/setups/arch"
 }
 
 function exec(){

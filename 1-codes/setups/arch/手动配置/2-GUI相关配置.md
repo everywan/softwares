@@ -1,7 +1,7 @@
 # arch 日常使用
 
 ## 中文支持
-首次安装参考 [Linux中文支持](/soft/chinese.md).
+首次安装参考 [Linux中文支持](/2-docs/chinese.md).
 
 重装恢复简易流程如下
 ```Bash
@@ -29,10 +29,10 @@ ln -s ~/cloud/backup/config/xprofile ~/.xprofile
 4. 备用: 中文等宽字体 wqy-microhei
 
 ### 桌面配置
-参考 [Linux_GUI_i3wm](/soft/gui.md#i3)
+参考 [Linux_GUI_i3wm](/2-docs/gui.md#i3)
 
 ### 电源管理
-首次安装参考 [电源管理](/soft/power-manger.md)
+首次安装参考 [电源管理](/2-docs/power-manger.md)
 
 休眠支持 简易流程如下
 ```Bash
@@ -62,14 +62,14 @@ sudo systemctl restart systemd-logind
 ```
 
 ### 硬件配置
-首次安装参考 [硬件配置](/soft/hardware.md)
+首次安装参考 [硬件配置](/2-docs/hardware.md)
 
 亮度调节 简易流程如下
 ```Bash
 sudo chgrp video /sys/class/backlight/intel_backlight/brightness
 sudo chmod 664 /sys/class/backlight/intel_backlight/brightness
 sudo usermod -a -G video wzs
-# 将 /soft/script/backlight.sh 添加到 $PATH
+# 将 /1-codes/scripts/backlight.sh 添加到 $PATH
 # 恢复 i3 配置文件. 其中包含快捷键映射
 vim /etc/udev/rules.d/99-backlight.rules
 # ACTION=="add", SUBSYSTEM=="backlight", RUN+="/usr/bin/chgrp video /sys/class/backlight/%k/brightness"
