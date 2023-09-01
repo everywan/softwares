@@ -12,7 +12,8 @@ function main(){
         install_brew
     fi
 
-    brew install git tree wget curl mycli
+    # 常用基础软件包
+    brew install git tree wget curl mycli tig
 
     install_go
 
@@ -72,6 +73,15 @@ function install_brew(){
 function install_go(){
     brew install go
 
+    export GOPROXY=https://mirrors.aliyun.com/goproxy/
+    go get github.com/cweill/gotests/gotests
+    go get github.com/fatih/gomodifytags
+    go get github.com/josharian/impl
+    go get github.com/haya14busa/goplay/cmd/goplay
+    go get github.com/go-delve/delve/cmd/dlv
+    go get honnef.co/go/tools/cmd/staticcheck
+    go get golang.org/x/tools/gopls
+    
     brew install protobuf
     go get -u github.com/golang/protobuf/protoc-gen-go
 }

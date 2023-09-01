@@ -24,6 +24,7 @@ curl -sSL https://github.com/everywan/soft/blob/master/os/osx/config.sh | sh -
 首次配置:
 . 字体大小修改为 14. `setting->profile->text`
 . 修改为半透明. `setting->profile->windows.transparency`
+. 修改 opt+l/r 为左右移动一个单词. `setting->profile->keys.key_mapping`. [参考](https://www.jianshu.com/p/149376210472)
 
 配置一次后, 建议保存配置, 后续直接回复配置即可.
 
