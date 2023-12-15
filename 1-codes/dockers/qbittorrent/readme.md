@@ -1,3 +1,6 @@
+# qbittorrent
+推荐使用 aria2
+
 参考 [docker-qbittorrent](https://github.com/linuxserver/docker-qbittorrent)
 
 默认用户名: admin
