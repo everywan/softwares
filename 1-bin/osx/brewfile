@@ -1,0 +1,13 @@
+brew "zsh"
+brew "git"
+brew "tig"
+brew "vim"
+brew "wget"
+brew "nmap"
+brew "tree"
+
+cask "iterm2"
+cask "raycast"
+cask "alttab"
+cask "karabiner-elements"
+cask "istat-menus"
