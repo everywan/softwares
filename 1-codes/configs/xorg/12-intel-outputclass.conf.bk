@@ -1,5 +1,0 @@
-Section "OutputClass"
-    Identifier "intel"
-    MatchDriver "i915"
-    Driver "modesetting"
-EndSection

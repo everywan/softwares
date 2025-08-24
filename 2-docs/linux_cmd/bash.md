@@ -29,7 +29,7 @@ http://www.ruanyifeng.com/blog/2017/11/bash-set.html
   
 ### 脚本调试
 > 使用 `set -x/+x` 嵌套代码段  
-> 通常使用 [重定向](/OS/Linux/summary.md#重定向) 配合来查看错误日志
+> 通常使用 [重定向](./basic.md#重定向) 配合来查看错误日志
 
 ```Bash
 # At Begin: 开启调试模式(把脚本运行过程打印出来)

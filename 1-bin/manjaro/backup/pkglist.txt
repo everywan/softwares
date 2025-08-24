@@ -1,0 +1,28 @@
+code                        # vscode
+dex                         # xorg autostart tool
+docker
+docker-compose
+fcitx5                      # 输入法
+fcitx5-chinese-addons       # 中文支持
+fcitx5-configtool           # fictx gui 配置
+fcitx5-gtk                  
+fcitx5-qt
+feh                         # 壁纸使用
+git
+go
+go-tools
+htop
+nmap
+obsidian                    # 笔记软件
+openssh
+polybar                     # 状态栏，替代 i3status
+rofi                        # 软件启动器
+rsync
+shadowsocks                 # god use vpn
+tig
+tree
+ttf-fira-code               # 编程字体. 排行榜参考 https://distrowatch.com/dwres.php?resource=popularity
+unzip
+vim
+yay
+zsh

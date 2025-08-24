@@ -1,6 +1,0 @@
-export GOPROXY=https://mirrors.aliyun.com/goproxy/
-export GO111MODULE=on
-
-# termite shell
-export TERM=linux
-export TERM=xterm-256color
