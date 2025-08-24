@@ -4,7 +4,7 @@
 通过 timemachine 备份还原即可. mac 本身也支持从其他设备迁移.
 
 ## 推荐软件
-常用软件如微信等不再叙述. 如下软件大多数都可以用 brew 安装
+常用软件如微信等不再叙述. 大多数软件可以通过 brew 安装, 已包含在 setup.sh 中.
 
 - [homebrew](https://brew.sh): 命令行软件包管理.
 - [raycast](https://www.raycast.com/): 现代化的 alfred
