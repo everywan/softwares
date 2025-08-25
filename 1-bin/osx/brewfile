@@ -13,6 +13,7 @@ cask "karabiner-elements"
 cask "istat-menus"
 cask "shadowsocksx-ng"
 
+## 按需选择
 # cask "obsidian"
 # cask "wechat"
 # cask "microsoft-edge"
