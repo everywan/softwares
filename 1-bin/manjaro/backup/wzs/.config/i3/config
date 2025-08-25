@@ -50,6 +50,8 @@ bindsym $mod+Shift+a exec deepin-screen-recorder
 exec_always --no-startup-id feh --bg-scale "$HOME/picture/wallpaper.jpg"
 # polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# xmodmap
+exec_always --no-startup-id xmodmap $HOME/.config/xmodmap/keys.map
 # dex autostart
 exec_always --no-startup-id dex -a
 

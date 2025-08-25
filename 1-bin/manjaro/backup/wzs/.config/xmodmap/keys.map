@@ -1,0 +1,5 @@
+keycode  66 = Mode_switch
+keycode  25 = w W Up Up
+keycode  38 = a A Left Left
+keycode  39 = s S Down Down
+keycode  40 = d D Right Right
